@@ -2,13 +2,87 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Website.Desktop</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Camping Swag</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans&family=Libre+Caslon+Text&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
 
+    <header>
+        <nav class="navbar">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <img src="assets/logo.jpg" alt="Camping Swag Logo" />
+                </a>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="shop.html">Shop Now</a>
+                    <ul class="dropdown-content">
+                        <li><a href="#">Tents</a></li>
+                        <li><a href="#">Swags</a></li>
+                        <li><a href="#">Packs</a></li>
+                    </ul>
+                </li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="blog.html">Blog</a></li>
+            </ul>
+
+            <div class="nav-icons">
+                <a href="#"><span class="icon-search">&#128269;</span></a>
+                <a href="cart.html" class="cart-icon">
+                    <span class="icon-cart">&#128722;</span>
+                    <span class="cart-count">4</span>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+
+    <section class="mainimage-slideshow">
+        <div class="slide active">
+            <img src="assets/1.1.jpg" alt="Tent at sunset" />
+            <img src="assets/1.2.jpeg" alt="View from inside tent" />
+        </div>
+        <div class="slide">
+            <img src="assets/2.1.jpg" alt="Tent in forest" />
+            <img src="assets/2.2.jpg" alt="Tent by lake" />
+        </div>
+        <div class="slide">
+            <img src="assets/3.1.jpg" alt="Sun through trees" />
+            <img src="assets/3.2.jpg" alt="Campfire with woman" />
+        </div>
+
+        <div class="mainimage-overlay">
+            <h2>THE PERFECT TENT</h2>
+            <h1>Start your adventure today</h1>
+            <p>Perfect for you and that someone special</p>
+            <button>SHOP NOW</button>
+        </div>
+    </section>
+
+    <section class="categories">
+        <a href="shop.html" class="category">
+            <img src="assets/tents.jpg" alt="Tents" />
+            <span class="label">Tents</span>
+        </a>
+        <a href="shop.html" class="category">
+            <img src="assets/swags.jpg" alt="Swags" />
+            <span class="label">Swags</span>
+        </a>
+        <a href="shop.html" class="category">
+            <img src="assets/packs.jpg" alt="Packs" />
+            <span class="label">Packs</span>
+        </a>
+    </section>
+
+    <script src="js/script.js"></script>
 </body>
 
 </html>
