@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+  <title>Camping Swag | Blog</title>
+
+  <!-- ─── GOOGLE FONTS ────────────────────────────────────────────────────────── -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Libre+Caslon+Text:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- ─── FONT AWESOME 6.x FREE ────────────────────────────────────────────────── -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha384-XxX..."
+    crossorigin="anonymous"
+  />
+
+  <!-- ─── MAIN CSS ─────────────────────────────────────────────────────────────── -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- ────────────────────────────────────────────────────────────────────────── -->
+  <!--                           STICKY NAVIGATION BAR                            -->
+  <!-- ────────────────────────────────────────────────────────────────────────── -->
+  <header class="site-header">
+    <div class="header-inner container">
+      <!-- Logo on the left -->
+      <a href="index.html" class="logo-link">
+        <img
+          src="assets/logo.jpg"
+          alt="Camping Swag Logo"
+          class="logo-img"
+        />
+      </a>
+
+      <!-- Primary navigation menu -->
+      <nav class="primary-nav">
+        <ul>
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li class="has-submenu">
+            <a href="search.html" class="nav-link">
+              Shop Now <i class="fas fa-chevron-down"></i>
+            </a>
+            <ul class="submenu">
+              <li><a href="search.html#tents" class="submenu-link">Tents</a></li>
+              <li><a href="search.html#swags" class="submenu-link">Swags</a></li>
+              <li><a href="search.html#packs" class="submenu-link">Packs</a></li>
+            </ul>
+          </li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="blog.html" class="nav-link">Blog</a></li>
+        </ul>
+      </nav>
+
+      <!-- Icons on the right: search and cart -->
+      <div class="nav-icons">
+        <a href="search.html" aria-label="Search" class="nav-icon-link">
+          <i class="fas fa-search"></i>
+        </a>
+        <a href="cart.html" aria-label="Cart" class="nav-icon-link">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="cart-count">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ────────────────────────────────────────────────────────────────────────── -->
+  <!--                                BLOG HERO                                  -->
+  <!-- ────────────────────────────────────────────────────────────────────────── -->
+  <main>
+    <!-- Hero Section -->
+    <section class="blog-hero" style="position: relative; text-align: center; margin-bottom: 4rem;">
+      <!-- Hero image -->
+      <img
+        src="assets/mainimage2.jpg"
+        alt="Hiking in the mountains"
+        style="width:100%; max-height: 600px; object-fit: cover;"
+      />
+      <!-- Dark overlay -->
+      <div
+        style="
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(62, 16, 13, 0);
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          color: #F9F0E1;
+          font-family: var(--font-heading);
+        "
+      >
+        <h1 style="font-size: 2.75rem; margin-bottom: 0.5rem;">Our Journey</h1>
+        <p style="font-family: var(--font-body); font-size: 1rem; margin-bottom: 1.5rem; opacity: 0.9;">
+          Explore the outdoors and share your experiences
+        </p>
+        <a href="blog.html" class="btn-shop">LEARN MORE</a>
+      </div>
+    </section>
+
+    <!-- Post Filters (All Posts / Outdoor Guide / Stories) -->
+    <section class="post-filters container" style="margin-bottom: 2rem;">
+      <div style="display: flex; gap: 2rem; justify-content: center; font-family: var(--font-body);">
+        <button class="filter-btn" data-filter="all" style="background: none; border: none; font-size: 1rem; cursor: pointer; color: var(--color-text);">
+          All Posts
+        </button>
+        <button class="filter-btn" data-filter="guide" style="background: none; border: none; font-size: 1rem; cursor: pointer; color: var(--color-text);">
+          Outdoor Guide
+        </button>
+        <button class="filter-btn" data-filter="stories" style="background: none; border: none; font-size: 1rem; cursor: pointer; color: var(--color-text);">
+          Stories
+        </button>
+      </div>
+    </section>
+
+    <!-- Blog Post Grid -->
+    <section class="posts-grid container">
+      <div
+        class="post-card"
+        data-category="stories"
+        style="
+          flex: 1 1 calc(25% - 1rem);
+          margin-bottom: 2rem;
+          border-radius: 8px;
+          overflow: hidden;
+          background-color: #ffffff;
+          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+          transition: transform 0.2s ease;
+        "
+      >
+        <img
+          src="assets/aroundcampfire.jpg"
+          alt="People around a campfire"
+          style="width:100%; height: 200px; object-fit: cover;"
+        />
+        <div style="padding: 1rem;">
+          <p style="font-family: var(--font-body); font-size: 0.85rem; color: var(--color-text); opacity: 0.7; margin-bottom: 0.25rem;">
+            Jul 15, 2024
+          </p>
+          <h3 style="font-family: var(--font-heading); font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--color-text);">
+            Best places with even better company
+          </h3>
+          <a href="#" style="font-family: var(--font-body); font-weight: 500; font-size: 0.9rem; color: var(--color-text); text-decoration: underline;">
+            LEARN MORE
+          </a>
+        </div>
+      </div>
+
+      <div
+        class="post-card"
+        data-category="guide"
+        style="
+          flex: 1 1 calc(25% - 1rem);
+          margin-bottom: 2rem;
+          border-radius: 8px;
+          overflow: hidden;
+          background-color: #ffffff;
+          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+          transition: transform 0.2s ease;
+        "
+      >
+        <img
+          src="assets/tentsonahill.jpg"
+          alt="Hikers on a hill"
+          style="width:100%; height: 200px; object-fit: cover;"
+        />
+        <div style="padding: 1rem;">
+          <p style="font-family: var(--font-body); font-size: 0.85rem; color: var(--color-text); opacity: 0.7; margin-bottom: 0.25rem;">
+            Sep 12, 2024
+          </p>
+          <h3 style="font-family: var(--font-heading); font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--color-text);">
+            Views that are worth the hike!
+          </h3>
+          <a href="#" style="font-family: var(--font-body); font-weight: 500; font-size: 0.9rem; color: var(--color-text); text-decoration: underline;">
+            LEARN MORE
+          </a>
+        </div>
+      </div>
+
+      <div
+        class="post-card"
+        data-category="guide"
+        style="
+          flex: 1 1 calc(25% - 1rem);
+          margin-bottom: 2rem;
+          border-radius: 8px;
+          overflow: hidden;
+          background-color: #ffffff;
+          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+          transition: transform 0.2s ease;
+        "
+      >
+        <img
+          src="assets/caravan.jpg"
+          alt="Caravan by a field"
+          style="width:100%; height: 200px; object-fit: cover;"
+        />
+        <div style="padding: 1rem;">
+          <p style="font-family: var(--font-body); font-size: 0.85rem; color: var(--color-text); opacity: 0.7; margin-bottom: 0.25rem;">
+            May 1, 2025
+          </p>
+          <h3 style="font-family: var(--font-heading); font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--color-text);">
+            Where to set up a caravan?
+          </h3>
+          <a href="#" style="font-family: var(--font-body); font-weight: 500; font-size: 0.9rem; color: var(--color-text); text-decoration: underline;">
+            LEARN MORE
+          </a>
+        </div>
+      </div>
+
+      <div
+        class="post-card"
+        data-category="stories"
+        style="
+          flex: 1 1 calc(25% - 1rem);
+          margin-bottom: 2rem;
+          border-radius: 8px;
+          overflow: hidden;
+          background-color: #ffffff;
+          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+          transition: transform 0.2s ease;
+        "
+      >
+        <img
+          src="assets/campingbywater.jpg"
+          alt="Camping by a sunset lake"
+          style="width:100%; height: 200px; object-fit: cover;"
+        />
+        <div style="padding: 1rem;">
+          <p style="font-family: var(--font-body); font-size: 0.85rem; color: var(--color-text); opacity: 0.7; margin-bottom: 0.25rem;">
+            Oct 29, 2023
+          </p>
+          <h3 style="font-family: var(--font-heading); font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--color-text);">
+            The best camping spots by the water
+          </h3>
+          <a href="#" style="font-family: var(--font-body); font-weight: 500; font-size: 0.9rem; color: var(--color-text); text-decoration: underline;">
+            LEARN MORE
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ────────────────────────────────────────────────────────────────────────── -->
+  <!--                                  FOOTER                                     -->
+  <!-- ────────────────────────────────────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <div class="footer-container container">
+      <!-- Subscribe Column -->
+      <div class="footer-col subscribe-col">
+        <h3>Subscribe to get 10% OFF</h3>
+        <p>Subscribe for store updates and discounts.</p>
+        <form class="subscribe-form" action="#" method="POST">
+          <input
+            type="email"
+            name="email"
+            placeholder="Enter your Email"
+            required
+          />
+          <button type="submit">Subscribe</button>
+        </form>
+        <p class="disclaimer">
+          By subscribing you agree to the Term of Use &amp; Privacy Policy
+        </p>
+        <p class="copyright">&copy; 2025, CampingSwag</p>
+      </div>
+
+      <!-- About Column -->
+      <div class="footer-col about-col">
+        <h3>About</h3>
+        <p>
+          Proudly owned and run by Australians. Camping Swag Online is dedicated
+          to offering high‐quality products at reasonable prices.
+        </p>
+        <a href="about.html" class="learn-more">LEARN MORE</a>
+      </div>
+
+      <!-- Shop Column -->
+      <div class="footer-col shop-col">
+        <h3>Shop</h3>
+        <ul>
+          <li><a href="search.html">Shop All</a></li>
+          <li><a href="search.html#bestseller">Best Seller</a></li>
+          <li><a href="search.html#newcoming">New Coming</a></li>
+          <li><a href="search.html#onsale">On Sale</a></li>
+        </ul>
+      </div>
+
+      <!-- Customer Care Column -->
+      <div class="footer-col customer-col">
+        <h3>Customer Care</h3>
+        <ul>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="faqs.html">FAQs</a></li>
+          <li><a href="terms.html">Terms & Conditions</a></li>
+          <li><a href="shipping.html">Shipping & Returns</a></li>
+        </ul>
+        <!-- Social Media Icons -->
+        <div class="footer-social">
+          <a href="https://www.facebook.com" target="_blank" aria-label="Facebook"
+            ><i class="fab fa-facebook-f"></i
+          ></a>
+          <a href="https://www.instagram.com" target="_blank" aria-label="Instagram"
+            ><i class="fab fa-instagram"></i
+          ></a>
+          <a href="https://www.twitter.com" target="_blank" aria-label="Twitter"
+            ><i class="fab fa-twitter"></i
+          ></a>
+          <a href="https://www.tiktok.com" target="_blank" aria-label="TikTok"
+            ><i class="fab fa-tiktok"></i
+          ></a>
+          <a
+            href="https://www.youtube.com"
+            target="_blank"
+            aria-label="YouTube"
+            ><i class="fab fa-youtube"></i
+          ></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ────────────────────────────────────────────────────────────────────────── -->
+  <!--                            MAIN JAVASCRIPT FILE                             -->
+  <!-- ────────────────────────────────────────────────────────────────────────── -->
+  <script src="main.js"></script>
+  <script>
+    // Basic filter logic (show/hide posts by category)
+    const filterButtons = document.querySelectorAll(".filter-btn");
+    const postCards     = document.querySelectorAll(".post-card");
+
+    filterButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const category = btn.dataset.filter; // "all", "guide", or "stories"
+        postCards.forEach((card) => {
+          if (category === "all" || card.dataset.category === category) {
+            card.style.display = "flex";
+          } else {
+            card.style.display = "none";
+          }
+        });
+        // Optional: highlight active filter button
+        filterButtons.forEach((b) => (b.style.opacity = 0.6));
+        btn.style.opacity = 1;
+      });
+    });
+
+    // Set initial filter button style
+    filterButtons[0].style.opacity = 1; // "All Posts" active by default
+  </script>
+</body>
+</html>
