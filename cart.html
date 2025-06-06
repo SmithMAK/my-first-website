@@ -1,1 +1,386 @@
-<link rel="stylesheet" href="css/fonts.css">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Camping Swag | Home</title>
+
+  <!-- ─── GOOGLE FONTS ────────────────────────────────────────────────────────── -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Libre+Caslon+Text:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- ─── FONT AWESOME 6.x FREE (jsDelivr CDN) ────────────────────────────────── -->
+  <!-- This link has been tested and will reliably load all of the “fas”, “far” and “fab” icons: -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"
+  />
+
+  <!-- ─── MAIN CSS ─────────────────────────────────────────────────────────────── -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- ──────────────────────────────────────────────────────────────────────────
+     STICKY NAVIGATION BAR
+  ────────────────────────────────────────────────────────────────────────── -->
+  <header class="site-header">
+    <div class="header-inner container">
+      <!-- Logo on the left (clickable to go to index.html) -->
+      <a href="index.html" class="logo-link">
+        <img src="assets/logo.jpg" alt="Camping Swag Logo" class="logo-img" />
+      </a>
+
+      <!-- Primary navigation menu -->
+      <nav class="primary-nav">
+        <ul>
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li class="has-submenu">
+            <a href="search.html" class="nav-link">
+              Shop Now <i class="fa-solid fa-chevron-down"></i>
+            </a>
+            <ul class="submenu">
+              <li><a href="search.html#tents" class="submenu-link">Tents</a></li>
+              <li><a href="search.html#swags" class="submenu-link">Swags</a></li>
+              <li><a href="search.html#packs" class="submenu-link">Packs</a></li>
+            </ul>
+          </li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="blog.html" class="nav-link">Blog</a></li>
+        </ul>
+      </nav>
+
+      <!-- Icons on the right: search and cart -->
+      <div class="nav-icons">
+        <a href="search.html" aria-label="Search" class="nav-icon-link">
+          <!-- “fa-solid” prefix ensures a solid search icon -->
+          <i class="fa-solid fa-search"></i>
+        </a>
+        <a href="cart.html" aria-label="Cart" class="nav-icon-link">
+          <i class="fa-solid fa-shopping-cart"></i>
+          <span class="cart-count">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <style>
+    /* ─────────────────────────────────────────────────────────────────────────────
+       CART PAGE SPECIFIC STYLES
+    ────────────────────────────────────────────────────────────────────────────── */
+    .cart-page {
+      max-width: 1200px;
+      margin: 2rem auto 4rem;
+      padding: 0 1rem;
+    }
+
+    /* “Continue Shopping” button */
+    .btn-continue {
+      display: inline-block;
+      margin-bottom: 2rem;
+      padding: 0.75rem 1.5rem;
+      background-color: var(--color-accent);
+      color: var(--color-text);
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 1rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.2s ease;
+    }
+    .btn-continue:hover {
+      background-color: var(--color-text);
+      color: #ffffff;
+    }
+
+    .cart-title {
+      font-family: var(--font-heading);
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--color-text);
+      text-align: center;
+    }
+
+    /* Container that will hold either the “empty” state or the list of items */
+    #cart-content {
+      margin-bottom: 2rem;
+    }
+
+    /* Empty‐cart box */
+    .cart-empty {
+      background-color: var(--color-accent);
+      border-radius: 8px;
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+    .cart-empty i {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: var(--color-text);
+    }
+    .cart-empty p {
+      font-family: var(--font-body);
+      font-size: 1.25rem;
+      color: var(--color-text);
+    }
+
+    /* When there are items in the cart, each item is displayed in .cart-item */
+    .cart-item {
+      display: flex;
+      align-items: center;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+
+    .item-image {
+      flex: 0 0 150px;
+      margin-right: 1.5rem;
+    }
+    .item-image img {
+      width: 100%;
+      border-radius: 4px;
+      object-fit: cover;
+    }
+
+    .item-details {
+      flex: 1;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .item-name {
+      flex: 1 1 200px;
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--color-text);
+    }
+
+    .item-price {
+      flex: 0 0 120px;
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--color-text);
+      text-align: right;
+    }
+
+    .item-quantity {
+      flex: 0 0 160px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0.5rem;
+      margin-left: 1rem;
+    }
+
+    .item-quantity button {
+      background-color: var(--color-accent);
+      color: var(--color-text);
+      border: none;
+      padding: 0.4rem 0.8rem;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background-color 0.2s ease;
+    }
+    .item-quantity button:hover {
+      background-color: var(--color-text);
+      color: #ffffff;
+    }
+
+    .item-quantity .qty-number {
+      min-width: 24px;
+      text-align: center;
+      font-family: var(--font-body);
+      font-size: 1rem;
+    }
+
+    /* Cart summary / total section */
+    .cart-summary {
+      display: none; /* hidden when cart is empty */
+      justify-content: flex-end;
+      align-items: flex-end;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .cart-summary .total-label {
+      font-family: var(--font-body);
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: var(--color-text);
+    }
+    .cart-summary .total-amount {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--color-text);
+      margin-bottom: 0.25rem;
+    }
+    .cart-summary small {
+      display: block;
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      color: var(--color-text);
+      opacity: 0.8;
+      margin-bottom: 1rem;
+    }
+    .cart-summary .btn-checkout {
+      background-color: var(--color-text);
+      color: #ffffff;
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 0.75rem 2rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+    .cart-summary .btn-checkout:hover {
+      background-color: #4a0705; /* a slightly darker brown */
+    }
+
+    /* Responsive: items stack on small screens */
+    @media (max-width: 768px) {
+      .cart-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .item-details {
+        width: 100%;
+        margin-top: 1rem;
+      }
+      .item-price,
+      .item-quantity {
+        flex: 1 1 100%;
+        text-align: left;
+        margin-left: 0;
+        margin-top: 0.5rem;
+      }
+      .cart-summary {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ────────────────────────────────────────────────────────────────────────── -->
+  <!--                             CART PAGE CONTENT                              -->
+  <!-- ────────────────────────────────────────────────────────────────────────── -->
+  <main class="cart-page container">
+    <!-- “Continue Shopping” -->
+    <a href="search.html" class="btn-continue">CONTINUE SHOPPING</a>
+
+    <!-- Page Title -->
+    <h2 class="cart-title">YOUR CART</h2>
+
+    <!-- This div will be populated by JavaScript:
+         either show empty‐cart or list of items. -->
+    <div id="cart-content"></div>
+
+    <!-- Cart summary (total + checkout) -->
+    <div id="cart-summary" class="cart-summary">
+      <div>
+        <span class="total-label">Total</span><br />
+        <span class="total-amount">$0.00</span><br />
+        <small>Shipping Fee will be calculated at the time of purchase</small>
+      </div>
+      <button class="btn-checkout">Checkout</button>
+    </div>
+  </main>
+
+  <!-- ────────────────────────────────────────────────────────────────────────── -->
+  <!--                                  FOOTER                                     -->
+  <!-- (identical to your other pages’ footer)                                   -->
+  <!-- ────────────────────────────────────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <div class="footer-container container">
+      <!-- Subscribe Column -->
+      <div class="footer-col subscribe-col">
+        <h3>Subscribe to get 10% OFF</h3>
+        <p>Subscribe for store updates and discounts.</p>
+        <form class="subscribe-form" action="#" method="POST">
+          <input
+            type="email"
+            name="email"
+            placeholder="Enter your Email"
+            required
+          />
+          <button type="submit">Subscribe</button>
+        </form>
+        <p class="disclaimer">
+          By subscribing you agree to the Term of Use &amp; Privacy Policy
+        </p>
+        <p class="copyright">&copy; 2025, CampingSwag</p>
+      </div>
+
+      <!-- About Column -->
+      <div class="footer-col about-col">
+        <h3>About</h3>
+        <p>
+          Proudly owned and run by Australians. Camping Swag Online is dedicated
+          to offering high‐quality products at reasonable prices.
+        </p>
+        <a href="about.html" class="learn-more">LEARN MORE</a>
+      </div>
+
+      <!-- Shop Column -->
+      <div class="footer-col shop-col">
+        <h3>Shop</h3>
+        <ul>
+          <li><a href="search.html">Shop All</a></li>
+          <li><a href="search.html#bestseller">Best Seller</a></li>
+          <li><a href="search.html#newcoming">New Coming</a></li>
+          <li><a href="search.html#onsale">On Sale</a></li>
+        </ul>
+      </div>
+
+      <!-- Customer Care Column -->
+      <div class="footer-col customer-col">
+        <h3>Customer Care</h3>
+        <ul>
+          <li><a href="about.html">Contact</a></li>
+          <li><a href="about.html">FAQs</a></li>
+          <li><a href="about.html">Terms & Conditions</a></li>
+          <li><a href="about.html">Shipping & Returns</a></li>
+        </ul>
+        <!-- Social Media Icons -->
+        <div class="footer-social">
+          <a href="https://www.facebook.com" target="_blank" aria-label="Facebook"
+            ><i class="fab fa-facebook-f"></i
+          ></a>
+          <a href="https://www.instagram.com" target="_blank" aria-label="Instagram"
+            ><i class="fab fa-instagram"></i
+          ></a>
+          <a href="https://www.twitter.com" target="_blank" aria-label="Twitter"
+            ><i class="fab fa-twitter"></i
+          ></a>
+          <a href="https://www.tiktok.com" target="_blank" aria-label="TikTok"
+            ><i class="fab fa-tiktok"></i
+          ></a>
+          <a
+            href="https://www.youtube.com"
+            target="_blank"
+            aria-label="YouTube"
+            ><i class="fab fa-youtube"></i
+          ></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ────────────────────────────────────────────────────────────────────────── -->
+  <!--                            MAIN JAVASCRIPT FILE                             -->
+  <!-- ────────────────────────────────────────────────────────────────────────── -->
+  <script src="main.js"></script>
+</body>
+</html>

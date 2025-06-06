@@ -146,28 +146,183 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+
 // ─────────────────────────────────────────────────────────────────────────────
-//                    main.js (shared by all product & site pages)
+//                          main.js (all pages use this file)
 // ─────────────────────────────────────────────────────────────────────────────
 document.addEventListener("DOMContentLoaded", () => {
-  // 1) Initialize cart count from localStorage (or 0 if none)
-  let cartCount = parseInt(localStorage.getItem("cartCount") || "0", 10);
-  updateCartBadge(cartCount);
+  // 1) Initialize / update the cart‐count badge in the header
+  let cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
+  updateCartBadge();
 
-  // 2) Attach event listeners to ALL ".add-to-cart-btn" buttons
-  document.querySelectorAll(".add-to-cart-btn").forEach((button) => {
-    button.addEventListener("click", () => {
-      cartCount++;
-      localStorage.setItem("cartCount", cartCount);
-      updateCartBadge(cartCount);
+  // 2) On product pages: attach “Add to Cart” buttons (they have class .add-to-cart-btn)
+  document.querySelectorAll(".add-to-cart-btn").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      // Each product page must set window.PRODUCT_DATA = { id, name, price, image }
+      // (see the product‐page HTML files we provided earlier).
+      if (window.PRODUCT_DATA) {
+        addItemToCart({ ...window.PRODUCT_DATA, quantity: 1 });
+      }
     });
   });
 
-  // 3) In case a product is already in cart (persist between pages), update badge
-  function updateCartBadge(count) {
+  // 3) On search.html: attach “＋” and “－” buttons to update cart directly from the grid
+  document.querySelectorAll(".qty-btn").forEach((qtyBtn) => {
+    qtyBtn.addEventListener("click", (e) => {
+      const parentCard = e.currentTarget.closest(".product-card");
+      if (!parentCard) return;
+
+      // We assume each .product-card element has data attributes set:
+      // data-id, data-name, data-price, data-image
+      const id = parentCard.getAttribute("data-id");
+      const name = parentCard.getAttribute("data-name");
+      const price = parseFloat(parentCard.getAttribute("data-price"));
+      const image = parentCard.getAttribute("data-image");
+
+      // Determine if this is “plus” or “minus”
+      const isPlus = e.currentTarget.classList.contains("plus-btn");
+      changeItemQuantity(id, name, price, image, isPlus ? 1 : -1);
+
+      // Also update the visible quantity number inside that card
+      const qtyNumberEl = parentCard.querySelector(".qty-number");
+      let currentQty = parseInt(qtyNumberEl.textContent || "0", 10);
+      currentQty = isPlus ? currentQty + 1 : Math.max(0, currentQty - 1);
+      qtyNumberEl.textContent = currentQty;
+    });
+  });
+
+  // 4) If we are on cart.html (it has an element with ID #cart-content), render the cart
+  if (document.getElementById("cart-content")) {
+    renderCartPage();
+  }
+
+  // ────────────────────────────────────────────────────────────────────────────
+  // Utility Functions
+  // ────────────────────────────────────────────────────────────────────────────
+
+  // Update the red badge in the header
+  function updateCartBadge() {
+    cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
+    const totalCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
     const badge = document.querySelector(".cart-count");
     if (badge) {
-      badge.textContent = count;
+      badge.textContent = totalCount;
+    }
+  }
+
+  // Add a new item or bump quantity if it already exists
+  function addItemToCart(product) {
+    const existing = cartItems.find((ci) => ci.id === product.id);
+    if (existing) {
+      existing.quantity += product.quantity;
+    } else {
+      cartItems.push({ ...product });
+    }
+    // Remove any product with zero quantity
+    cartItems = cartItems.filter((ci) => ci.quantity > 0);
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    updateCartBadge();
+    if (document.getElementById("cart-content")) {
+      renderCartPage();
+    }
+  }
+
+  // Change quantity by delta (±1). If not found, create a new entry with quantity=1
+  function changeItemQuantity(id, name, price, image, delta) {
+    const existing = cartItems.find((ci) => ci.id === id);
+    if (existing) {
+      existing.quantity = Math.max(0, existing.quantity + delta);
+      if (existing.quantity === 0) {
+        // Remove entirely if quantity is zero
+        cartItems = cartItems.filter((ci) => ci.id !== id);
+      }
+    } else if (delta > 0) {
+      cartItems.push({ id, name, price, image, quantity: 1 });
+    }
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    updateCartBadge();
+    if (document.getElementById("cart-content")) {
+      renderCartPage();
+    }
+  }
+
+  // Render the cart page’s contents (list of items or empty state)
+  function renderCartPage() {
+    cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
+    const container = document.getElementById("cart-content");
+    const summaryEl = document.getElementById("cart-summary");
+    container.innerHTML = ""; // clear first
+
+    if (!cartItems || cartItems.length === 0) {
+      // Show empty‐cart box
+      container.innerHTML = `
+        <div class="cart-empty">
+          <i class="fas fa-shopping-bag"></i>
+          <p>No items in your cart</p>
+        </div>`;
+      summaryEl.style.display = "none";
+      return;
+    }
+
+    // Otherwise, build each .cart-item row
+    cartItems.forEach((item) => {
+      const itemEl = document.createElement("div");
+      itemEl.classList.add("cart-item");
+      itemEl.setAttribute("data-id", item.id);
+
+      itemEl.innerHTML = `
+        <div class="item-image">
+          <img src="${item.image}" alt="${item.name}" />
+        </div>
+        <div class="item-details">
+          <span class="item-name">${item.name}</span>
+          <span class="item-price">$${(item.price * item.quantity).toFixed(2)}</span>
+          <div class="item-quantity">
+            <button class="qty-btn minus-btn" aria-label="Decrease quantity">–</button>
+            <span class="qty-number">${item.quantity}</span>
+            <button class="qty-btn plus-btn" aria-label="Increase quantity">＋</button>
+          </div>
+        </div>
+      `;
+
+      container.appendChild(itemEl);
+    });
+
+    // Show the summary (total + checkout)
+    summaryEl.style.display = "flex";
+    updateCartTotal();
+
+    // Attach listeners to the new quantity buttons
+    container.querySelectorAll(".minus-btn").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        const parentItem = e.currentTarget.closest(".cart-item");
+        const prodId = parentItem.getAttribute("data-id");
+        const existing = cartItems.find((ci) => ci.id === prodId);
+        if (!existing) return;
+        changeItemQuantity(prodId, existing.name, existing.price, existing.image, -1);
+      });
+    });
+    container.querySelectorAll(".plus-btn").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        const parentItem = e.currentTarget.closest(".cart-item");
+        const prodId = parentItem.getAttribute("data-id");
+        const existing = cartItems.find((ci) => ci.id === prodId);
+        if (!existing) return;
+        changeItemQuantity(prodId, existing.name, existing.price, existing.image, +1);
+      });
+    });
+  }
+
+  // Compute and display the total sum of all items
+  function updateCartTotal() {
+    cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
+    const totalAmount = cartItems.reduce(
+      (sum, item) => sum + item.price * item.quantity,
+      0
+    );
+    const totalEl = document.querySelector(".total-amount");
+    if (totalEl) {
+      totalEl.textContent = `$${totalAmount.toFixed(2)}`;
     }
   }
 });
