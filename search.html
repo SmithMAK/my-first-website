@@ -1,1 +1,329 @@
-<link rel="stylesheet" href="css/fonts.css">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Camping Swag | Home</title>
+
+  <!-- ─── GOOGLE FONTS ────────────────────────────────────────────────────────── -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Libre+Caslon+Text:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- ─── FONT AWESOME 6.x FREE (jsDelivr CDN) ────────────────────────────────── -->
+  <!-- This link has been tested and will reliably load all of the “fas”, “far” and “fab” icons: -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"
+  />
+
+  <!-- ─── MAIN CSS ─────────────────────────────────────────────────────────────── -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- ──────────────────────────────────────────────────────────────────────────
+     STICKY NAVIGATION BAR
+  ────────────────────────────────────────────────────────────────────────── -->
+  <header class="site-header">
+    <div class="header-inner container">
+      <!-- Logo on the left (clickable to go to index.html) -->
+      <a href="index.html" class="logo-link">
+        <img src="assets/logo.jpg" alt="Camping Swag Logo" class="logo-img" />
+      </a>
+
+      <!-- Primary navigation menu -->
+      <nav class="primary-nav">
+        <ul>
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li class="has-submenu">
+            <a href="search.html" class="nav-link">
+              Shop Now <i class="fa-solid fa-chevron-down"></i>
+            </a>
+            <ul class="submenu">
+              <li><a href="search.html#tents" class="submenu-link">Tents</a></li>
+              <li><a href="search.html#swags" class="submenu-link">Swags</a></li>
+              <li><a href="search.html#packs" class="submenu-link">Packs</a></li>
+            </ul>
+          </li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="blog.html" class="nav-link">Blog</a></li>
+        </ul>
+      </nav>
+
+      <!-- Icons on the right: search and cart -->
+      <div class="nav-icons">
+        <a href="search.html" aria-label="Search" class="nav-icon-link">
+          <!-- “fa-solid” prefix ensures a solid search icon -->
+          <i class="fa-solid fa-search"></i>
+        </a>
+        <a href="cart.html" aria-label="Cart" class="nav-icon-link">
+          <i class="fa-solid fa-shopping-cart"></i>
+          <span class="cart-count">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ──────────────────────────────────────────────────────────────────────────
+     MAIN CONTENT: Filter + Products Grid
+  ────────────────────────────────────────────────────────────────────────── -->
+  <main>
+    <div class="container">
+      <!-- Section Title + Filter Control -->
+      <div class="search-header">
+        <h1>Browse Essential Camping Items</h1>
+
+        <div class="filter-dropdown">
+          <button id="filter-toggle">
+            Filter by: <span id="current-filter">All</span>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <ul id="filter-menu" class="filter-menu">
+            <li><a href="#" data-filter="All">All</a></li>
+            <li><a href="#" data-filter="Tents">Tents</a></li>
+            <li><a href="#" data-filter="Swags">Swags</a></li>
+            <li><a href="#" data-filter="Packs">Packs</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Anchor for “Tents” -->
+      <div id="tents"></div>
+
+      <!-- Products Grid -->
+      <div class="products-grid">
+        <!-- Beach Tent (Category: Tents) -->
+        <div class="product-card" data-category="Tents">
+          <div class="product-image-wrapper">
+            <button class="img-nav prev-img"><i class="fas fa-chevron-left"></i></button>
+            <a href="beachtent.html">
+              <img
+                src="assets/beach tent1.jpg"
+                alt="Beach Tent"
+                class="product-img"
+                data-images='[
+                  "assets/beach tent1.jpg",
+                  "assets/beach tent2.jpg",
+                  "assets/beach tent3.jpg",
+                  "assets/beach tent4.jpg"
+                ]'
+                data-index="0"
+              />
+            </a>
+            <button class="img-nav next-img"><i class="fas fa-chevron-right"></i></button>
+
+            <button class="favorite-btn"><i class="far fa-heart"></i></button>
+          </div>
+          <div class="product-info">
+            <a href="beachtent.html" class="product-name" style="color: #3E100D;">
+              Beach Tent
+            </a>
+            <div class="product-price" style="color: #3E100D;">$149.95</div>
+            <div class="quantity-controls">
+              <button class="qty-btn qty-decrease"><i class="fas fa-minus"></i></button>
+              <span class="qty-number">0</span>
+              <button class="qty-btn qty-increase"><i class="fas fa-plus"></i></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Family Tent (Category: Tents) -->
+        <div class="product-card" data-category="Tents">
+          <div class="product-image-wrapper">
+            <button class="img-nav prev-img"><i class="fas fa-chevron-left"></i></button>
+            <a href="familytent.html">
+              <img
+                src="assets/family tent1.jpg"
+                alt="Family Tent"
+                class="product-img"
+                data-images='[
+                  "assets/family tent1.jpg",
+                  "assets/family tent2.jpg",
+                  "assets/family tent3.jpg",
+                  "assets/family tent4.jpg"
+                ]'
+                data-index="0"
+              />
+            </a>
+            <button class="img-nav next-img"><i class="fas fa-chevron-right"></i></button>
+
+            <button class="favorite-btn"><i class="far fa-heart"></i></button>
+          </div>
+          <div class="product-info">
+            <a href="familytent.html" class="product-name" style="color: #3E100D;">
+              Family Tent
+            </a>
+            <div class="product-price" style="color: #3E100D;">$279.95</div>
+            <div class="quantity-controls">
+              <button class="qty-btn qty-decrease"><i class="fas fa-minus"></i></button>
+              <span class="qty-number">0</span>
+              <button class="qty-btn qty-increase"><i class="fas fa-plus"></i></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Anchor for “Swags” -->
+        <div id="swags"></div>
+
+        <!-- Head Torch (Category: Swags) -->
+        <div class="product-card" data-category="Swags">
+          <div class="product-image-wrapper">
+            <button class="img-nav prev-img"><i class="fas fa-chevron-left"></i></button>
+            <a href="headtorch.html">
+              <img
+                src="assets/headtorch1.jpg"
+                alt="Head Torch"
+                class="product-img"
+                data-images='[
+                  "assets/headtorch1.jpg",
+                  "assets/headtorch2.jpg",
+                  "assets/headtorch3.jpg",
+                  "assets/headtorch4.jpg"
+                ]'
+                data-index="0"
+              />
+            </a>
+            <button class="img-nav next-img"><i class="fas fa-chevron-right"></i></button>
+
+            <button class="favorite-btn"><i class="far fa-heart"></i></button>
+          </div>
+          <div class="product-info">
+            <a href="headtorch.html" class="product-name" style="color: #3E100D;">
+              Head Torch
+            </a>
+            <div class="product-price" style="color: #3E100D;">$65.95</div>
+            <div class="quantity-controls">
+              <button class="qty-btn qty-decrease"><i class="fas fa-minus"></i></button>
+              <span class="qty-number">0</span>
+              <button class="qty-btn qty-increase"><i class="fas fa-plus"></i></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Anchor for “Packs” -->
+        <div id="packs"></div>
+
+        <!-- 35 L Backpack (Category: Packs) -->
+        <div class="product-card" data-category="Packs">
+          <div class="product-image-wrapper">
+            <button class="img-nav prev-img"><i class="fas fa-chevron-left"></i></button>
+            <a href="backpack.html">
+              <img
+                src="assets/backpack1.jpg"
+                alt="35 L Backpack"
+                class="product-img"
+                data-images='[
+                  "assets/backpack1.jpg",
+                  "assets/backpack2.jpg",
+                  "assets/backpack3.jpg",
+                  "assets/backpack4.jpg"
+                ]'
+                data-index="0"
+              />
+            </a>
+            <button class="img-nav next-img"><i class="fas fa-chevron-right"></i></button>
+
+            <button class="favorite-btn"><i class="far fa-heart"></i></button>
+          </div>
+          <div class="product-info">
+            <a href="backpack.html" class="product-name" style="color: #3E100D;">
+              35 L Backpack
+            </a>
+            <div class="product-price" style="color: #3E100D;">$49.95</div>
+            <div class="quantity-controls">
+              <button class="qty-btn qty-decrease"><i class="fas fa-minus"></i></button>
+              <span class="qty-number">0</span>
+              <button class="qty-btn qty-increase"><i class="fas fa-plus"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ──────────────────────────────────────────────────────────────────────────
+     FOOTER
+  ────────────────────────────────────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <div class="footer-container container">
+      <!-- Subscribe Column -->
+      <div class="footer-col subscribe-col">
+        <h3>Subscribe to get 10% OFF</h3>
+        <p>Subscribe for store updates and discounts.</p>
+        <form class="subscribe-form" action="#" method="POST">
+          <input
+            type="email"
+            name="email"
+            placeholder="Enter your Email"
+            required
+          />
+          <button type="submit">Subscribe</button>
+        </form>
+        <p class="disclaimer">
+          By subscribing you agree to the Term of Use &amp; Privacy Policy
+        </p>
+        <p class="copyright">&copy; 2025, CampingSwag</p>
+      </div>
+
+      <!-- About Column -->
+      <div class="footer-col about-col">
+        <h3>About</h3>
+        <p>
+          Proudly owned and run by Australians. Camping Swag Online is dedicated
+          to offering high‐quality products at reasonable prices.
+        </p>
+        <a href="about.html" class="learn-more">LEARN MORE</a>
+      </div>
+
+      <!-- Shop Column -->
+      <div class="footer-col shop-col">
+        <h3>Shop</h3>
+        <ul>
+          <li><a href="search.html">Shop All</a></li>
+          <li><a href="search.html#bestseller">Best Seller</a></li>
+          <li><a href="search.html#newcoming">New Coming</a></li>
+          <li><a href="search.html#onsale">On Sale</a></li>
+        </ul>
+      </div>
+
+      <!-- Customer Care Column -->
+      <div class="footer-col customer-col">
+        <h3>Customer Care</h3>
+        <ul>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="faqs.html">FAQs</a></li>
+          <li><a href="terms.html">Terms & Conditions</a></li>
+          <li><a href="shipping.html">Shipping & Returns</a></li>
+        </ul>
+        <!-- Social Media Icons -->
+        <div class="footer-social">
+          <a href="https://www.facebook.com" target="_blank" aria-label="Facebook"
+            ><i class="fa-brands fa-facebook-f"></i
+          ></a>
+          <a href="https://www.instagram.com" target="_blank" aria-label="Instagram"
+            ><i class="fa-brands fa-instagram"></i
+          ></a>
+          <a href="https://www.twitter.com" target="_blank" aria-label="Twitter"
+            ><i class="fa-brands fa-twitter"></i
+          ></a>
+          <a href="https://www.tiktok.com" target="_blank" aria-label="TikTok"
+            ><i class="fa-brands fa-tiktok"></i
+          ></a>
+          <a
+            href="https://www.youtube.com"
+            target="_blank"
+            aria-label="YouTube"
+            ><i class="fa-brands fa-youtube"></i
+          ></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ──────────────────────────────────────────────────────────────────────────
+     MAIN JAVASCRIPT FILE
+  ────────────────────────────────────────────────────────────────────────── -->
+  <script src="main.js"></script>
+</body>
+</html>

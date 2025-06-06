@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Camping Swag | Home</title>
+
+  <!-- ─── GOOGLE FONTS ────────────────────────────────────────────────────────── -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Libre+Caslon+Text:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- ─── FONT AWESOME 6.x FREE (jsDelivr CDN) ────────────────────────────────── -->
+  <!-- This link has been tested and will reliably load all of the “fas”, “far” and “fab” icons: -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"
+  />
+
+  <!-- ─── MAIN CSS ─────────────────────────────────────────────────────────────── -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- ──────────────────────────────────────────────────────────────────────────
+     STICKY NAVIGATION BAR
+  ────────────────────────────────────────────────────────────────────────── -->
+  <header class="site-header">
+    <div class="header-inner container">
+      <!-- Logo on the left (clickable to go to index.html) -->
+      <a href="index.html" class="logo-link">
+        <img src="assets/logo.jpg" alt="Camping Swag Logo" class="logo-img" />
+      </a>
+
+      <!-- Primary navigation menu -->
+      <nav class="primary-nav">
+        <ul>
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li class="has-submenu">
+            <a href="search.html" class="nav-link">
+              Shop Now <i class="fa-solid fa-chevron-down"></i>
+            </a>
+            <ul class="submenu">
+              <li><a href="search.html#tents" class="submenu-link">Tents</a></li>
+              <li><a href="search.html#swags" class="submenu-link">Swags</a></li>
+              <li><a href="search.html#packs" class="submenu-link">Packs</a></li>
+            </ul>
+          </li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="blog.html" class="nav-link">Blog</a></li>
+        </ul>
+      </nav>
+
+      <!-- Icons on the right: search and cart -->
+      <div class="nav-icons">
+        <a href="search.html" aria-label="Search" class="nav-icon-link">
+          <!-- “fa-solid” prefix ensures a solid search icon -->
+          <i class="fa-solid fa-search"></i>
+        </a>
+        <a href="cart.html" aria-label="Cart" class="nav-icon-link">
+          <i class="fa-solid fa-shopping-cart"></i>
+          <span class="cart-count">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
