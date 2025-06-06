@@ -26,200 +26,203 @@
 
   <title>Camping Swag | 35 L Backpack</title>
   <style>
-    /* ===================================================
-       Only the following CSS is strictly necessary
-       for this product page. Everything else (e.g. 
-       header/footer, grid, font, color variables, etc.)
-       lives in your existing style.css.
-    =================================================== */
-
-    /* Carousel container */
+    /* ─── PRODUCT PAGE SPECIFIC STYLES ────────────────────────────────────────── */
     .product-page {
       max-width: 1200px;
-      margin: 2rem auto;
+      margin: 2rem auto 4rem;
       padding: 0 1rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
     }
-
-    .product-title {
-      font-family: var(--font-heading);
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
-      color: var(--color-text);
-    }
-    .product-price {
-      font-family: var(--font-body);
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin-bottom: 1.5rem;
-      color: var(--color-text);
-    }
-
-    /* Image‐carousel wrapper */
-    .product-image-wrapper {
+    .carousel-container {
       position: relative;
-      max-width: 800px;
-      margin: 0 auto 2rem;
-    }
-    .product-image-wrapper img.product-img {
-      width: 100%;
-      max-height: 500px;
-      object-fit: cover;
-      display: block;
+      overflow: hidden;
       border-radius: 8px;
     }
-    .product-image-wrapper .img-nav {
+    .carousel-slide {
+      display: none;
+      width: 100%;
+      height: 500px;
+      position: relative;
+    }
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .carousel-nav {
       position: absolute;
       top: 50%;
+      width: 100%;
       transform: translateY(-50%);
-      background-color: rgba(255, 255, 255, 0.85);
+      display: flex;
+      justify-content: space-between;
+      padding: 0 1rem;
+    }
+    .carousel-nav button {
+      background-color: rgba(255,255,255,0.8);
       border: none;
-      font-size: 1.2rem;
+      font-size: 1.5rem;
       padding: 0.5rem;
       cursor: pointer;
       border-radius: 50%;
       transition: background-color 0.2s ease;
     }
-    .product-image-wrapper .img-nav:hover {
+    .carousel-nav button:hover {
       background-color: var(--color-accent);
       color: var(--color-text);
-    }
-    .product-image-wrapper .prev-img {
-      left: 8px;
-    }
-    .product-image-wrapper .next-img {
-      right: 8px;
     }
 
-    /* Add to Cart button */
-    .add-to-cart-btn {
-      display: inline-block;
+    /* Product Details (Right Column) */
+    .product-details {
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+    }
+    .product-title {
+      font-family: var(--font-heading);
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .product-price {
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .product-description {
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    /* Add-to-Cart + Qty Controls */
+    .cart-controls {
       margin-bottom: 2rem;
+    }
+    .btn-add-cart {
+      background-color: var(--color-text);
+      color: var(--color-bg);
+      border: none;
       padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+    .btn-add-cart:hover {
       background-color: var(--color-accent);
       color: var(--color-text);
-      font-weight: 600;
+    }
+    .qty-controls {
+      display: none;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    .qty-controls button {
+      background-color: var(--color-accent);
+      color: var(--color-text);
       border: none;
+      padding: 0.4rem 0.8rem;
+      font-size: 1rem;
       border-radius: 4px;
       cursor: pointer;
       transition: background-color 0.2s ease;
     }
-    .add-to-cart-btn:hover {
+    .qty-controls button:hover {
       background-color: var(--color-text);
-      color: #fff;
+      color: var(--color-bg);
+    }
+    .qty-number {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      min-width: 20px;
+      text-align: center;
     }
 
-    /* Collapsible sections (using <details>) */
-    .product-details {
-      margin-bottom: 3rem;
-    }
-    .product-details details {
+    /* Collapsible Details */
+    .collapsible-group details {
       margin-bottom: 1rem;
-      background-color: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.1);
       border-radius: 4px;
-      overflow: hidden;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+      background-color: #fff;
     }
-    .product-details details summary {
+    .collapsible-group summary {
+      cursor: pointer;
       padding: 0.75rem 1rem;
-      font-family: var(--font-body);
-      font-weight: 600;
-      font-size: 1rem;
+      font-weight: 500;
+    }
+    .collapsible-group details[open] summary {
       background-color: var(--color-accent);
       color: var(--color-text);
-      cursor: pointer;
-      list-style: none;
     }
-    .product-details details summary::-webkit-details-marker {
-      display: none;
-    }
-    .product-details details summary::after {
-      content: "\f078"; /* FontAwesome “chevron-down” */
-      font-family: "Font Awesome 5 Free";
-      font-weight: 900;
-      float: right;
-      transition: transform 0.3s ease;
-    }
-    .product-details details[open] summary::after {
-      content: "\f077"; /* FontAwesome “chevron-up” */
-    }
-    .product-details details div.content {
-      padding: 1rem;
-      font-family: var(--font-body);
-      font-size: 0.95rem;
+    .collapsible-group p,
+    .collapsible-group ul {
+      padding: 0 1rem 1rem;
+      margin: 0;
       line-height: 1.5;
-      color: var(--color-text);
-      background-color: #fff;
     }
 
     /* Reviews Section */
     .reviews-section {
-      margin-bottom: 4rem;
+      max-width: 800px;
+      margin: 3rem auto 2rem;
+      padding: 0 1rem;
     }
-    .reviews-section h3 {
+    .reviews-section h2 {
       font-family: var(--font-heading);
-      font-size: 1.75rem;
+      font-size: 2rem;
       margin-bottom: 1.5rem;
-      color: var(--color-text);
+      text-align: center;
     }
     .review {
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
       border-bottom: 1px solid rgba(0,0,0,0.1);
-      padding: 1rem 0;
     }
-    .review:last-child {
-      border-bottom: none;
-    }
-    .review .review-author {
+    .reviewer-name {
       font-family: var(--font-body);
-      font-weight: 600;
-      color: var(--color-text);
+      font-weight: 700;
       margin-bottom: 0.25rem;
+      display: inline-block;
     }
-    .review .review-rating {
-      color: gold;
+    .review-stars {
+      color: #FFD700; /* gold */
       margin-bottom: 0.5rem;
     }
-    .review .review-comment {
+    .review-text {
       font-family: var(--font-body);
       font-size: 0.95rem;
       line-height: 1.4;
-      color: var(--color-text);
     }
 
-    /* Responsive tweaks */
-    @media (max-width: 768px) {
-      .product-image-wrapper img.product-img {
-        max-height: 350px;
+    /* Responsive: stack columns on narrow screens */
+    @media (max-width: 900px) {
+      .product-page {
+        grid-template-columns: 1fr;
       }
-    }
-    @media (max-width: 480px) {
-      .product-image-wrapper img.product-img {
-        max-height: 250px;
+      .carousel-container {
+        height: 300px;
       }
-      .product-title {
-        font-size: 2rem;
-      }
-      .product-price {
-        font-size: 1.25rem;
+      .carousel-slide {
+        height: 300px;
       }
     }
   </style>
 </head>
 <body>
-  <!-- ────────────────────────────────────────────────────────────────────────── -->
-  <!--                           STICKY NAVIGATION BAR                            -->
-  <!-- ────────────────────────────────────────────────────────────────────────── -->
+  <!-- ─────────────────────────────────────────────────────────────────────────── -->
+  <!--                            SITE HEADER / NAV BAR                            -->
+  <!-- ─────────────────────────────────────────────────────────────────────────── -->
   <header class="site-header">
     <div class="header-inner container">
-      <!-- Logo on the left -->
+      <!-- Logo (left) -->
       <a href="index.html" class="logo-link">
-        <img
-          src="assets/logo.jpg"
-          alt="Camping Swag Logo"
-          class="logo-img"
-        />
+        <img src="assets/logo.jpg" alt="Camping Swag Logo" class="logo-img" />
       </a>
 
-      <!-- Primary navigation menu -->
+      <!-- Primary navigation -->
       <nav class="primary-nav">
         <ul>
           <li><a href="index.html" class="nav-link">Home</a></li>
@@ -238,7 +241,7 @@
         </ul>
       </nav>
 
-      <!-- Icons on the right: search and cart -->
+      <!-- Search + Cart Icons (right) -->
       <div class="nav-icons">
         <a href="search.html" aria-label="Search" class="nav-icon-link">
           <i class="fas fa-search"></i>
@@ -251,89 +254,128 @@
     </div>
   </header>
 
-  <!-- ────────────────────────────────────────────────────────────────────────── -->
-  <!--                       35 L BACKPACK PRODUCT SECTION                         -->
-  <!-- ────────────────────────────────────────────────────────────────────────── -->
-  <main class="product-page">
-    <h1 class="product-title">35 L Backpack</h1>
-    <p class="product-price">$49.95</p>
+  <!-- ─────────────────────────────────────────────────────────────────────────── -->
+  <!--                            PRODUCT PAGE CONTENT                              -->
+  <!-- ─────────────────────────────────────────────────────────────────────────── -->
+  <main>
+    <div class="product-page container">
+      <!-- ─── LEFT COLUMN: 4-IMAGE CAROUSEL ─────────────────────────────────────── -->
+      <div class="carousel-container">
+        <div class="carousel-slide" data-index="0">
+          <img src="assets/backpack1.jpg" alt="35L Backpack - View 1" />
+        </div>
+        <div class="carousel-slide" data-index="1">
+          <img src="assets/backpack2.jpg" alt="35L Backpack - View 2" />
+        </div>
+        <div class="carousel-slide" data-index="2">
+          <img src="assets/backpack3.jpg" alt="35L Backpack - View 3" />
+        </div>
+        <div class="carousel-slide" data-index="3">
+          <img src="assets/backpack4.jpg" alt="35L Backpack - View 4" />
+        </div>
 
-    <!-- Image Carousel -->
-    <div class="product-image-wrapper">
-      <button class="img-nav prev-img" aria-label="Previous Image">
-        <i class="fas fa-chevron-left"></i>
-      </button>
-      <img
-        src="assets/backpack1.jpg"
-        alt="35 L Backpack Image"
-        class="product-img"
-      />
-      <button class="img-nav next-img" aria-label="Next Image">
-        <i class="fas fa-chevron-right"></i>
-      </button>
+        <!-- Carousel Navigation Arrows -->
+        <div class="carousel-nav">
+          <button id="backpack-prev-btn"><i class="fas fa-chevron-left"></i></button>
+          <button id="backpack-next-btn"><i class="fas fa-chevron-right"></i></button>
+        </div>
+      </div>
+
+      <!-- ─── RIGHT COLUMN: PRODUCT DETAILS ─────────────────────────────────────── -->
+      <div class="product-details">
+        <h1 class="product-title">35 L Backpack</h1>
+        <span class="product-price">$49.95</span>
+        <p class="product-description">
+          Durable 35-liter backpack with multiple compartments, padded shoulder straps, 
+          water‐resistant base, and a built‐in rain cover. Ideal for day hikes, 
+          camping, or everyday use.
+        </p>
+
+        <!-- Add to Cart + Quantity Controls -->
+        <div class="cart-controls">
+          <button id="backpack-add-cart-btn" class="btn-add-cart">Add to Cart</button>
+          <div id="backpack-qty-controls" class="qty-controls">
+            <button id="backpack-decrement-btn">−</button>
+            <span id="backpack-qty-number" class="qty-number">0</span>
+            <button id="backpack-increment-btn">＋</button>
+          </div>
+        </div>
+
+        <!-- Collapsible Details -->
+        <div class="collapsible-group">
+          <details>
+            <summary>Materials &amp; Care</summary>
+            <p>
+              • 600D polyester fabric with water-resistant coating.<br />
+              • Padded back panel and shoulder straps with breathable mesh. <br />
+              • Hand wash cold, hang to dry.
+            </p>
+          </details>
+          <details>
+            <summary>Sizing</summary>
+            <ul>
+              <li>Total capacity: 35 liters</li>
+              <li>Dimensions: 18″ H × 12″ W × 8″ D</li>
+              <li>Weight (empty): 2.2 lb</li>
+            </ul>
+          </details>
+          <details>
+            <summary>Shipping &amp; Returns</summary>
+            <p>
+              • Standard shipping: $5 (free over $100). <br />
+              • Delivery: 3–6 business days. <br />
+              • Returns accepted within 30 days if unused.
+            </p>
+          </details>
+        </div>
+      </div>
     </div>
 
-    <!-- Add to Cart -->
-    <button class="add-to-cart-btn">Add to Cart</button>
-
-    <!-- Product Details (collapsible) -->
-    <section class="product-details">
-      <details>
-        <summary>Materials &amp; Care</summary>
-        <div class="content">
-          <p>
-            Made from heavy-duty 600D polyester with reinforced stitching and water-resistant zippers. To clean, wipe with damp cloth and mild detergent. Avoid bleach.
-          </p>
-        </div>
-      </details>
-      <details>
-        <summary>Sizing</summary>
-        <div class="content">
-          <p>
-            This backpack measures 19″ (H) × 12″ (W) × 8″ (D) and holds up to 35 L. Adjustable shoulder straps fit chest circumference 35″–48″.
-          </p>
-        </div>
-      </details>
-      <details>
-        <summary>Shipping &amp; Returns</summary>
-        <div class="content">
-          <p>
-            Free ground shipping within the U.S. (3–5 business days). International shipping rates vary. Returns accepted within 30 days—unused condition. Customer covers return shipping.
-          </p>
-        </div>
-      </details>
-    </section>
-
-    <!-- Reviews Section -->
+    <!-- ─── REVIEWS SECTION (FULL-WIDTH) ─────────────────────────────────────── -->
     <section class="reviews-section">
-      <h3>Customer Reviews</h3>
+      <h2>Reviews</h2>
 
       <div class="review">
-        <p class="review-author">★★★★★  Tina K.</p>
-        <p class="review-comment">
-          “Perfect size for day hikes or overnight trips. Pockets are well-placed, and it’s sturdier than I expected at this price. Highly recommended!”
+        <span class="reviewer-name">Samantha K.</span>
+        <div class="review-stars">
+          <i class="fas fa-star"></i><i class="fas fa-star"></i>
+          <i class="fas fa-star"></i><i class="fas fa-star"></i>
+          <i class="far fa-star"></i>
+        </div>
+        <p class="review-text">
+          “This backpack fits so much gear! The rain cover is a lifesaver in sudden downpours.”
         </p>
       </div>
 
       <div class="review">
-        <p class="review-author">★★★★  Luis M.</p>
-        <p class="review-comment">
-          “Super comfy straps and good padding on the back. Only gripe is the side pocket is too tight for my bigger water bottle, but otherwise, five stars.”
+        <span class="reviewer-name">Derek M.</span>
+        <div class="review-stars">
+          <i class="fas fa-star"></i><i class="fas fa-star"></i>
+          <i class="fas fa-star"></i><i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+        </div>
+        <p class="review-text">
+          “Great value for the price. The straps are comfortable and it stays balanced even fully loaded.”
         </p>
       </div>
 
       <div class="review">
-        <p class="review-author">★★★★★  Aisha R.</p>
-        <p class="review-comment">
-          “Got it for camping and it’s worked flawlessly. Held up to rain without leaking. Plenty of room for stove, clothes, and snacks. Fantastic.”
+        <span class="reviewer-name">Riley P.</span>
+        <div class="review-stars">
+          <i class="fas fa-star"></i><i class="fas fa-star"></i>
+          <i class="fas fa-star"></i><i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+        </div>
+        <p class="review-text">
+          “Perfect daypack for weekend hikes. All compartments are easy to access and well‐organized.”
         </p>
       </div>
     </section>
   </main>
 
-  <!-- ────────────────────────────────────────────────────────────────────────── -->
-  <!--                                  FOOTER                                     -->
-  <!-- ────────────────────────────────────────────────────────────────────────── -->
+  <!-- ─────────────────────────────────────────────────────────────────────────── -->
+  <!--                                   FOOTER                                     -->
+  <!-- ─────────────────────────────────────────────────────────────────────────── -->
   <footer class="site-footer">
     <div class="footer-container container">
       <!-- Subscribe Column -->
@@ -380,67 +422,149 @@
       <div class="footer-col customer-col">
         <h3>Customer Care</h3>
         <ul>
-          <li><a href="about.html">Contact</a></li>
-          <li><a href="about.html">FAQs</a></li>
-          <li><a href="about.html">Terms & Conditions</a></li>
-          <li><a href="about.html">Shipping & Returns</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="faqs.html">FAQs</a></li>
+          <li><a href="terms.html">Terms &amp; Conditions</a></li>
+          <li><a href="shipping.html">Shipping &amp; Returns</a></li>
         </ul>
         <!-- Social Media Icons -->
         <div class="footer-social">
-          <a href="https://www.facebook.com" target="_blank" aria-label="Facebook"
-            ><i class="fab fa-facebook-f"></i
-          ></a>
-          <a href="https://www.instagram.com" target="_blank" aria-label="Instagram"
-            ><i class="fab fa-instagram"></i
-          ></a>
-          <a href="https://www.twitter.com" target="_blank" aria-label="Twitter"
-            ><i class="fab fa-twitter"></i
-          ></a>
-          <a href="https://www.tiktok.com" target="_blank" aria-label="TikTok"
-            ><i class="fab fa-tiktok"></i
-          ></a>
+          <a
+            href="https://www.facebook.com"
+            target="_blank"
+            aria-label="Facebook"
+          >
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a
+            href="https://www.instagram.com"
+            target="_blank"
+            aria-label="Instagram"
+          >
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a
+            href="https://www.twitter.com"
+            target="_blank"
+            aria-label="Twitter"
+          >
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a
+            href="https://www.tiktok.com"
+            target="_blank"
+            aria-label="TikTok"
+          >
+            <i class="fab fa-tiktok"></i>
+          </a>
           <a
             href="https://www.youtube.com"
             target="_blank"
             aria-label="YouTube"
-            ><i class="fab fa-youtube"></i
-          ></a>
+          >
+            <i class="fab fa-youtube"></i>
+          </a>
         </div>
       </div>
     </div>
   </footer>
 
-  <!-- ────────────────────────────────────────────────────────────────────────── -->
+  <!-- ─────────────────────────────────────────────────────────────────────────── -->
   <!--                            MAIN JAVASCRIPT FILE                             -->
-  <!-- ────────────────────────────────────────────────────────────────────────── -->
+  <!-- ─────────────────────────────────────────────────────────────────────────── -->
   <script src="main.js"></script>
 
-  <!-- ────────────────────────────────────────────────────────────────────────── -->
-  <!--                      35 L BACKPACK CAROUSEL INITIALIZATION                   -->
-  <!-- ────────────────────────────────────────────────────────────────────────── -->
+  <!-- ─────────────────────────────────────────────────────────────────────────── -->
+  <!--                 INLINE SCRIPT: 35L BACKPACK CART & CAROUSEL                 -->
+  <!-- ─────────────────────────────────────────────────────────────────────────── -->
   <script>
-    (function () {
-      // 4 backpack images in assets folder
-      const images = [
-        "assets/backpack1.jpg",
-        "assets/backpack2.jpg",
-        "assets/backpack3.jpg",
-        "assets/backpack4.jpg",
-      ];
-      let index = 0;
-      const imgEl = document.querySelector(".product-img");
-      const prevBtn = document.querySelector(".prev-img");
-      const nextBtn = document.querySelector(".next-img");
+    document.addEventListener("DOMContentLoaded", () => {
+      const PRODUCT_DATA = {
+        id: "backpack35",
+        name: "35 L Backpack",
+        price: 49.95,
+        image: "assets/backpack1.jpg"
+      };
+
+      const btnAdd    = document.getElementById("backpack-add-cart-btn");
+      const qtyCtrls  = document.getElementById("backpack-qty-controls");
+      const qtyNumber = document.getElementById("backpack-qty-number");
+      const incBtn    = document.getElementById("backpack-increment-btn");
+      const decBtn    = document.getElementById("backpack-decrement-btn");
+
+      // 1) If already in cart → show quantity controls
+      let items = JSON.parse(localStorage.getItem("cartItems") || "[]");
+      const found = items.find((ci) => ci.id === PRODUCT_DATA.id);
+      if (found) {
+        btnAdd.style.display    = "none";
+        qtyCtrls.style.display  = "flex";
+        qtyNumber.textContent   = found.quantity;
+      }
+
+      // 2) ON “Add to Cart” click
+      btnAdd.addEventListener("click", () => {
+        addItemToCart({ ...PRODUCT_DATA, quantity: 1 });
+        btnAdd.style.display    = "none";
+        qtyCtrls.style.display  = "flex";
+        qtyNumber.textContent   = 1;
+      });
+
+      // 3) ON “＋” click
+      incBtn.addEventListener("click", () => {
+        changeItemQuantity(
+          PRODUCT_DATA.id,
+          PRODUCT_DATA.name,
+          PRODUCT_DATA.price,
+          PRODUCT_DATA.image,
+          +1
+        );
+        let cur = parseInt(qtyNumber.textContent, 10) || 0;
+        cur++;
+        qtyNumber.textContent = cur;
+      });
+
+      // 4) ON “−” click
+      decBtn.addEventListener("click", () => {
+        changeItemQuantity(
+          PRODUCT_DATA.id,
+          PRODUCT_DATA.name,
+          PRODUCT_DATA.price,
+          PRODUCT_DATA.image,
+          -1
+        );
+        let cur = parseInt(qtyNumber.textContent, 10) || 0;
+        if (cur <= 1) {
+          qtyNumber.textContent = 0;
+          qtyCtrls.style.display = "none";
+          btnAdd.style.display   = "inline-block";
+        } else {
+          cur--;
+          qtyNumber.textContent = cur;
+        }
+      });
+
+      // ─── CAROUSEL LOGIC ────────────────────────────────────────────────────────
+      let currentIndex = 0;
+      const slides = document.querySelectorAll(".carousel-slide");
+      const totalSlides = slides.length;
+      const prevBtn = document.getElementById("backpack-prev-btn");
+      const nextBtn = document.getElementById("backpack-next-btn");
+
+      function showSlide(index) {
+        slides.forEach((s) => (s.style.display = "none"));
+        slides[index].style.display = "block";
+      }
+      showSlide(currentIndex);
 
       prevBtn.addEventListener("click", () => {
-        index = (index - 1 + images.length) % images.length;
-        imgEl.src = images[index];
+        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+        showSlide(currentIndex);
       });
       nextBtn.addEventListener("click", () => {
-        index = (index + 1) % images.length;
-        imgEl.src = images[index];
+        currentIndex = (currentIndex + 1) % totalSlides;
+        showSlide(currentIndex);
       });
-    })();
+    });
   </script>
 </body>
 </html>

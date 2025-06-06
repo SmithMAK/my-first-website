@@ -33,6 +33,12 @@
     text-decoration: none;
   }
   
+    /* Logo */
+    .logo-img {
+        height: 120px;
+        width: auto;
+      }
+      
   /* Utility container to center content and padding */
   .container {
     max-width: 1200px;
@@ -69,8 +75,11 @@
     background-color: var(--color-bg);
     z-index: 1000;
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 0
   }
   
+
+
   .header-inner {
     display: flex;
     align-items: center;
@@ -79,11 +88,7 @@
     padding: 0; /* ensure logo is flush left */
   }
   
-  /* Logo */
-  .logo-img {
-    height: 120px;
-    width: auto;
-  }
+
   
   /* Primary navigation */
   .primary-nav ul {

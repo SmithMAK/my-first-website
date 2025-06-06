@@ -26,200 +26,203 @@
 
   <title>Camping Swag | Head Torch</title>
   <style>
-    /* ===================================================
-       Only the following CSS is strictly necessary
-       for this product page. Everything else (e.g. 
-       header/footer, grid, font, color variables, etc.)
-       lives in your existing style.css.
-    =================================================== */
-
-    /* Carousel container */
+    /* ─── PRODUCT PAGE SPECIFIC STYLES ────────────────────────────────────────── */
     .product-page {
       max-width: 1200px;
-      margin: 2rem auto;
+      margin: 2rem auto 4rem;
       padding: 0 1rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
     }
-
-    .product-title {
-      font-family: var(--font-heading);
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
-      color: var(--color-text);
-    }
-    .product-price {
-      font-family: var(--font-body);
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin-bottom: 1.5rem;
-      color: var(--color-text);
-    }
-
-    /* Image‐carousel wrapper */
-    .product-image-wrapper {
+    .carousel-container {
       position: relative;
-      max-width: 800px;
-      margin: 0 auto 2rem;
-    }
-    .product-image-wrapper img.product-img {
-      width: 100%;
-      max-height: 500px;
-      object-fit: cover;
-      display: block;
+      overflow: hidden;
       border-radius: 8px;
     }
-    .product-image-wrapper .img-nav {
+    .carousel-slide {
+      display: none;
+      width: 100%;
+      height: 500px;
+      position: relative;
+    }
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .carousel-nav {
       position: absolute;
       top: 50%;
+      width: 100%;
       transform: translateY(-50%);
-      background-color: rgba(255, 255, 255, 0.85);
+      display: flex;
+      justify-content: space-between;
+      padding: 0 1rem;
+    }
+    .carousel-nav button {
+      background-color: rgba(255,255,255,0.8);
       border: none;
-      font-size: 1.2rem;
+      font-size: 1.5rem;
       padding: 0.5rem;
       cursor: pointer;
       border-radius: 50%;
       transition: background-color 0.2s ease;
     }
-    .product-image-wrapper .img-nav:hover {
+    .carousel-nav button:hover {
       background-color: var(--color-accent);
       color: var(--color-text);
-    }
-    .product-image-wrapper .prev-img {
-      left: 8px;
-    }
-    .product-image-wrapper .next-img {
-      right: 8px;
     }
 
-    /* Add to Cart button */
-    .add-to-cart-btn {
-      display: inline-block;
+    /* Product Details (Right Column) */
+    .product-details {
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+    }
+    .product-title {
+      font-family: var(--font-heading);
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .product-price {
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .product-description {
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    /* Add-to-Cart + Qty Controls */
+    .cart-controls {
       margin-bottom: 2rem;
+    }
+    .btn-add-cart {
+      background-color: var(--color-text);
+      color: var(--color-bg);
+      border: none;
       padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+    .btn-add-cart:hover {
       background-color: var(--color-accent);
       color: var(--color-text);
-      font-weight: 600;
+    }
+    .qty-controls {
+      display: none;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    .qty-controls button {
+      background-color: var(--color-accent);
+      color: var(--color-text);
       border: none;
+      padding: 0.4rem 0.8rem;
+      font-size: 1rem;
       border-radius: 4px;
       cursor: pointer;
       transition: background-color 0.2s ease;
     }
-    .add-to-cart-btn:hover {
+    .qty-controls button:hover {
       background-color: var(--color-text);
-      color: #fff;
+      color: var(--color-bg);
+    }
+    .qty-number {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      min-width: 20px;
+      text-align: center;
     }
 
-    /* Collapsible sections (using <details>) */
-    .product-details {
-      margin-bottom: 3rem;
-    }
-    .product-details details {
+    /* Collapsible Details */
+    .collapsible-group details {
       margin-bottom: 1rem;
-      background-color: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.1);
       border-radius: 4px;
-      overflow: hidden;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+      background-color: #fff;
     }
-    .product-details details summary {
+    .collapsible-group summary {
+      cursor: pointer;
       padding: 0.75rem 1rem;
-      font-family: var(--font-body);
-      font-weight: 600;
-      font-size: 1rem;
+      font-weight: 500;
+    }
+    .collapsible-group details[open] summary {
       background-color: var(--color-accent);
       color: var(--color-text);
-      cursor: pointer;
-      list-style: none;
     }
-    .product-details details summary::-webkit-details-marker {
-      display: none;
-    }
-    .product-details details summary::after {
-      content: "\f078"; /* FontAwesome “chevron-down” */
-      font-family: "Font Awesome 5 Free";
-      font-weight: 900;
-      float: right;
-      transition: transform 0.3s ease;
-    }
-    .product-details details[open] summary::after {
-      content: "\f077"; /* FontAwesome “chevron-up” */
-    }
-    .product-details details div.content {
-      padding: 1rem;
-      font-family: var(--font-body);
-      font-size: 0.95rem;
+    .collapsible-group p,
+    .collapsible-group ul {
+      padding: 0 1rem 1rem;
+      margin: 0;
       line-height: 1.5;
-      color: var(--color-text);
-      background-color: #fff;
     }
 
     /* Reviews Section */
     .reviews-section {
-      margin-bottom: 4rem;
+      max-width: 800px;
+      margin: 3rem auto 2rem;
+      padding: 0 1rem;
     }
-    .reviews-section h3 {
+    .reviews-section h2 {
       font-family: var(--font-heading);
-      font-size: 1.75rem;
+      font-size: 2rem;
       margin-bottom: 1.5rem;
-      color: var(--color-text);
+      text-align: center;
     }
     .review {
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
       border-bottom: 1px solid rgba(0,0,0,0.1);
-      padding: 1rem 0;
     }
-    .review:last-child {
-      border-bottom: none;
-    }
-    .review .review-author {
+    .reviewer-name {
       font-family: var(--font-body);
-      font-weight: 600;
-      color: var(--color-text);
+      font-weight: 700;
       margin-bottom: 0.25rem;
+      display: inline-block;
     }
-    .review .review-rating {
-      color: gold;
+    .review-stars {
+      color: #FFD700; /* gold */
       margin-bottom: 0.5rem;
     }
-    .review .review-comment {
+    .review-text {
       font-family: var(--font-body);
       font-size: 0.95rem;
       line-height: 1.4;
-      color: var(--color-text);
     }
 
-    /* Responsive tweaks */
-    @media (max-width: 768px) {
-      .product-image-wrapper img.product-img {
-        max-height: 350px;
+    /* Responsive: stack columns on narrow screens */
+    @media (max-width: 900px) {
+      .product-page {
+        grid-template-columns: 1fr;
       }
-    }
-    @media (max-width: 480px) {
-      .product-image-wrapper img.product-img {
-        max-height: 250px;
+      .carousel-container {
+        height: 300px;
       }
-      .product-title {
-        font-size: 2rem;
-      }
-      .product-price {
-        font-size: 1.25rem;
+      .carousel-slide {
+        height: 300px;
       }
     }
   </style>
 </head>
 <body>
-  <!-- ────────────────────────────────────────────────────────────────────────── -->
-  <!--                           STICKY NAVIGATION BAR                            -->
-  <!-- ────────────────────────────────────────────────────────────────────────── -->
+  <!-- ─────────────────────────────────────────────────────────────────────────── -->
+  <!--                            SITE HEADER / NAV BAR                            -->
+  <!-- ─────────────────────────────────────────────────────────────────────────── -->
   <header class="site-header">
     <div class="header-inner container">
-      <!-- Logo on the left -->
+      <!-- Logo (left) -->
       <a href="index.html" class="logo-link">
-        <img
-          src="assets/logo.jpg"
-          alt="Camping Swag Logo"
-          class="logo-img"
-        />
+        <img src="assets/logo.jpg" alt="Camping Swag Logo" class="logo-img" />
       </a>
 
-      <!-- Primary navigation menu -->
+      <!-- Primary navigation -->
       <nav class="primary-nav">
         <ul>
           <li><a href="index.html" class="nav-link">Home</a></li>
@@ -238,7 +241,7 @@
         </ul>
       </nav>
 
-      <!-- Icons on the right: search and cart -->
+      <!-- Search + Cart Icons (right) -->
       <div class="nav-icons">
         <a href="search.html" aria-label="Search" class="nav-icon-link">
           <i class="fas fa-search"></i>
@@ -251,89 +254,128 @@
     </div>
   </header>
 
-  <!-- ────────────────────────────────────────────────────────────────────────── -->
-  <!--                        HEAD TORCH PRODUCT SECTION                          -->
-  <!-- ────────────────────────────────────────────────────────────────────────── -->
-  <main class="product-page">
-    <h1 class="product-title">Head Torch</h1>
-    <p class="product-price">$65.95</p>
+  <!-- ─────────────────────────────────────────────────────────────────────────── -->
+  <!--                            PRODUCT PAGE CONTENT                              -->
+  <!-- ─────────────────────────────────────────────────────────────────────────── -->
+  <main>
+    <div class="product-page container">
+      <!-- ─── LEFT COLUMN: 4-IMAGE CAROUSEL ─────────────────────────────────────── -->
+      <div class="carousel-container">
+        <div class="carousel-slide" data-index="0">
+          <img src="assets/headtorch1.jpg" alt="Head Torch - View 1" />
+        </div>
+        <div class="carousel-slide" data-index="1">
+          <img src="assets/headtorch2.jpg" alt="Head Torch - View 2" />
+        </div>
+        <div class="carousel-slide" data-index="2">
+          <img src="assets/headtorch3.jpg" alt="Head Torch - View 3" />
+        </div>
+        <div class="carousel-slide" data-index="3">
+          <img src="assets/headtorch4.jpg" alt="Head Torch - View 4" />
+        </div>
 
-    <!-- Image Carousel -->
-    <div class="product-image-wrapper">
-      <button class="img-nav prev-img" aria-label="Previous Image">
-        <i class="fas fa-chevron-left"></i>
-      </button>
-      <img
-        src="assets/headtorch1.jpg"
-        alt="Head Torch Image"
-        class="product-img"
-      />
-      <button class="img-nav next-img" aria-label="Next Image">
-        <i class="fas fa-chevron-right"></i>
-      </button>
+        <!-- Carousel Navigation Arrows -->
+        <div class="carousel-nav">
+          <button id="torch-prev-btn"><i class="fas fa-chevron-left"></i></button>
+          <button id="torch-next-btn"><i class="fas fa-chevron-right"></i></button>
+        </div>
+      </div>
+
+      <!-- ─── RIGHT COLUMN: PRODUCT DETAILS ─────────────────────────────────────── -->
+      <div class="product-details">
+        <h1 class="product-title">Head Torch</h1>
+        <span class="product-price">$65.95</span>
+        <p class="product-description">
+          Ultra-bright LED head torch with adjustable beam modes, rechargeable battery, 
+          and adjustable nylon strap. Perfect for night hikes, camping, and hands-free work.
+        </p>
+
+        <!-- Add to Cart + Quantity Controls -->
+        <div class="cart-controls">
+          <button id="torch-add-cart-btn" class="btn-add-cart">Add to Cart</button>
+          <div id="torch-qty-controls" class="qty-controls">
+            <button id="torch-decrement-btn">−</button>
+            <span id="torch-qty-number" class="qty-number">0</span>
+            <button id="torch-increment-btn">＋</button>
+          </div>
+        </div>
+
+        <!-- Collapsible Details -->
+        <div class="collapsible-group">
+          <details>
+            <summary>Materials &amp; Care</summary>
+            <p>
+              • Durable ABS plastic housing with waterproof rating IPX5. <br />
+              • High-output 1200 lumen LED. <br />
+              • Micro-USB rechargeable battery (included). <br />
+              • Wipe clean with a damp cloth; do not submerge.
+            </p>
+          </details>
+          <details>
+            <summary>Sizing</summary>
+            <ul>
+              <li>Adjustable head strap fits 20″–24″ circumference</li>
+              <li>Weight: 3.5 oz (100 g) with battery</li>
+              <li>Battery life: 6 hrs high mode, 20 hrs low mode</li>
+            </ul>
+          </details>
+          <details>
+            <summary>Shipping &amp; Returns</summary>
+            <p>
+              • Flat-rate shipping: $5. <br />
+              • Free shipping on orders over $100. <br />
+              • 30-day hassle-free returns if unopened.
+            </p>
+          </details>
+        </div>
+      </div>
     </div>
 
-    <!-- Add to Cart -->
-    <button class="add-to-cart-btn">Add to Cart</button>
-
-    <!-- Product Details (collapsible) -->
-    <section class="product-details">
-      <details>
-        <summary>Materials &amp; Care</summary>
-        <div class="content">
-          <p>
-            High‐impact ABS body with a water‐resistant rubber seal. Uses a rechargeable Li-ion battery. To clean, wipe with a damp cloth. Do not submerge in water or expose to extreme heat.
-          </p>
-        </div>
-      </details>
-      <details>
-        <summary>Sizing</summary>
-        <div class="content">
-          <p>
-            Adjustable elastic head strap fits head circumference 21″–24″. Torch unit measures 2.5″ × 2″ × 1.5″ and weighs 5.6 oz.
-          </p>
-        </div>
-      </details>
-      <details>
-        <summary>Shipping &amp; Returns</summary>
-        <div class="content">
-          <p>
-            Free ground shipping within the U.S. (2–4 business days). International shipping rates vary. Returns accepted within 30 days—torch must be in original packaging and unused. Customer pays return shipping.
-          </p>
-        </div>
-      </details>
-    </section>
-
-    <!-- Reviews Section -->
+    <!-- ─── REVIEWS SECTION (FULL-WIDTH) ─────────────────────────────────────── -->
     <section class="reviews-section">
-      <h3>Customer Reviews</h3>
+      <h2>Reviews</h2>
 
       <div class="review">
-        <p class="review-author">★★★★★  Ethan G.</p>
-        <p class="review-comment">
-          “Brightest headlamp I’ve ever owned. Lasted 8 hours on the high beam and recharged quickly. Perfect for evening hikes!”
+        <span class="reviewer-name">Avery J.</span>
+        <div class="review-stars">
+          <i class="fas fa-star"></i><i class="fas fa-star"></i>
+          <i class="fas fa-star"></i><i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+        </div>
+        <p class="review-text">
+          “Night trail running is so much safer now. Battery lasts for hours and it’s very comfortable.”
         </p>
       </div>
 
       <div class="review">
-        <p class="review-author">★★★★  Marina L.</p>
-        <p class="review-comment">
-          “Lightweight and comfortable, great for running in the dark. Wish it had a slightly wider beam, but still a 5-star product.”
+        <span class="reviewer-name">Jordan B.</span>
+        <div class="review-stars">
+          <i class="fas fa-star"></i><i class="fas fa-star"></i>
+          <i class="fas fa-star"></i><i class="fas fa-star"></i>
+          <i class="far fa-star"></i>
+        </div>
+        <p class="review-text">
+          “Bright enough even on full beam. Easy to adjust angle and fits my helmet perfectly.”
         </p>
       </div>
 
       <div class="review">
-        <p class="review-author">★★★★★  Zachary P.</p>
-        <p class="review-comment">
-          “Used this on a 3-day camping trip. Waterproof, comfy strap, and the battery life exceeded my expectations. Highly recommend!” 
+        <span class="reviewer-name">Morgan S.</span>
+        <div class="review-stars">
+          <i class="fas fa-star"></i><i class="fas fa-star"></i>
+          <i class="fas fa-star"></i><i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+        </div>
+        <p class="review-text">
+          “Rechargeable is great—no need to replace batteries. Very lightweight and water-resistant.”
         </p>
       </div>
     </section>
   </main>
 
-  <!-- ────────────────────────────────────────────────────────────────────────── -->
-  <!--                                  FOOTER                                     -->
-  <!-- ────────────────────────────────────────────────────────────────────────── -->
+  <!-- ─────────────────────────────────────────────────────────────────────────── -->
+  <!--                                   FOOTER                                     -->
+  <!-- ─────────────────────────────────────────────────────────────────────────── -->
   <footer class="site-footer">
     <div class="footer-container container">
       <!-- Subscribe Column -->
@@ -380,67 +422,149 @@
       <div class="footer-col customer-col">
         <h3>Customer Care</h3>
         <ul>
-          <li><a href="about.html">Contact</a></li>
-          <li><a href="about.html">FAQs</a></li>
-          <li><a href="about.html">Terms & Conditions</a></li>
-          <li><a href="about.html">Shipping & Returns</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="faqs.html">FAQs</a></li>
+          <li><a href="terms.html">Terms &amp; Conditions</a></li>
+          <li><a href="shipping.html">Shipping &amp; Returns</a></li>
         </ul>
         <!-- Social Media Icons -->
         <div class="footer-social">
-          <a href="https://www.facebook.com" target="_blank" aria-label="Facebook"
-            ><i class="fab fa-facebook-f"></i
-          ></a>
-          <a href="https://www.instagram.com" target="_blank" aria-label="Instagram"
-            ><i class="fab fa-instagram"></i
-          ></a>
-          <a href="https://www.twitter.com" target="_blank" aria-label="Twitter"
-            ><i class="fab fa-twitter"></i
-          ></a>
-          <a href="https://www.tiktok.com" target="_blank" aria-label="TikTok"
-            ><i class="fab fa-tiktok"></i
-          ></a>
+          <a
+            href="https://www.facebook.com"
+            target="_blank"
+            aria-label="Facebook"
+          >
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a
+            href="https://www.instagram.com"
+            target="_blank"
+            aria-label="Instagram"
+          >
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a
+            href="https://www.twitter.com"
+            target="_blank"
+            aria-label="Twitter"
+          >
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a
+            href="https://www.tiktok.com"
+            target="_blank"
+            aria-label="TikTok"
+          >
+            <i class="fab fa-tiktok"></i>
+          </a>
           <a
             href="https://www.youtube.com"
             target="_blank"
             aria-label="YouTube"
-            ><i class="fab fa-youtube"></i
-          ></a>
+          >
+            <i class="fab fa-youtube"></i>
+          </a>
         </div>
       </div>
     </div>
   </footer>
 
-  <!-- ────────────────────────────────────────────────────────────────────────── -->
+  <!-- ─────────────────────────────────────────────────────────────────────────── -->
   <!--                            MAIN JAVASCRIPT FILE                             -->
-  <!-- ────────────────────────────────────────────────────────────────────────── -->
+  <!-- ─────────────────────────────────────────────────────────────────────────── -->
   <script src="main.js"></script>
 
-  <!-- ────────────────────────────────────────────────────────────────────────── -->
-  <!--                       HEAD TORCH CAROUSEL INITIALIZATION                      -->
-  <!-- ────────────────────────────────────────────────────────────────────────── -->
+  <!-- ─────────────────────────────────────────────────────────────────────────── -->
+  <!--                 INLINE SCRIPT: HEAD TORCH CART & CAROUSEL                    -->
+  <!-- ─────────────────────────────────────────────────────────────────────────── -->
   <script>
-    (function () {
-      // 4 headtorch images in assets folder
-      const images = [
-        "assets/headtorch1.jpg",
-        "assets/headtorch2.jpg",
-        "assets/headtorch3.jpg",
-        "assets/headtorch4.jpg",
-      ];
-      let index = 0;
-      const imgEl = document.querySelector(".product-img");
-      const prevBtn = document.querySelector(".prev-img");
-      const nextBtn = document.querySelector(".next-img");
+    document.addEventListener("DOMContentLoaded", () => {
+      const PRODUCT_DATA = {
+        id: "headtorch",
+        name: "Head Torch",
+        price: 65.95,
+        image: "assets/headtorch1.jpg"
+      };
+
+      const btnAdd    = document.getElementById("torch-add-cart-btn");
+      const qtyCtrls  = document.getElementById("torch-qty-controls");
+      const qtyNumber = document.getElementById("torch-qty-number");
+      const incBtn    = document.getElementById("torch-increment-btn");
+      const decBtn    = document.getElementById("torch-decrement-btn");
+
+      // 1) If already in cart → show quantity controls
+      let items = JSON.parse(localStorage.getItem("cartItems") || "[]");
+      const found = items.find((ci) => ci.id === PRODUCT_DATA.id);
+      if (found) {
+        btnAdd.style.display    = "none";
+        qtyCtrls.style.display  = "flex";
+        qtyNumber.textContent   = found.quantity;
+      }
+
+      // 2) ON “Add to Cart” click
+      btnAdd.addEventListener("click", () => {
+        addItemToCart({ ...PRODUCT_DATA, quantity: 1 });
+        btnAdd.style.display    = "none";
+        qtyCtrls.style.display  = "flex";
+        qtyNumber.textContent   = 1;
+      });
+
+      // 3) ON “＋” click
+      incBtn.addEventListener("click", () => {
+        changeItemQuantity(
+          PRODUCT_DATA.id,
+          PRODUCT_DATA.name,
+          PRODUCT_DATA.price,
+          PRODUCT_DATA.image,
+          +1
+        );
+        let cur = parseInt(qtyNumber.textContent, 10) || 0;
+        cur++;
+        qtyNumber.textContent = cur;
+      });
+
+      // 4) ON “−” click
+      decBtn.addEventListener("click", () => {
+        changeItemQuantity(
+          PRODUCT_DATA.id,
+          PRODUCT_DATA.name,
+          PRODUCT_DATA.price,
+          PRODUCT_DATA.image,
+          -1
+        );
+        let cur = parseInt(qtyNumber.textContent, 10) || 0;
+        if (cur <= 1) {
+          qtyNumber.textContent = 0;
+          qtyCtrls.style.display = "none";
+          btnAdd.style.display   = "inline-block";
+        } else {
+          cur--;
+          qtyNumber.textContent = cur;
+        }
+      });
+
+      // ─── CAROUSEL LOGIC ────────────────────────────────────────────────────────
+      let currentIndex = 0;
+      const slides = document.querySelectorAll(".carousel-slide");
+      const totalSlides = slides.length;
+      const prevBtn = document.getElementById("torch-prev-btn");
+      const nextBtn = document.getElementById("torch-next-btn");
+
+      function showSlide(index) {
+        slides.forEach((s) => (s.style.display = "none"));
+        slides[index].style.display = "block";
+      }
+      showSlide(currentIndex);
 
       prevBtn.addEventListener("click", () => {
-        index = (index - 1 + images.length) % images.length;
-        imgEl.src = images[index];
+        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+        showSlide(currentIndex);
       });
       nextBtn.addEventListener("click", () => {
-        index = (index + 1) % images.length;
-        imgEl.src = images[index];
+        currentIndex = (currentIndex + 1) % totalSlides;
+        showSlide(currentIndex);
       });
-    })();
+    });
   </script>
 </body>
 </html>

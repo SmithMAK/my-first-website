@@ -27,7 +27,6 @@
   <title>Camping Swag | Beach Tent</title>
   <style>
     /* ─── PRODUCT PAGE SPECIFIC STYLES ────────────────────────────────────────── */
-
     .product-page {
       max-width: 1200px;
       margin: 2rem auto 4rem;
@@ -36,18 +35,194 @@
       grid-template-columns: 1fr 1fr;
       gap: 2rem;
     }
+    .carousel-container {
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+    }
+    .carousel-slide {
+      display: none;
+      width: 100%;
+      height: 500px;
+      position: relative;
+    }
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .carousel-nav {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      transform: translateY(-50%);
+      display: flex;
+      justify-content: space-between;
+      padding: 0 1rem;
+    }
+    .carousel-nav button {
+      background-color: rgba(255,255,255,0.8);
+      border: none;
+      font-size: 1.5rem;
+      padding: 0.5rem;
+      cursor: pointer;
+      border-radius: 50%;
+      transition: background-color 0.2s ease;
+    }
+    .carousel-nav button:hover {
+      background-color: var(--color-accent);
+      color: var(--color-text);
+    }
 
-    /* (Other CSS from previous example omitted for brevity) */
-    /* … */
+    /* Product Details (Right Column) */
+    .product-details {
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+    }
+    .product-title {
+      font-family: var(--font-heading);
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .product-price {
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .product-description {
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    /* Add-to-Cart + Qty Controls */
+    .cart-controls {
+      margin-bottom: 2rem;
+    }
+    .btn-add-cart {
+      background-color: var(--color-text);
+      color: var(--color-bg);
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+    .btn-add-cart:hover {
+      background-color: var(--color-accent);
+      color: var(--color-text);
+    }
+    .qty-controls {
+      display: none;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    .qty-controls button {
+      background-color: var(--color-accent);
+      color: var(--color-text);
+      border: none;
+      padding: 0.4rem 0.8rem;
+      font-size: 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+    .qty-controls button:hover {
+      background-color: var(--color-text);
+      color: var(--color-bg);
+    }
+    .qty-number {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      min-width: 20px;
+      text-align: center;
+    }
+
+    /* Collapsible Details */
+    .collapsible-group details {
+      margin-bottom: 1rem;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 4px;
+      background-color: #fff;
+    }
+    .collapsible-group summary {
+      cursor: pointer;
+      padding: 0.75rem 1rem;
+      font-weight: 500;
+    }
+    .collapsible-group details[open] summary {
+      background-color: var(--color-accent);
+      color: var(--color-text);
+    }
+    .collapsible-group p,
+    .collapsible-group ul {
+      padding: 0 1rem 1rem;
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* Reviews Section */
+    .reviews-section {
+      max-width: 800px;
+      margin: 3rem auto 2rem;
+      padding: 0 1rem;
+    }
+    .reviews-section h2 {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    .review {
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+    .reviewer-name {
+      font-family: var(--font-body);
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+      display: inline-block;
+    }
+    .review-stars {
+      color: #FFD700; /* gold */
+      margin-bottom: 0.5rem;
+    }
+    .review-text {
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    /* Responsive: stack columns on narrow screens */
+    @media (max-width: 900px) {
+      .product-page {
+        grid-template-columns: 1fr;
+      }
+      .carousel-container {
+        height: 300px;
+      }
+      .carousel-slide {
+        height: 300px;
+      }
+    }
   </style>
 </head>
 <body>
-  <!-- ─── HEADER ──────────────────────────────────────────────────────────────── -->
+  <!-- ─────────────────────────────────────────────────────────────────────────── -->
+  <!--                            SITE HEADER / NAV BAR                            -->
+  <!-- ─────────────────────────────────────────────────────────────────────────── -->
   <header class="site-header">
     <div class="header-inner container">
+      <!-- Logo (left) -->
       <a href="index.html" class="logo-link">
         <img src="assets/logo.jpg" alt="Camping Swag Logo" class="logo-img" />
       </a>
+
+      <!-- Primary navigation -->
       <nav class="primary-nav">
         <ul>
           <li><a href="index.html" class="nav-link">Home</a></li>
@@ -66,6 +241,7 @@
         </ul>
       </nav>
 
+      <!-- Search + Cart Icons (right) -->
       <div class="nav-icons">
         <a href="search.html" aria-label="Search" class="nav-icon-link">
           <i class="fas fa-search"></i>
@@ -78,141 +254,262 @@
     </div>
   </header>
 
-  <!-- ─── PRODUCT PAGE CONTENT ────────────────────────────────────────────────── -->
-  <main class="product-page container">
-    <!-- LEFT COLUMN: Image Carousel (omitted for brevity) -->
-    <div class="carousel-container">
-       <!-- … same as before … -->
-    </div>
+  <!-- ─────────────────────────────────────────────────────────────────────────── -->
+  <!--                            PRODUCT PAGE CONTENT                              -->
+  <!-- ─────────────────────────────────────────────────────────────────────────── -->
+  <main>
+    <div class="product-page container">
+      <!-- ─── LEFT COLUMN: 4-IMAGE CAROUSEL ─────────────────────────────────────── -->
+      <div class="carousel-container">
+        <div class="carousel-slide" data-index="0">
+          <img src="assets/beach tent1.jpg" alt="Beach Tent - View 1" />
+        </div>
+        <div class="carousel-slide" data-index="1">
+          <img src="assets/beach tent2.jpg" alt="Beach Tent - View 2" />
+        </div>
+        <div class="carousel-slide" data-index="2">
+          <img src="assets/beach tent3.jpg" alt="Beach Tent - View 3" />
+        </div>
+        <div class="carousel-slide" data-index="3">
+          <img src="assets/beach tent4.jpg" alt="Beach Tent - View 4" />
+        </div>
 
-    <!-- RIGHT COLUMN: Product Details -->
-    <div class="product-details">
-      <h1 class="product-title">Beach Tent</h1>
-      <span class="product-price">$149.95</span>
-      <p class="product-description">
-        Enjoy summer days by the shore with this lightweight beach tent…  
-      </p>
-
-      <!-- Add‐to‐Cart & Quantity Controls -->
-      <div class="cart-controls">
-        <button id="add-cart-btn" class="btn-add-cart">Add to Cart</button>
-        <div id="qty-controls" class="qty-controls">
-          <button id="decrement-btn">–</button>
-          <span id="qty-number">0</span>
-          <button id="increment-btn">＋</button>
+        <!-- Carousel Navigation Arrows -->
+        <div class="carousel-nav">
+          <button id="beach-prev-btn"><i class="fas fa-chevron-left"></i></button>
+          <button id="beach-next-btn"><i class="fas fa-chevron-right"></i></button>
         </div>
       </div>
 
-      <!-- Collapsible Details (Materials, Sizing, Shipping) -->
-      <div class="collapsible-group">
-        <details>
-          <summary>Materials & Care</summary>
-          <p>
-            • 100% Polyester fabric with UV protection…  
-          </p>
-        </details>
-        <details>
-          <summary>Sizing</summary>
-          <ul>
-            <li>Floor: 7′ × 7′ (84″ × 84″)</li>
-            <li>Peak Height: 4′ (48″)</li>
-            <li>Weight: 5 lb 8 oz</li>
-          </ul>
-        </details>
-        <details>
-          <summary>Shipping & Returns</summary>
-          <p>
-            • Free shipping on orders over $100…  
-          </p>
-        </details>
+      <!-- ─── RIGHT COLUMN: PRODUCT DETAILS ─────────────────────────────────────── -->
+      <div class="product-details">
+        <h1 class="product-title">Beach Tent</h1>
+        <span class="product-price">$149.95</span>
+        <p class="product-description">
+          Enjoy perfect shade and protection on sunny days with our lightweight Beach Tent.  
+          UV‐resistant polyester fabric, easy pop‐up assembly, and a roomy interior for up to two adults. Ideal for picnics, beach days, and camping at the waterfront.
+        </p>
+
+        <!-- Add to Cart + Quantity Controls -->
+        <div class="cart-controls">
+          <button id="beach-add-cart-btn" class="btn-add-cart">Add to Cart</button>
+          <div id="beach-qty-controls" class="qty-controls">
+            <button id="beach-decrement-btn">−</button>
+            <span id="beach-qty-number" class="qty-number">0</span>
+            <button id="beach-increment-btn">＋</button>
+          </div>
+        </div>
+
+        <!-- Collapsible Details -->
+        <div class="collapsible-group">
+          <details>
+            <summary>Materials &amp; Care</summary>
+            <p>
+              • Outer fabric: 100% UV‐protected polyester <br />
+              • Floor material: 150D Oxford polyester <br />
+              • Poles: Fiberglass <br />
+              • Hand wash cold, air dry. Do not bleach.
+            </p>
+          </details>
+          <details>
+            <summary>Sizing</summary>
+            <ul>
+              <li>Overall footprint: 84″ × 84″ (7′ × 7′)</li>
+              <li>Center height: 48″ (4′)</li>
+              <li>Packed size: 26″ × 4″ (roughly 5 lb, 8 oz)</li>
+            </ul>
+          </details>
+          <details>
+            <summary>Shipping &amp; Returns</summary>
+            <p>
+              • Free shipping on orders over $100. <br />
+              • Standard shipping: 3–5 business days. <br />
+              • Returns accepted within 30 days in original condition.
+            </p>
+          </details>
+        </div>
       </div>
     </div>
+
+    <!-- ─── REVIEWS SECTION (FULL-WIDTH BELOW) ─────────────────────────────────── -->
+    <section class="reviews-section">
+      <h2>Reviews</h2>
+
+      <div class="review">
+        <span class="reviewer-name">Jessica W.</span>
+        <div class="review-stars">
+          <i class="fas fa-star"></i><i class="fas fa-star"></i>
+          <i class="fas fa-star"></i><i class="fas fa-star"></i>
+          <i class="far fa-star"></i>
+        </div>
+        <p class="review-text">
+          “Perfect for a day at the beach—super easy to set up and the fabric kept us cool all afternoon!”
+        </p>
+      </div>
+
+      <div class="review">
+        <span class="reviewer-name">Marcus L.</span>
+        <div class="review-stars">
+          <i class="fas fa-star"></i><i class="fas fa-star"></i>
+          <i class="fas fa-star"></i><i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+        </div>
+        <p class="review-text">
+          “Great UV protection and roomy enough for two. Lightweight to carry and looks stylish, too.”
+        </p>
+      </div>
+
+      <div class="review">
+        <span class="reviewer-name">Taylor C.</span>
+        <div class="review-stars">
+          <i class="fas fa-star"></i><i class="fas fa-star"></i>
+          <i class="fas fa-star"></i><i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+        </div>
+        <p class="review-text">
+          “Zippers and poles feel very sturdy. The water‐resistant bottom saved us from damp sand.”
+        </p>
+      </div>
+    </section>
   </main>
 
-  <!-- ─── REVIEWS SECTION (FULL WIDTH) ────────────────────────────────────────── -->
-  <section class="reviews-section">
-    <h2>Reviews</h2>
-    <div class="review">
-      <span class="reviewer-name">Jessica W.</span>
-      <div class="review-stars">
-        <i class="fas fa-star"></i><i class="fas fa-star"></i>
-        <i class="fas fa-star"></i><i class="fas fa-star"></i>
-        <i class="far fa-star"></i>
-      </div>
-      <p class="review-text">
-        “I took this tent to the beach… perfect shade and roomy for two chairs!”
-      </p>
-    </div>
-    <div class="review">
-      <span class="reviewer-name">Marcus L.</span>
-      <div class="review-stars">
-        <i class="fas fa-star"></i><i class="fas fa-star"></i>
-        <i class="fas fa-star"></i><i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-      </div>
-      <p class="review-text">
-        “Great UPF protection and super easy to carry. Highly recommend for beach trips.”  
-      </p>
-    </div>
-    <div class="review">
-      <span class="reviewer-name">Taylor C.</span>
-      <div class="review-stars">
-        <i class="fas fa-star"></i><i class="fas fa-star"></i>
-        <i class="fas fa-star"></i><i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-      </div>
-      <p class="review-text">
-        “Exactly the space we needed and it dries quickly. Zippers feel very sturdy too.”  
-      </p>
-    </div>
-  </section>
-
-  <!-- ─── FOOTER ──────────────────────────────────────────────────────────────── -->
+  <!-- ─────────────────────────────────────────────────────────────────────────── -->
+  <!--                                   FOOTER                                     -->
+  <!-- ─────────────────────────────────────────────────────────────────────────── -->
   <footer class="site-footer">
     <div class="footer-container container">
-      <!-- … same as before … -->
+      <!-- Subscribe Column -->
+      <div class="footer-col subscribe-col">
+        <h3>Subscribe to get 10% OFF</h3>
+        <p>Subscribe for store updates and discounts.</p>
+        <form class="subscribe-form" action="#" method="POST">
+          <input
+            type="email"
+            name="email"
+            placeholder="Enter your Email"
+            required
+          />
+          <button type="submit">Subscribe</button>
+        </form>
+        <p class="disclaimer">
+          By subscribing you agree to the Term of Use &amp; Privacy Policy
+        </p>
+        <p class="copyright">&copy; 2025, CampingSwag</p>
+      </div>
+
+      <!-- About Column -->
+      <div class="footer-col about-col">
+        <h3>About</h3>
+        <p>
+          Proudly owned and run by Australians. Camping Swag Online is dedicated
+          to offering high‐quality products at reasonable prices.
+        </p>
+        <a href="about.html" class="learn-more">LEARN MORE</a>
+      </div>
+
+      <!-- Shop Column -->
+      <div class="footer-col shop-col">
+        <h3>Shop</h3>
+        <ul>
+          <li><a href="search.html">Shop All</a></li>
+          <li><a href="search.html#bestseller">Best Seller</a></li>
+          <li><a href="search.html#newcoming">New Coming</a></li>
+          <li><a href="search.html#onsale">On Sale</a></li>
+        </ul>
+      </div>
+
+      <!-- Customer Care Column -->
+      <div class="footer-col customer-col">
+        <h3>Customer Care</h3>
+        <ul>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="faqs.html">FAQs</a></li>
+          <li><a href="terms.html">Terms &amp; Conditions</a></li>
+          <li><a href="shipping.html">Shipping &amp; Returns</a></li>
+        </ul>
+        <!-- Social Media Icons -->
+        <div class="footer-social">
+          <a
+            href="https://www.facebook.com"
+            target="_blank"
+            aria-label="Facebook"
+          >
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a
+            href="https://www.instagram.com"
+            target="_blank"
+            aria-label="Instagram"
+          >
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a
+            href="https://www.twitter.com"
+            target="_blank"
+            aria-label="Twitter"
+          >
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a
+            href="https://www.tiktok.com"
+            target="_blank"
+            aria-label="TikTok"
+          >
+            <i class="fab fa-tiktok"></i>
+          </a>
+          <a
+            href="https://www.youtube.com"
+            target="_blank"
+            aria-label="YouTube"
+          >
+            <i class="fab fa-youtube"></i>
+          </a>
+        </div>
+      </div>
     </div>
   </footer>
 
-  <!-- ─── LOAD MAIN.JS ONCE ────────────────────────────────────────────────────── -->
+  <!-- ─────────────────────────────────────────────────────────────────────────── -->
+  <!--                            MAIN JAVASCRIPT FILE                             -->
+  <!-- ─────────────────────────────────────────────────────────────────────────── -->
   <script src="main.js"></script>
 
-  <!-- ─── INLINE SCRIPT: PRODUCT‐SPECIFIC CART LOGIC ───────────────────────────── -->
+  <!-- ─────────────────────────────────────────────────────────────────────────── -->
+  <!--                    INLINE SCRIPT: BEACH TENT CART LOGIC                      -->
+  <!-- ─────────────────────────────────────────────────────────────────────────── -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      // 1) Product data object (unique ID matches “id” in localStorage)
       const PRODUCT_DATA = {
         id: "beachtent",
         name: "Beach Tent",
         price: 149.95,
-        image: "assets/beachtent1.jpg"
+        image: "assets/beach tent1.jpg"
       };
 
-      // 2) Grab elements
-      const btnAdd = document.getElementById("add-cart-btn");
-      const qtyControls = document.getElementById("qty-controls");
-      const qtyNumberEl = document.getElementById("qty-number");
-      const incBtn = document.getElementById("increment-btn");
-      const decBtn = document.getElementById("decrement-btn");
+      const btnAdd    = document.getElementById("beach-add-cart-btn");
+      const qtyCtrls  = document.getElementById("beach-qty-controls");
+      const qtyNumber = document.getElementById("beach-qty-number");
+      const incBtn    = document.getElementById("beach-increment-btn");
+      const decBtn    = document.getElementById("beach-decrement-btn");
 
-      // 3) If this product is already in cart, show the qty controls on load
-      let cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
-      const existing = cartItems.find((ci) => ci.id === PRODUCT_DATA.id);
-      if (existing) {
-        btnAdd.style.display = "none";
-        qtyControls.style.display = "flex";
-        qtyNumberEl.textContent = existing.quantity;
+      // 1) Check if already in cart → show quantity controls
+      let items = JSON.parse(localStorage.getItem("cartItems") || "[]");
+      const found = items.find((ci) => ci.id === PRODUCT_DATA.id);
+      if (found) {
+        btnAdd.style.display    = "none";
+        qtyCtrls.style.display  = "flex";
+        qtyNumber.textContent   = found.quantity;
       }
 
-      // 4) “Add to Cart” click → add one item, then toggle controls
+      // 2) ON “Add to Cart” click
       btnAdd.addEventListener("click", () => {
         addItemToCart({ ...PRODUCT_DATA, quantity: 1 });
-        btnAdd.style.display = "none";
-        qtyControls.style.display = "flex";
-        qtyNumberEl.textContent = 1;
+        btnAdd.style.display    = "none";
+        qtyCtrls.style.display  = "flex";
+        qtyNumber.textContent   = 1;
       });
 
-      // 5) “＋” click
+      // 3) ON “＋” click
       incBtn.addEventListener("click", () => {
         changeItemQuantity(
           PRODUCT_DATA.id,
@@ -221,12 +518,12 @@
           PRODUCT_DATA.image,
           +1
         );
-        let current = parseInt(qtyNumberEl.textContent, 10) || 0;
-        current++;
-        qtyNumberEl.textContent = current;
+        let cur = parseInt(qtyNumber.textContent, 10) || 0;
+        cur++;
+        qtyNumber.textContent = cur;
       });
 
-      // 6) “−” click
+      // 4) ON “−” click
       decBtn.addEventListener("click", () => {
         changeItemQuantity(
           PRODUCT_DATA.id,
@@ -235,16 +532,37 @@
           PRODUCT_DATA.image,
           -1
         );
-        let current = parseInt(qtyNumberEl.textContent, 10) || 0;
-        if (current <= 1) {
-          // Remove from cart entirely & revert controls
-          qtyNumberEl.textContent = 0;
-          qtyControls.style.display = "none";
-          btnAdd.style.display = "inline-block";
+        let cur = parseInt(qtyNumber.textContent, 10) || 0;
+        if (cur <= 1) {
+          qtyNumber.textContent = 0;
+          qtyCtrls.style.display = "none";
+          btnAdd.style.display   = "inline-block";
         } else {
-          current--;
-          qtyNumberEl.textContent = current;
+          cur--;
+          qtyNumber.textContent = cur;
         }
+      });
+
+      // ─── CAROUSEL LOGIC ────────────────────────────────────────────────────────
+      let currentIndex = 0;
+      const slides = document.querySelectorAll(".carousel-slide");
+      const totalSlides = slides.length;
+      const prevBtn = document.getElementById("beach-prev-btn");
+      const nextBtn = document.getElementById("beach-next-btn");
+
+      function showSlide(index) {
+        slides.forEach((s) => (s.style.display = "none"));
+        slides[index].style.display = "block";
+      }
+      showSlide(currentIndex);
+
+      prevBtn.addEventListener("click", () => {
+        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+        showSlide(currentIndex);
+      });
+      nextBtn.addEventListener("click", () => {
+        currentIndex = (currentIndex + 1) % totalSlides;
+        showSlide(currentIndex);
       });
     });
   </script>
