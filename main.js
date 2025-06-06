@@ -145,3 +145,29 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+
+// ─────────────────────────────────────────────────────────────────────────────
+//                    main.js (shared by all product & site pages)
+// ─────────────────────────────────────────────────────────────────────────────
+document.addEventListener("DOMContentLoaded", () => {
+  // 1) Initialize cart count from localStorage (or 0 if none)
+  let cartCount = parseInt(localStorage.getItem("cartCount") || "0", 10);
+  updateCartBadge(cartCount);
+
+  // 2) Attach event listeners to ALL ".add-to-cart-btn" buttons
+  document.querySelectorAll(".add-to-cart-btn").forEach((button) => {
+    button.addEventListener("click", () => {
+      cartCount++;
+      localStorage.setItem("cartCount", cartCount);
+      updateCartBadge(cartCount);
+    });
+  });
+
+  // 3) In case a product is already in cart (persist between pages), update badge
+  function updateCartBadge(count) {
+    const badge = document.querySelector(".cart-count");
+    if (badge) {
+      badge.textContent = count;
+    }
+  }
+});
