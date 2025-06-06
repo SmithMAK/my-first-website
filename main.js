@@ -159,7 +159,6 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".add-to-cart-btn").forEach((btn) => {
     btn.addEventListener("click", (e) => {
       // Each product page must set window.PRODUCT_DATA = { id, name, price, image }
-      // (see the product‐page HTML files we provided earlier).
       if (window.PRODUCT_DATA) {
         addItemToCart({ ...window.PRODUCT_DATA, quantity: 1 });
       }
@@ -326,3 +325,159 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 });
+
+
+<!-- ────────────────────────────────────────────────────────────────────────── -->
+<!--                            MAIN JAVASCRIPT FILE                             -->
+<script>
+  /********************************************************************
+   PRODUCT PAGE JS
+   -------------------------------------------------------------
+   1) Image Carousel Logic
+   2) Full‐Screen Overlay Logic
+   3) Add to Cart → Switch to Qty Controls
+   4) Qty Buttons Update localStorage & Header badge
+  ********************************************************************/
+
+  document.addEventListener("DOMContentLoaded", () => {
+    // ────────────────────────────────────────────────────────────────────────────
+    // 1) Set up the image‐carousel data
+    // ────────────────────────────────────────────────────────────────────────────
+    const imageList = [
+      "assets/beachtent1.jpg",
+      "assets/beachtent2.jpg",
+      "assets/beachtent3.jpg",
+      "assets/beachtent4.jpg"
+    ];
+    let currentIndex = 0; // currently displayed index
+
+    const mainImage = document.getElementById("main-image");
+    const prevBtn = document.querySelector(".nav-prev");
+    const nextBtn = document.querySelector(".nav-next");
+    const thumbs = document.querySelectorAll(".thumb");
+
+    function updateMainImage(index) {
+      currentIndex = index;
+      mainImage.src = imageList[index];
+      // Update selected thumbnail highlight
+      thumbs.forEach((thumb) => thumb.classList.remove("selected"));
+      thumbs[index].classList.add("selected");
+    }
+
+    // Prev / Next arrow handlers
+    prevBtn.addEventListener("click", () => {
+      let newIndex = currentIndex - 1;
+      if (newIndex < 0) newIndex = imageList.length - 1;
+      updateMainImage(newIndex);
+    });
+    nextBtn.addEventListener("click", () => {
+      let newIndex = (currentIndex + 1) % imageList.length;
+      updateMainImage(newIndex);
+    });
+
+    // Thumbnail click handlers
+    thumbs.forEach((thumb) => {
+      thumb.addEventListener("click", () => {
+        const idx = parseInt(thumb.getAttribute("data-index"), 10);
+        updateMainImage(idx);
+      });
+    });
+
+    // ────────────────────────────────────────────────────────────────────────────
+    // 2) Full‐Screen Overlay logic
+    // ────────────────────────────────────────────────────────────────────────────
+    const fullscreenOverlay = document.getElementById("fullscreen-overlay");
+    const fullscreenImg = document.getElementById("fullscreen-img");
+    const closeFsBtn = document.getElementById("close-fullscreen");
+
+    // When user clicks main image, open overlay
+    mainImage.addEventListener("click", () => {
+      fullscreenImg.src = imageList[currentIndex];
+      fullscreenOverlay.style.display = "flex";
+    });
+    // Close button
+    closeFsBtn.addEventListener("click", () => {
+      fullscreenOverlay.style.display = "none";
+    });
+    // Also click outside to close
+    fullscreenOverlay.addEventListener("click", (e) => {
+      if (e.target === fullscreenOverlay) {
+        fullscreenOverlay.style.display = "none";
+      }
+    });
+
+    // ────────────────────────────────────────────────────────────────────────────
+    // 3) “Add to Cart” → Quantity Controls
+    // ────────────────────────────────────────────────────────────────────────────
+    // We will use the same localStorage logic as in main.js (cart from earlier instructions).
+    // Ensure you have already included the “main.js” file which contains the addItemToCart(), changeItemQuantity(), updateCartBadge(), etc.
+
+    // Product Data for localStorage
+    window.PRODUCT_DATA = {
+      id: "beachtent",
+      name: "Beach Tent",
+      price: 149.95,
+      image: "assets/beachtent1.jpg"
+    };
+
+    const addCartBtn = document.getElementById("add-cart-btn");
+    const qtyControls = document.getElementById("qty-controls");
+    const qtyNumberEl = document.getElementById("qty-number");
+    const incBtn = document.getElementById("increment-btn");
+    const decBtn = document.getElementById("decrement-btn");
+
+    // Check localStorage on load—if this item already in cart, show qty controls with current qty
+    let cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
+    const existingItem = cartItems.find((ci) => ci.id === "beachtent");
+    if (existingItem) {
+      addCartBtn.style.display = "none";
+      qtyControls.style.display = "flex";
+      qtyNumberEl.textContent = existingItem.quantity;
+    }
+
+    // Click “Add to Cart”
+    addCartBtn.addEventListener("click", () => {
+      // Add one
+      addItemToCart({ ...window.PRODUCT_DATA, quantity: 1 });
+      // Hide this button, show qty controls
+      addCartBtn.style.display = "none";
+      qtyControls.style.display = "flex";
+      qtyNumberEl.textContent = 1;
+    });
+
+    // Click “＋”
+    incBtn.addEventListener("click", () => {
+      changeItemQuantity(
+        "beachtent",
+        window.PRODUCT_DATA.name,
+        window.PRODUCT_DATA.price,
+        window.PRODUCT_DATA.image,
+        +1
+      );
+      let current = parseInt(qtyNumberEl.textContent, 10) || 0;
+      current++;
+      qtyNumberEl.textContent = current;
+    });
+
+    // Click “－”
+    decBtn.addEventListener("click", () => {
+      changeItemQuantity(
+        "beachtent",
+        window.PRODUCT_DATA.name,
+        window.PRODUCT_DATA.price,
+        window.PRODUCT_DATA.image,
+        -1
+      );
+      let current = parseInt(qtyNumberEl.textContent, 10) || 0;
+      if (current <= 1) {
+        // If quantity goes to zero, revert back to “Add to Cart” button
+        qtyNumberEl.textContent = 0;
+        qtyControls.style.display = "none";
+        addCartBtn.style.display = "inline-block";
+      } else {
+        current--;
+        qtyNumberEl.textContent = current;
+      }
+    });
+  });
+</script>
