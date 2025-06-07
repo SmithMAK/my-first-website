@@ -779,6 +779,49 @@
   }
   
   /* ─────────────────────────────────────────────────────────────────────────────
+   CHECKOUT & CONFIRMATION CARD STYLES
+───────────────────────────────────────────────────────────────────────────── */
+.card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    margin: 2rem auto;
+    max-width: 600px;
+  }
+  
+  /* Form styles */
+  .checkout-form .form-group {
+    margin-bottom: 1.5rem;
+  }
+  .checkout-form label {
+    display: block;
+    font-family: var(--font-body);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+  .checkout-form input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 4px;
+    font-family: var(--font-body);
+  }
+  
+  /* Confirmation page icon */
+  .confirmation-icon {
+    font-size: 4rem;
+    color: var(--color-accent);
+    margin-bottom: 1rem;
+  }
+  
+  /* Continue Shopping button on confirmation */
+  .continue-btn {
+    margin-top: 1.5rem;
+    display: inline-block;
+  }
+  
+  /* ─────────────────────────────────────────────────────────────────────────────
      FOOTER STYLING
   ───────────────────────────────────────────────────────────────────────────── */
   .site-footer {
