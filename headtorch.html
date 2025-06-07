@@ -8,46 +8,47 @@
   />
   <title>Camping Swag | Head Torch</title>
 
-  <!-- ─── GOOGLE FONTS ────────────────────────────────────────────────────────── -->
+  <!-- FONTS & ICONS & MAIN CSS -->
   <link
     href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Libre+Caslon+Text:wght@400;700&display=swap"
     rel="stylesheet"
   />
-
-  <!-- ─── FONT AWESOME 6.x FREE ────────────────────────────────────────────────── -->
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     integrity="sha384-XxX..."
     crossorigin="anonymous"
   />
-
-  <!-- ─── MAIN CSS ─────────────────────────────────────────────────────────────── -->
   <link rel="stylesheet" href="style.css" />
+
+  <style>
+    .product-detail-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+    @media (max-width: 768px) {
+      .product-detail-wrapper {
+        flex-direction: column;
+      }
+      #add-to-cart,
+      #quantity-container {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 <body>
-  <!-- ────────────────────────────────────────────────────────────────────────── -->
-  <!--                           STICKY NAVIGATION BAR                            -->
-  <!-- ────────────────────────────────────────────────────────────────────────── -->
   <header class="site-header">
     <div class="header-inner container">
-      <!-- Logo on the left -->
       <a href="index.html" class="logo-link">
-        <img
-          src="assets/logo.jpg"
-          alt="Camping Swag Logo"
-          class="logo-img"
-        />
+        <img src="assets/logo.jpg" alt="Camping Swag Logo" class="logo-img" />
       </a>
-
-      <!-- Primary navigation menu -->
       <nav class="primary-nav">
         <ul>
           <li><a href="index.html" class="nav-link">Home</a></li>
           <li class="has-submenu">
-            <a href="search.html" class="nav-link">
-              Shop Now <i class="fas fa-chevron-down"></i>
-            </a>
+            <a href="search.html" class="nav-link">Shop Now <i class="fas fa-chevron-down"></i></a>
             <ul class="submenu">
               <li><a href="search.html#tents" class="submenu-link">Tents</a></li>
               <li><a href="search.html#swags" class="submenu-link">Swags</a></li>
@@ -58,13 +59,9 @@
           <li><a href="blog.html" class="nav-link">Blog</a></li>
         </ul>
       </nav>
-
-      <!-- Icons on the right: search and cart -->
       <div class="nav-icons">
-        <a href="search.html" aria-label="Search" class="nav-icon-link">
-          <i class="fas fa-search"></i>
-        </a>
-        <a href="cart.html" aria-label="Cart" class="nav-icon-link">
+        <a href="search.html" class="nav-icon-link" aria-label="Search"><i class="fas fa-search"></i></a>
+        <a href="cart.html" class="nav-icon-link" aria-label="Cart">
           <i class="fas fa-shopping-cart"></i>
           <span class="cart-count">0</span>
         </a>
@@ -72,163 +69,176 @@
     </div>
   </header>
 
-  <!-- ────────────────────────────────────────────────────────────────────────── -->
-  <!--                                PRODUCT DETAIL                               -->
-  <!-- ────────────────────────────────────────────────────────────────────────── -->
-  <main class="container" style="margin: 2rem auto; max-width: 1000px;">
-    <div style="display: flex; flex-wrap: wrap; gap: 2rem;">
-      <!-- LEFT: Square Grid of Thumbnails -->
-      <div style="flex: 1 1 350px; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-        <img src="assets/headtorch1.jpg" alt="Head Torch view 1" style="width:100%; border-radius: 8px; object-fit: cover; cursor: pointer;" class="thumb-img" data-product="headtorch" data-index="0" />
-        <img src="assets/headtorch2.jpg" alt="Head Torch view 2" style="width:100%; border-radius: 8px; object-fit: cover; cursor: pointer;" class="thumb-img" data-product="headtorch" data-index="1" />
-        <img src="assets/headtorch3.jpg" alt="Head Torch view 3" style="width:100%; border-radius: 8px; object-fit: cover; cursor: pointer;" class="thumb-img" data-product="headtorch" data-index="2" />
-        <img src="assets/headtorch4.jpg" alt="Head Torch view 4" style="width:100%; border-radius: 8px; object-fit: cover; cursor: pointer;" class="thumb-img" data-product="headtorch" data-index="3" />
+  <main class="container" style="margin:2rem auto;max-width:1000px;">
+    <div class="product-detail-wrapper">
+      <div style="flex:1 1 350px;display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+        <img src="assets/headtorch1.jpg" alt="Head Torch view 1" class="thumb-img"
+             style="width:100%;border-radius:8px;object-fit:cover;cursor:pointer"
+             data-product="headtorch" data-index="0">
+        <img src="assets/headtorch2.jpg" alt="Head Torch view 2" class="thumb-img"
+             style="width:100%;border-radius:8px;object-fit:cover;cursor:pointer"
+             data-product="headtorch" data-index="1">
+        <img src="assets/headtorch3.jpg" alt="Head Torch view 3" class="thumb-img"
+             style="width:100%;border-radius:8px;object-fit:cover;cursor:pointer"
+             data-product="headtorch" data-index="2">
+        <img src="assets/headtorch4.jpg" alt="Head Torch view 4" class="thumb-img"
+             style="width:100%;border-radius:8px;object-fit:cover;cursor:pointer"
+             data-product="headtorch" data-index="3">
       </div>
 
-      <!-- RIGHT: Product Info, Price, Add-to-Cart, Accordion, Reviews -->
-      <div style="flex: 1 1 500px;">
-        <h1 style="font-family: var(--font-heading); font-size: 2rem; margin-bottom: 0.5rem; color: var(--color-text);">
+      <div style="flex:1 1 500px;">
+        <h1 style="font-family:var(--font-heading);font-size:2rem;margin-bottom:0.5rem;color:var(--color-text);">
           Head Torch
         </h1>
-        <p style="font-family: var(--font-body); font-size: 1.25rem; font-weight: 700; margin-bottom: 1.5rem; color: var(--color-text);">
+        <p style="font-family:var(--font-body);font-size:1.25rem;font-weight:700;margin-bottom:1.5rem;color:var(--color-text);">
           $65.95
         </p>
 
-        <!-- ADD TO CART / then quantity controls once added -->
-        <div id="add-cart-container" style="margin-bottom: 1.5rem;">
-          <button id="add-to-cart" data-id="headtorch" class="btn-shop" style="font-size: 1rem; padding: 0.75rem 1.75rem;">
+        <div id="add-cart-container" style="margin-bottom:1.5rem;">
+          <button id="add-to-cart" data-id="headtorch" class="btn-shop"
+                  style="font-size:1rem;padding:0.75rem 1.75rem;">
             Add to Cart
           </button>
         </div>
-        <div id="quantity-container" style="display: none; margin-bottom: 1.5rem; align-items: center; gap: 0.75rem; display: flex;">
-          <button class="qty-btn" data-action="decrease" data-id="headtorch" style="background-color: var(--color-accent); color: var(--color-text); border: none; padding: 0.4rem 0.8rem; font-size: 1rem; cursor: pointer; border-radius: 4px;">
+        <div id="quantity-container" style="display:none;margin-bottom:1.5rem;align-items:center;gap:0.75rem;display:flex;">
+          <button class="qty-btn" data-action="decrease" data-id="headtorch"
+                  style="background-color:var(--color-accent);color:var(--color-text);
+                         border:none;padding:0.4rem 0.8rem;font-size:1rem;
+                         cursor:pointer;border-radius:4px;">
             &minus;
           </button>
-          <span id="qty-number-headtorch" style="font-family: var(--font-body); font-size: 1.1rem; min-width: 24px; text-align: center;">0</span>
-          <button class="qty-btn" data-action="increase" data-id="headtorch" style="background-color: var(--color-accent); color: var(--color-text); border: none; padding: 0.4rem 0.8rem; font-size: 1rem; cursor: pointer; border-radius: 4px;">
+          <span id="qty-number-headtorch"
+                style="font-family:var(--font-body);font-size:1.1rem;
+                       min-width:24px;text-align:center;">
+            0
+          </span>
+          <button class="qty-btn" data-action="increase" data-id="headtorch"
+                  style="background-color:var(--color-accent);color:var(--color-text);
+                         border:none;padding:0.4rem 0.8rem;font-size:1rem;
+                         cursor:pointer;border-radius:4px;">
             &#43;
           </button>
         </div>
 
-        <!-- ACCORDION: Materials & Care, Sizing, Shipping & Returns -->
-        <div class="accordion" style="margin-bottom: 2rem;">
-          <div class="accordion-item" style="margin-bottom: 1rem;">
-            <button class="accordion-header" style="width: 100%; background: none; border: none; text-align: left; font-family: var(--font-body); font-weight: 500; font-size: 1.1rem; color: var(--color-text); cursor: pointer; padding: 0.5rem 0;">
+        <!-- ACCORDION -->
+        <div class="accordion" style="margin-bottom:2rem;">
+          <div class="accordion-item" style="margin-bottom:1rem;">
+            <button class="accordion-header" style="width:100%;background:none;border:none;
+                   text-align:left;font-family:var(--font-body);font-weight:500;
+                   font-size:1.1rem;color:var(--color-text);cursor:pointer;
+                   padding:0.5rem 0;">
               Materials &amp; Care
-              <i class="fas fa-chevron-down" style="float: right; transition: transform 0.2s ease;"></i>
+              <i class="fas fa-chevron-down" style="float:right;transition:transform 0.2s ease;"></i>
             </button>
-            <div class="accordion-content" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease; font-family: var(--font-body); font-size: 0.95rem; color: var(--color-text);">
-              <p style="margin-top: 0.5rem; line-height: 1.5;">
-                ● Body: ABS plastic housing with rubberized grip<br>
-                ● Lens: Impact‐resistant polycarbonate<br>
-                ● LED: CREE XM‐L2 for 800 lumens output<br>
-                ● Care: Wipe housing with damp cloth. Store battery inside.
+            <div class="accordion-content" style="max-height:0;overflow:hidden;
+                   transition:max-height 0.3s ease;font-family:var(--font-body);
+                   font-size:0.95rem;color:var(--color-text);">
+              <p style="margin-top:0.5rem;line-height:1.5;">
+                ● Aluminum body with rubberized outsole<br>
+                ● Adjustable nylon strap<br>
+                ● IPX4 splash resistant<br>
+                ● Care: wipe dry after use.
               </p>
             </div>
           </div>
-
-          <div class="accordion-item" style="margin-bottom: 1rem;">
-            <button class="accordion-header" style="width: 100%; background: none; border: none; text-align: left; font-family: var(--font-body); font-weight: 500; font-size: 1.1rem; color: var(--color-text); cursor: pointer; padding: 0.5rem 0;">
-              Sizing
-              <i class="fas fa-chevron-down" style="float: right; transition: transform 0.2s ease;"></i>
+          <div class="accordion-item" style="margin-bottom:1rem;">
+            <button class="accordion-header" style="width:100%;background:none;border:none;
+                   text-align:left;font-family:var(--font-body);font-weight:500;
+                   font-size:1.1rem;color:var(--color-text);cursor:pointer;
+                   padding:0.5rem 0;">
+              Specs
+              <i class="fas fa-chevron-down" style="float:right;transition:transform 0.2s ease;"></i>
             </button>
-            <div class="accordion-content" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease; font-family: var(--font-body); font-size: 0.95rem; color: var(--color-text);">
-              <p style="margin-top: 0.5rem; line-height: 1.5;">
-                ● Headstrap: Adjustable 20″– 24″ circumference<br>
-                ● Torch Weight: 3.2 oz (90 g) without batteries<br>
-                ● Batteries: 3× AAA (not included)<br>
-                ● Beam Distance: Up to 200 meters on high setting
+            <div class="accordion-content" style="max-height:0;overflow:hidden;
+                   transition:max-height 0.3s ease;font-family:var(--font-body);
+                   font-size:0.95rem;color:var(--color-text);">
+              <p style="margin-top:0.5rem;line-height:1.5;">
+                ● Lumens: 800<br>
+                ● Beam distance: 120 m<br>
+                ● Battery: 3×AAA (included)<br>
+                ● Weight: 3.5 oz (100 g).
               </p>
             </div>
           </div>
-
           <div class="accordion-item">
-            <button class="accordion-header" style="width: 100%; background: none; border: none; text-align: left; font-family: var(--font-body); font-weight: 500; font-size: 1.1rem; color: var(--color-text); cursor: pointer; padding: 0.5rem 0;">
+            <button class="accordion-header" style="width:100%;background:none;border:none;
+                   text-align:left;font-family:var(--font-body);font-weight:500;
+                   font-size:1.1rem;color:var(--color-text);cursor:pointer;
+                   padding:0.5rem 0;">
               Shipping &amp; Returns
-              <i class="fas fa-chevron-down" style="float: right; transition: transform 0.2s ease;"></i>
+              <i class="fas fa-chevron-down" style="float:right;transition:transform 0.2s ease;"></i>
             </button>
-            <div class="accordion-content" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease; font-family: var(--font-body); font-size: 0.95rem; color: var(--color-text);">
-              <p style="margin-top: 0.5rem; line-height: 1.5;">
-                ● Free shipping on orders over $100 within AU (3–5 business days).<br>
-                ● $10 flat shipping under $100 (4–7 business days).<br>
-                ● Returns accepted within 30 days—product must be in original condition. Customer pays return shipping.
+            <div class="accordion-content" style="max-height:0;overflow:hidden;
+                   transition:max-height 0.3s ease;font-family:var(--font-body);
+                   font-size:0.95rem;color:var(--color-text);">
+              <p style="margin-top:0.5rem;line-height:1.5;">
+                ● Free AU shipping over $75<br>
+                ● $10 flat under $75<br>
+                ● 30-day returns if unopened.
               </p>
             </div>
           </div>
         </div>
-
-        <!-- REVIEWS SECTION -->
-        <section class="reviews" style="margin-bottom: 2rem;">
-          <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 1rem; color: var(--color-text);">Customer Reviews</h2>
-
-          <!-- Review #1 -->
-          <div class="review-item" style="margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(0,0,0,0.1);">
-            <p style="font-family: var(--font-body); font-size: 0.9rem; color: var(--color-text); margin-bottom: 0.25rem;">
-              <strong>Greg P.</strong> <span style="color: #FFD700;">★★★★★</span>
-            </p>
-            <p style="font-family: var(--font-body); font-size: 0.95rem; color: var(--color-text); line-height: 1.4;">
-              “Incredibly bright beam and long battery life. Perfect for night hikes.”  
-            </p>
-          </div>
-
-          <!-- Review #2 -->
-          <div class="review-item" style="margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(0,0,0,0.1);">
-            <p style="font-family: var(--font-body); font-size: 0.9rem; color: var(--color-text); margin-bottom: 0.25rem;">
-              <strong>Maria S.</strong> <span style="color: #FFD700;">★★★★☆</span>
-            </p>
-            <p style="font-family: var(--font-body); font-size: 0.95rem; color: var(--color-text); line-height: 1.4;">
-              “Very comfortable strap. I wish it had USB‐C rechargeable, but AAA is fine too.”  
-            </p>
-          </div>
-
-          <!-- Review #3 -->
-          <div class="review-item">
-            <p style="font-family: var(--font-body); font-size: 0.9rem; color: var(--color-text); margin-bottom: 0.25rem;">
-              <strong>Anthony L.</strong> <span style="color: #FFD700;">★★★★★</span>
-            </p>
-            <p style="font-family: var(--font-body); font-size: 0.95rem; color: var(--color-text); line-height: 1.4;">
-              “Super light, easily attaches to my helmet. I use it every camping trip.”  
-            </p>
-          </div>
-        </section>
       </div>
     </div>
+
+    <!-- REVIEWS -->
+    <section class="reviews" style="margin-bottom:2rem;">
+      <h2 style="font-family:var(--font-heading);font-size:1.5rem;margin-bottom:1rem;color:var(--color-text);">
+        Customer Reviews
+      </h2>
+      <div class="review-item" style="margin-bottom:1.5rem;padding-bottom:1rem;
+                border-bottom:1px solid rgba(0,0,0,0.1);">
+        <p style="font-family:var(--font-body);font-size:0.9rem;color:var(--color-text);
+                   margin-bottom:0.25rem;">
+          <strong>Amy W.</strong> <span style="color:#FFD700;">★★★★★</span>
+        </p>
+        <p style="font-family:var(--font-body);font-size:0.95rem;color:var(--color-text);
+                   line-height:1.4;">
+          “Bright and long‐lasting battery life—all night on high!”  
+        </p>
+      </div>
+      <div class="review-item" style="margin-bottom:1.5rem;padding-bottom:1rem;
+                border-bottom:1px solid rgba(0,0,0,0.1);">
+        <p style="font-family:var(--font-body);font-size:0.9rem;color:var(--color-text);
+                   margin-bottom:0.25rem;">
+          <strong>Ben F.</strong> <span style="color:#FFD700;">★★★★☆</span>
+        </p>
+        <p style="font-family:var(--font-body);font-size:0.95rem;color:var(--color-text);
+                   line-height:1.4;">
+          “Comfortable fit, though could use a red‐light mode.”  
+        </p>
+      </div>
+      <div class="review-item">
+        <p style="font-family:var(--font-body);font-size:0.9rem;color:var(--color-text);
+                   margin-bottom:0.25rem;">
+          <strong>Sophia T.</strong> <span style="color:#FFD700;">★★★★★</span>
+        </p>
+        <p style="font-family:var(--font-body);font-size:0.95rem;color:var(--color-text);
+                   line-height:1.4;">
+          “Perfect for late‐night trail runs! Very sturdy.”  
+        </p>
+      </div>
+    </section>
   </main>
 
-  <!-- ────────────────────────────────────────────────────────────────────────── -->
-  <!--                                  FOOTER                                     -->
-  <!-- ────────────────────────────────────────────────────────────────────────── -->
   <footer class="site-footer">
     <div class="footer-container container">
-      <!-- Subscribe Column -->
       <div class="footer-col subscribe-col">
         <h3>Subscribe to get 10% OFF</h3>
         <p>Subscribe for store updates and discounts.</p>
         <form class="subscribe-form" action="#" method="POST">
-          <input
-            type="email"
-            name="email"
-            placeholder="Enter your Email"
-            required
-          />
+          <input type="email" name="email" placeholder="Enter your Email" required />
           <button type="submit">Subscribe</button>
         </form>
-        <p class="disclaimer">
-          By subscribing you agree to the Term of Use &amp; Privacy Policy
-        </p>
+        <p class="disclaimer">By subscribing you agree to the Term of Use &amp; Privacy Policy</p>
         <p class="copyright">&copy; 2025, CampingSwag</p>
       </div>
-
-      <!-- About Column -->
       <div class="footer-col about-col">
         <h3>About</h3>
-        <p>
-          Proudly owned and run by Australians. Camping Swag Online is dedicated to offering high‐quality products at reasonable prices.
-        </p>
+        <p>Proudly owned and run by Australians. Camping Swag Online is dedicated to offering high-quality products at reasonable prices.</p>
         <a href="about.html" class="learn-more">LEARN MORE</a>
       </div>
-
-      <!-- Shop Column -->
       <div class="footer-col shop-col">
         <h3>Shop</h3>
         <ul>
@@ -238,8 +248,6 @@
           <li><a href="search.html#onsale">On Sale</a></li>
         </ul>
       </div>
-
-      <!-- Customer Care Column -->
       <div class="footer-col customer-col">
         <h3>Customer Care</h3>
         <ul>
@@ -248,51 +256,30 @@
           <li><a href="terms.html">Terms & Conditions</a></li>
           <li><a href="shipping.html">Shipping & Returns</a></li>
         </ul>
-        <!-- Social Media Icons -->
         <div class="footer-social">
-          <a href="https://www.facebook.com" target="_blank" aria-label="Facebook"
-            ><i class="fab fa-facebook-f"></i
-          ></a>
-          <a href="https://www.instagram.com" target="_blank" aria-label="Instagram"
-            ><i class="fab fa-instagram"></i
-          ></a>
-          <a href="https://www.twitter.com" target="_blank" aria-label="Twitter"
-            ><i class="fab fa-twitter"></i
-          ></a>
-          <a href="https://www.tiktok.com" target="_blank" aria-label="TikTok"
-            ><i class="fab fa-tiktok"></i
-          ></a>
-          <a
-            href="https://www.youtube.com"
-            target="_blank"
-            aria-label="YouTube"
-            ><i class="fab fa-youtube"></i
-          ></a>
+          <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://twitter.com" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="https://tiktok.com" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+          <a href="https://youtube.com" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
         </div>
       </div>
     </div>
   </footer>
 
-  <!-- ────────────────────────────────────────────────────────────────────────── -->
-  <!--                            MAIN JAVASCRIPT FILE                             -->
-  <!-- ────────────────────────────────────────────────────────────────────────── -->
   <script src="main.js"></script>
   <script src="cart.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // This page’s product ID:
-      const productId = 'headtorch';
-
-      // DOM nodes:
+      const productId   = 'headtorch';
       const addBtn      = document.getElementById('add-to-cart');
       const qtyCont     = document.getElementById('quantity-container');
       const qtySpan     = document.getElementById('qty-number-headtorch');
       const reduceBtn   = document.querySelector('.qty-btn[data-action="decrease"][data-id="headtorch"]');
       const increaseBtn = document.querySelector('.qty-btn[data-action="increase"][data-id="headtorch"]');
 
-      // Initialize on page load:
       const currentCart = Cart.getCart();
-      if (currentCart[productId] && currentCart[productId] > 0) {
+      if (currentCart[productId] > 0) {
         addBtn.style.display = 'none';
         qtyCont.style.display = 'flex';
         qtySpan.textContent = currentCart[productId];
@@ -301,7 +288,6 @@
         qtyCont.style.display = 'none';
       }
 
-      // "Add to Cart" click
       addBtn.addEventListener('click', () => {
         Cart.addToCart(productId);
         addBtn.style.display = 'none';
@@ -309,13 +295,11 @@
         qtySpan.textContent = Cart.getCart()[productId];
       });
 
-      // "+" click
       increaseBtn.addEventListener('click', () => {
         Cart.addToCart(productId);
         qtySpan.textContent = Cart.getCart()[productId];
       });
 
-      // "−" click
       reduceBtn.addEventListener('click', () => {
         Cart.removeFromCart(productId);
         const newQty = Cart.getCart()[productId] || 0;
@@ -326,16 +310,14 @@
         }
       });
 
-      // Thumbnails → open in new tab:
       document.querySelectorAll('.thumb-img').forEach(thumb => {
         thumb.addEventListener('click', () => {
-          const idx = parseInt(thumb.dataset.index);
+          const idx  = parseInt(thumb.dataset.index, 10);
           const urls = Cart.PRODUCTS[productId].images;
           window.open(urls[idx], '_blank');
         });
       });
 
-      // ACCORDION logic:
       document.querySelectorAll('.accordion-header').forEach(header => {
         header.addEventListener('click', () => {
           const content = header.nextElementSibling;
@@ -344,12 +326,8 @@
             content.style.maxHeight = '0';
             icon.style.transform    = 'rotate(0deg)';
           } else {
-            document.querySelectorAll('.accordion-content').forEach(c => {
-              c.style.maxHeight = '0';
-            });
-            document.querySelectorAll('.accordion-header i').forEach(i => {
-              i.style.transform = 'rotate(0deg)';
-            });
+            document.querySelectorAll('.accordion-content').forEach(c => c.style.maxHeight = '0');
+            document.querySelectorAll('.accordion-header i').forEach(i => i.style.transform = 'rotate(0deg)');
             content.style.maxHeight = content.scrollHeight + 'px';
             icon.style.transform    = 'rotate(180deg)';
           }

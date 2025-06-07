@@ -24,30 +24,38 @@
 
   <!-- ─── MAIN CSS ─────────────────────────────────────────────────────────────── -->
   <link rel="stylesheet" href="style.css" />
+
+  <!-- ─── LOCAL RESPONSIVE OVERRIDES FOR THIS PAGE ─────────────────────────────── -->
+  <style>
+    .product-detail-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+    @media (max-width: 768px) {
+      .product-detail-wrapper {
+        flex-direction: column;
+      }
+      /* full-width buttons on small screens */
+      #add-to-cart,
+      #quantity-container {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 <body>
-  <!-- ────────────────────────────────────────────────────────────────────────── -->
-  <!--                           STICKY NAVIGATION BAR                            -->
-  <!-- ────────────────────────────────────────────────────────────────────────── -->
+  <!-- HEADER -->
   <header class="site-header">
     <div class="header-inner container">
-      <!-- Logo on the left -->
       <a href="index.html" class="logo-link">
-        <img
-          src="assets/logo.jpg"
-          alt="Camping Swag Logo"
-          class="logo-img"
-        />
+        <img src="assets/logo.jpg" alt="Camping Swag Logo" class="logo-img" />
       </a>
-
-      <!-- Primary navigation menu -->
       <nav class="primary-nav">
         <ul>
           <li><a href="index.html" class="nav-link">Home</a></li>
           <li class="has-submenu">
-            <a href="search.html" class="nav-link">
-              Shop Now <i class="fas fa-chevron-down"></i>
-            </a>
+            <a href="search.html" class="nav-link">Shop Now <i class="fas fa-chevron-down"></i></a>
             <ul class="submenu">
               <li><a href="search.html#tents" class="submenu-link">Tents</a></li>
               <li><a href="search.html#swags" class="submenu-link">Swags</a></li>
@@ -58,13 +66,9 @@
           <li><a href="blog.html" class="nav-link">Blog</a></li>
         </ul>
       </nav>
-
-      <!-- Icons on the right: search and cart -->
       <div class="nav-icons">
-        <a href="search.html" aria-label="Search" class="nav-icon-link">
-          <i class="fas fa-search"></i>
-        </a>
-        <a href="cart.html" aria-label="Cart" class="nav-icon-link">
+        <a href="search.html" class="nav-icon-link" aria-label="Search"><i class="fas fa-search"></i></a>
+        <a href="cart.html" class="nav-icon-link" aria-label="Cart">
           <i class="fas fa-shopping-cart"></i>
           <span class="cart-count">0</span>
         </a>
@@ -72,163 +76,187 @@
     </div>
   </header>
 
-  <!-- ────────────────────────────────────────────────────────────────────────── -->
-  <!--                                PRODUCT DETAIL                               -->
-  <!-- ────────────────────────────────────────────────────────────────────────── -->
-  <main class="container" style="margin: 2rem auto; max-width: 1000px;">
-    <div style="display: flex; flex-wrap: wrap; gap: 2rem;">
-      <!-- LEFT: Square Grid of Thumbnails -->
-      <div style="flex: 1 1 350px; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-        <img src="assets/beach tent1.jpg" alt="Beach Tent view 1" style="width:100%; border-radius: 8px; object-fit: cover; cursor: pointer;" class="thumb-img" data-product="beachtent" data-index="0" />
-        <img src="assets/beach tent2.jpg" alt="Beach Tent view 2" style="width:100%; border-radius: 8px; object-fit: cover; cursor: pointer;" class="thumb-img" data-product="beachtent" data-index="1" />
-        <img src="assets/beach tent3.jpg" alt="Beach Tent view 3" style="width:100%; border-radius: 8px; object-fit: cover; cursor: pointer;" class="thumb-img" data-product="beachtent" data-index="2" />
-        <img src="assets/beach tent4.jpg" alt="Beach Tent view 4" style="width:100%; border-radius: 8px; object-fit: cover; cursor: pointer;" class="thumb-img" data-product="beachtent" data-index="3" />
+  <!-- PRODUCT DETAIL -->
+  <main class="container" style="margin:2rem auto;max-width:1000px;">
+    <div class="product-detail-wrapper">
+      <!-- THUMBNAILS -->
+      <div style="flex:1 1 350px;display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+        <img src="assets/beach tent1.jpg" alt="Beach Tent view 1" class="thumb-img"
+             style="width:100%;border-radius:8px;object-fit:cover;cursor:pointer"
+             data-product="beachtent" data-index="0">
+        <img src="assets/beach tent2.jpg" alt="Beach Tent view 2" class="thumb-img"
+             style="width:100%;border-radius:8px;object-fit:cover;cursor:pointer"
+             data-product="beachtent" data-index="1">
+        <img src="assets/beach tent3.jpg" alt="Beach Tent view 3" class="thumb-img"
+             style="width:100%;border-radius:8px;object-fit:cover;cursor:pointer"
+             data-product="beachtent" data-index="2">
+        <img src="assets/beach tent4.jpg" alt="Beach Tent view 4" class="thumb-img"
+             style="width:100%;border-radius:8px;object-fit:cover;cursor:pointer"
+             data-product="beachtent" data-index="3">
       </div>
 
-      <!-- RIGHT: Product Info, Price, Add-to-Cart, Accordion, Reviews -->
-      <div style="flex: 1 1 500px;">
-        <h1 style="font-family: var(--font-heading); font-size: 2rem; margin-bottom: 0.5rem; color: var(--color-text);">
+      <!-- INFO & CONTROLS -->
+      <div style="flex:1 1 500px;">
+        <h1 style="font-family:var(--font-heading);font-size:2rem;margin-bottom:0.5rem;color:var(--color-text);">
           Beach Tent
         </h1>
-        <p style="font-family: var(--font-body); font-size: 1.25rem; font-weight: 700; margin-bottom: 1.5rem; color: var(--color-text);">
+        <p style="font-family:var(--font-body);font-size:1.25rem;font-weight:700;margin-bottom:1.5rem;color:var(--color-text);">
           $149.95
         </p>
 
-        <!-- ADD TO CART / then quantity controls once added -->
-        <div id="add-cart-container" style="margin-bottom: 1.5rem;">
-          <button id="add-to-cart" data-id="beachtent" class="btn-shop" style="font-size: 1rem; padding: 0.75rem 1.75rem;">
+        <!-- ADD TO CART / QUANTITY -->
+        <div id="add-cart-container" style="margin-bottom:1.5rem;">
+          <button id="add-to-cart" data-id="beachtent" class="btn-shop"
+                  style="font-size:1rem;padding:0.75rem 1.75rem;">
             Add to Cart
           </button>
         </div>
-        <div id="quantity-container" style="display: none; margin-bottom: 1.5rem; align-items: center; gap: 0.75rem; display: flex;">
-          <button class="qty-btn" data-action="decrease" data-id="beachtent" style="background-color: var(--color-accent); color: var(--color-text); border: none; padding: 0.4rem 0.8rem; font-size: 1rem; cursor: pointer; border-radius: 4px;">
+        <div id="quantity-container" style="display:none;margin-bottom:1.5rem;align-items:center;gap:0.75rem;display:flex;">
+          <button class="qty-btn" data-action="decrease" data-id="beachtent"
+                  style="background-color:var(--color-accent);color:var(--color-text);
+                         border:none;padding:0.4rem 0.8rem;font-size:1rem;
+                         cursor:pointer;border-radius:4px;">
             &minus;
           </button>
-          <span id="qty-number-beachtent" style="font-family: var(--font-body); font-size: 1.1rem; min-width: 24px; text-align: center;">0</span>
-          <button class="qty-btn" data-action="increase" data-id="beachtent" style="background-color: var(--color-accent); color: var(--color-text); border: none; padding: 0.4rem 0.8rem; font-size: 1rem; cursor: pointer; border-radius: 4px;">
+          <span id="qty-number-beachtent"
+                style="font-family:var(--font-body);font-size:1.1rem;
+                       min-width:24px;text-align:center;">
+            0
+          </span>
+          <button class="qty-btn" data-action="increase" data-id="beachtent"
+                  style="background-color:var(--color-accent);color:var(--color-text);
+                         border:none;padding:0.4rem 0.8rem;font-size:1rem;
+                         cursor:pointer;border-radius:4px;">
             &#43;
           </button>
         </div>
 
-        <!-- ACCORDION: Materials & Care, Sizing, Shipping & Returns -->
-        <div class="accordion" style="margin-bottom: 2rem;">
-          <div class="accordion-item" style="margin-bottom: 1rem;">
-            <button class="accordion-header" style="width: 100%; background: none; border: none; text-align: left; font-family: var(--font-body); font-weight: 500; font-size: 1.1rem; color: var(--color-text); cursor: pointer; padding: 0.5rem 0;">
+        <!-- ACCORDION -->
+        <div class="accordion" style="margin-bottom:2rem;">
+          <div class="accordion-item" style="margin-bottom:1rem;">
+            <button class="accordion-header" style="width:100%;background:none;border:none;
+                   text-align:left;font-family:var(--font-body);font-weight:500;
+                   font-size:1.1rem;color:var(--color-text);cursor:pointer;
+                   padding:0.5rem 0;">
               Materials &amp; Care
-              <i class="fas fa-chevron-down" style="float: right; transition: transform 0.2s ease;"></i>
+              <i class="fas fa-chevron-down" style="float:right;transition:transform 0.2s ease;"></i>
             </button>
-            <div class="accordion-content" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease; font-family: var(--font-body); font-size: 0.95rem; color: var(--color-text);">
-              <p style="margin-top: 0.5rem; line-height: 1.5;">
-                ● Fabric: 100% Polyester with UV‐protection coating<br>
-                ● Frame: Lightweight aluminum poles<br>
-                ● Zippers: Heavy‐duty YKK<br>
-                ● Care: Wipe clean with a damp cloth. Do not machine wash.
+            <div class="accordion-content" style="max-height:0;overflow:hidden;
+                   transition:max-height 0.3s ease;font-family:var(--font-body);
+                   font-size:0.95rem;color:var(--color-text);">
+              <p style="margin-top:0.5rem;line-height:1.5;">
+                ● 210D polyester outer shell<br>
+                ● Waterproof PU coating<br>
+                ● Sealed seams &amp; YKK zippers<br>
+                ● Care: wipe clean with damp cloth.
               </p>
             </div>
           </div>
 
-          <div class="accordion-item" style="margin-bottom: 1rem;">
-            <button class="accordion-header" style="width: 100%; background: none; border: none; text-align: left; font-family: var(--font-body); font-weight: 500; font-size: 1.1rem; color: var(--color-text); cursor: pointer; padding: 0.5rem 0;">
+          <div class="accordion-item" style="margin-bottom:1rem;">
+            <button class="accordion-header" style="width:100%;background:none;border:none;
+                   text-align:left;font-family:var(--font-body);font-weight:500;
+                   font-size:1.1rem;color:var(--color-text);cursor:pointer;
+                   padding:0.5rem 0;">
               Sizing
-              <i class="fas fa-chevron-down" style="float: right; transition: transform 0.2s ease;"></i>
+              <i class="fas fa-chevron-down" style="float:right;transition:transform 0.2s ease;"></i>
             </button>
-            <div class="accordion-content" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease; font-family: var(--font-body); font-size: 0.95rem; color: var(--color-text);">
-              <p style="margin-top: 0.5rem; line-height: 1.5;">
-                ● Fits 2–3 people comfortably<br>
-                ● Floor Dimensions: 7′ × 5′ (213 × 152 cm)<br>
-                ● Peak Height: 4.5′ (137 cm)<br>
-                ● Packed Size: 26″ × 7″ × 7″ (66 × 18 × 18 cm)
+            <div class="accordion-content" style="max-height:0;overflow:hidden;
+                   transition:max-height 0.3s ease;font-family:var(--font-body);
+                   font-size:0.95rem;color:var(--color-text);">
+              <p style="margin-top:0.5rem;line-height:1.5;">
+                ● Sleeps 2 adults comfortably<br>
+                ● Floor dimensions: 84″×55″ (213×140 cm)<br>
+                ● Center height: 50″ (127 cm)<br>
+                ● Pack size: 21″×7″ (53×18 cm).
               </p>
             </div>
           </div>
 
           <div class="accordion-item">
-            <button class="accordion-header" style="width: 100%; background: none; border: none; text-align: left; font-family: var(--font-body); font-weight: 500; font-size: 1.1rem; color: var(--color-text); cursor: pointer; padding: 0.5rem 0;">
+            <button class="accordion-header" style="width:100%;background:none;border:none;
+                   text-align:left;font-family:var(--font-body);font-weight:500;
+                   font-size:1.1rem;color:var(--color-text);cursor:pointer;
+                   padding:0.5rem 0;">
               Shipping &amp; Returns
-              <i class="fas fa-chevron-down" style="float: right; transition: transform 0.2s ease;"></i>
+              <i class="fas fa-chevron-down" style="float:right;transition:transform 0.2s ease;"></i>
             </button>
-            <div class="accordion-content" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease; font-family: var(--font-body); font-size: 0.95rem; color: var(--color-text);">
-              <p style="margin-top: 0.5rem; line-height: 1.5;">
-                ● Free standard shipping on orders $150+ within Australia.<br>
-                ● Flat $15 shipping under $150 (3–5 business days).<br>
-                ● Returns accepted within 30 days of delivery. Must be unused &amp; in original packaging. Customer pays return shipping.
+            <div class="accordion-content" style="max-height:0;overflow:hidden;
+                   transition:max-height 0.3s ease;font-family:var(--font-body);
+                   font-size:0.95rem;color:var(--color-text);">
+              <p style="margin-top:0.5rem;line-height:1.5;">
+                ● Free AU shipping over $75<br>
+                ● $10 flat rate under $75<br>
+                ● 30-day returns; item must be unused.
               </p>
             </div>
           </div>
         </div>
-
-        <!-- REVIEWS SECTION -->
-        <section class="reviews" style="margin-bottom: 2rem;">
-          <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 1rem; color: var(--color-text);">Customer Reviews</h2>
-
-          <!-- Review #1 -->
-          <div class="review-item" style="margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(0,0,0,0.1);">
-            <p style="font-family: var(--font-body); font-size: 0.9rem; color: var(--color-text); margin-bottom: 0.25rem;">
-              <strong>Emma J.</strong> <span style="color: #FFD700;">★★★★★</span>
-            </p>
-            <p style="font-family: var(--font-body); font-size: 0.95rem; color: var(--color-text); line-height: 1.4;">
-              “Love how easy it was to set up, and the UV protection kept us cool on the beach. Spacious enough for my whole family!”  
-            </p>
-          </div>
-
-          <!-- Review #2 -->
-          <div class="review-item" style="margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(0,0,0,0.1);">
-            <p style="font-family: var(--font-body); font-size: 0.9rem; color: var(--color-text); margin-bottom: 0.25rem;">
-              <strong>Michael T.</strong> <span style="color: #FFD700;">★★★★☆</span>
-            </p>
-            <p style="font-family: var(--font-body); font-size: 0.95rem; color: var(--color-text); line-height: 1.4;">
-              “Great value for the price. Only reason I took off one star is I wish the carrying bag was slightly bigger. Otherwise, highly recommended.”  
-            </p>
-          </div>
-
-          <!-- Review #3 -->
-          <div class="review-item">
-            <p style="font-family: var(--font-body); font-size: 0.9rem; color: var(--color-text); margin-bottom: 0.25rem;">
-              <strong>Sophie L.</strong> <span style="color: #FFD700;">★★★★★</span>
-            </p>
-            <p style="font-family: var(--font-body); font-size: 0.95rem; color: var(--color-text); line-height: 1.4;">
-              “I’ve used this beach tent for three summers now—still going strong! It’s lightweight, sturdy, and looks beautiful.”  
-            </p>
-          </div>
-        </section>
       </div>
     </div>
+
+    <!-- REVIEWS BELOW -->
+    <section class="reviews" style="margin-bottom:2rem;">
+      <h2 style="font-family:var(--font-heading);font-size:1.5rem;
+                 margin-bottom:1rem;color:var(--color-text);">
+        Customer Reviews
+      </h2>
+
+      <div class="review-item" style="margin-bottom:1.5rem;padding-bottom:1rem;
+                border-bottom:1px solid rgba(0,0,0,0.1);">
+        <p style="font-family:var(--font-body);font-size:0.9rem;color:var(--color-text);
+                   margin-bottom:0.25rem;">
+          <strong>Jane D.</strong> <span style="color:#FFD700;">★★★★★</span>
+        </p>
+        <p style="font-family:var(--font-body);font-size:0.95rem;color:var(--color-text);
+                   line-height:1.4;">
+          “Sturdy, easy to set up, and kept us dry during a downpour!”  
+        </p>
+      </div>
+
+      <div class="review-item" style="margin-bottom:1.5rem;padding-bottom:1rem;
+                border-bottom:1px solid rgba(0,0,0,0.1);">
+        <p style="font-family:var(--font-body);font-size:0.9rem;color:var(--color-text);
+                   margin-bottom:0.25rem;">
+          <strong>Paul K.</strong> <span style="color:#FFD700;">★★★★☆</span>
+        </p>
+        <p style="font-family:var(--font-body);font-size:0.95rem;color:var(--color-text);
+                   line-height:1.4;">
+          “Great value, though wish the storage pockets were a bit larger.”  
+        </p>
+      </div>
+
+      <div class="review-item">
+        <p style="font-family:var(--font-body);font-size:0.9rem;color:var(--color-text);
+                   margin-bottom:0.25rem;">
+          <strong>Mia L.</strong> <span style="color:#FFD700;">★★★★★</span>
+        </p>
+        <p style="font-family:var(--font-body);font-size:0.95rem;color:var(--color-text);
+                   line-height:1.4;">
+          “Perfect for beach camping—lightweight and breezy.”  
+        </p>
+      </div>
+    </section>
   </main>
 
-  <!-- ────────────────────────────────────────────────────────────────────────── -->
-  <!--                                  FOOTER                                     -->
-  <!-- ────────────────────────────────────────────────────────────────────────── -->
+  <!-- FOOTER -->
   <footer class="site-footer">
     <div class="footer-container container">
-      <!-- Subscribe Column -->
       <div class="footer-col subscribe-col">
         <h3>Subscribe to get 10% OFF</h3>
         <p>Subscribe for store updates and discounts.</p>
         <form class="subscribe-form" action="#" method="POST">
-          <input
-            type="email"
-            name="email"
-            placeholder="Enter your Email"
-            required
-          />
+          <input type="email" name="email" placeholder="Enter your Email" required />
           <button type="submit">Subscribe</button>
         </form>
-        <p class="disclaimer">
-          By subscribing you agree to the Term of Use &amp; Privacy Policy
-        </p>
+        <p class="disclaimer">By subscribing you agree to the Term of Use &amp; Privacy Policy</p>
         <p class="copyright">&copy; 2025, CampingSwag</p>
       </div>
-
-      <!-- About Column -->
       <div class="footer-col about-col">
         <h3>About</h3>
-        <p>
-          Proudly owned and run by Australians. Camping Swag Online is dedicated to offering high‐quality products at reasonable prices.
-        </p>
+        <p>Proudly owned and run by Australians. Camping Swag Online is dedicated to offering high-quality products at reasonable prices.</p>
         <a href="about.html" class="learn-more">LEARN MORE</a>
       </div>
-
-      <!-- Shop Column -->
       <div class="footer-col shop-col">
         <h3>Shop</h3>
         <ul>
@@ -238,8 +266,6 @@
           <li><a href="search.html#onsale">On Sale</a></li>
         </ul>
       </div>
-
-      <!-- Customer Care Column -->
       <div class="footer-col customer-col">
         <h3>Customer Care</h3>
         <ul>
@@ -248,51 +274,32 @@
           <li><a href="terms.html">Terms & Conditions</a></li>
           <li><a href="shipping.html">Shipping & Returns</a></li>
         </ul>
-        <!-- Social Media Icons -->
         <div class="footer-social">
-          <a href="https://www.facebook.com" target="_blank" aria-label="Facebook"
-            ><i class="fab fa-facebook-f"></i
-          ></a>
-          <a href="https://www.instagram.com" target="_blank" aria-label="Instagram"
-            ><i class="fab fa-instagram"></i
-          ></a>
-          <a href="https://www.twitter.com" target="_blank" aria-label="Twitter"
-            ><i class="fab fa-twitter"></i
-          ></a>
-          <a href="https://www.tiktok.com" target="_blank" aria-label="TikTok"
-            ><i class="fab fa-tiktok"></i
-          ></a>
-          <a
-            href="https://www.youtube.com"
-            target="_blank"
-            aria-label="YouTube"
-            ><i class="fab fa-youtube"></i
-          ></a>
+          <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://twitter.com" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="https://tiktok.com" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+          <a href="https://youtube.com" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
         </div>
       </div>
     </div>
   </footer>
 
-  <!-- ────────────────────────────────────────────────────────────────────────── -->
-  <!--                            MAIN JAVASCRIPT FILE                             -->
-  <!-- ────────────────────────────────────────────────────────────────────────── -->
+  <!-- SCRIPTS -->
   <script src="main.js"></script>
   <script src="cart.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // Identify this page's product ID:
-      const productId = 'beachtent';
-
-      // Cache DOM nodes:
-      const addBtn    = document.getElementById('add-to-cart');
-      const qtyCont   = document.getElementById('quantity-container');
-      const qtySpan   = document.getElementById('qty-number-beachtent');
-      const reduceBtn = document.querySelector('.qty-btn[data-action="decrease"][data-id="beachtent"]');
+      const productId   = 'beachtent';
+      const addBtn      = document.getElementById('add-to-cart');
+      const qtyCont     = document.getElementById('quantity-container');
+      const qtySpan     = document.getElementById('qty-number-beachtent');
+      const reduceBtn   = document.querySelector('.qty-btn[data-action="decrease"][data-id="beachtent"]');
       const increaseBtn = document.querySelector('.qty-btn[data-action="increase"][data-id="beachtent"]');
 
-      // Initialize: check if it already exists in cart → show qty controls or “Add” button:
+      // initialize from cart
       const currentCart = Cart.getCart();
-      if (currentCart[productId] && currentCart[productId] > 0) {
+      if (currentCart[productId] > 0) {
         addBtn.style.display = 'none';
         qtyCont.style.display = 'flex';
         qtySpan.textContent = currentCart[productId];
@@ -301,7 +308,7 @@
         qtyCont.style.display = 'none';
       }
 
-      // “Add to Cart” button listener:
+      // Add to Cart
       addBtn.addEventListener('click', () => {
         Cart.addToCart(productId);
         addBtn.style.display = 'none';
@@ -309,13 +316,13 @@
         qtySpan.textContent = Cart.getCart()[productId];
       });
 
-      // “+” button listener:
+      // Increase
       increaseBtn.addEventListener('click', () => {
         Cart.addToCart(productId);
         qtySpan.textContent = Cart.getCart()[productId];
       });
 
-      // “–” button listener:
+      // Decrease
       reduceBtn.addEventListener('click', () => {
         Cart.removeFromCart(productId);
         const newQty = Cart.getCart()[productId] || 0;
@@ -326,18 +333,16 @@
         }
       });
 
-      // --- LIGHTBOX IMAGE CLICK HANDLING (optional) ---
-      // If you want a quick “click thumbnail → open large image in new tab”:
+      // Thumbnail click → open full image
       document.querySelectorAll('.thumb-img').forEach(thumb => {
         thumb.addEventListener('click', () => {
-          const idx = parseInt(thumb.dataset.index);
+          const idx  = parseInt(thumb.dataset.index, 10);
           const urls = Cart.PRODUCTS[productId].images;
-          // Open that image in a new tab:
           window.open(urls[idx], '_blank');
         });
       });
 
-      // --- ACCORDION FUNCTIONALITY ---
+      // Accordion toggles
       document.querySelectorAll('.accordion-header').forEach(header => {
         header.addEventListener('click', () => {
           const content = header.nextElementSibling;
@@ -346,14 +351,8 @@
             content.style.maxHeight = '0';
             icon.style.transform    = 'rotate(0deg)';
           } else {
-            // Close any open accordion‐content first:
-            document.querySelectorAll('.accordion-content').forEach(c => {
-              c.style.maxHeight = '0';
-            });
-            document.querySelectorAll('.accordion-header i').forEach(i => {
-              i.style.transform = 'rotate(0deg)';
-            });
-            // Open this one:
+            document.querySelectorAll('.accordion-content').forEach(c => c.style.maxHeight = '0');
+            document.querySelectorAll('.accordion-header i').forEach(i => i.style.transform = 'rotate(0deg)');
             content.style.maxHeight = content.scrollHeight + 'px';
             icon.style.transform    = 'rotate(180deg)';
           }
