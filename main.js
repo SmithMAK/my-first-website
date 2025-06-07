@@ -1,483 +1,284 @@
 /* ─────────────────────────────────────────────────────────────────────────────
-   MAIN.JS
+   main.js
 ───────────────────────────────────────────────────────────────────────────── */
-document.addEventListener("DOMContentLoaded", function () {
-  /*───────────────────────────────────────────────────────────────────────────
-    SLIDESHOW (Home Page)
-  ────────────────────────────────────────────────────────────────────────────*/
+document.addEventListener("DOMContentLoaded", () => {
+  //
+  // ─── SLIDESHOW (Home page) ────────────────────────────────────────────────
+  //
   let slideIndex = 0;
   const slides = document.querySelectorAll(".slide");
-  const dots = document.querySelectorAll(".dot");
+  const dots   = document.querySelectorAll(".dot");
 
-  function showSlide(index) {
+  function showSlide(idx) {
     slides.forEach((slide, i) => {
-      slide.style.display = i === index ? "flex" : "none";
-      dots[i].classList.toggle("active", i === index);
+      slide.style.display = i === idx ? "flex" : "none";
+      dots[i].classList.toggle("active", i === idx);
     });
   }
 
-  function nextSlide() {
-    slideIndex = (slideIndex + 1) % slides.length;
+  if (slides.length > 0 && dots.length === slides.length) {
     showSlide(slideIndex);
-  }
-
-  if (slides.length > 0) {
-    showSlide(slideIndex);
-    setInterval(nextSlide, 4000); // change every 4s
-  }
-
-  dots.forEach((dot) => {
-    dot.addEventListener("click", function () {
-      const idx = parseInt(this.getAttribute("data-index"));
-      slideIndex = idx;
+    setInterval(() => {
+      slideIndex = (slideIndex + 1) % slides.length;
       showSlide(slideIndex);
+    }, 4000);
+    dots.forEach(dot => {
+      dot.addEventListener("click", () => {
+        slideIndex = Number(dot.dataset.index);
+        showSlide(slideIndex);
+      });
     });
-  });
+  }
 
-  /*───────────────────────────────────────────────────────────────────────────
-    FILTER DROPDOWN (Search Page Only)
-  ────────────────────────────────────────────────────────────────────────────*/
-  const filterToggle = document.getElementById("filter-toggle");
-  const filterMenu = document.getElementById("filter-menu");
+  //
+  // ─── FILTER DROPDOWN (Search page only) ───────────────────────────────────
+  //
+  const filterToggle      = document.getElementById("filter-toggle");
+  const filterMenu        = document.getElementById("filter-menu");
   const currentFilterSpan = document.getElementById("current-filter");
-  const productCards = document.querySelectorAll(".product-card");
+  const productCards      = document.querySelectorAll(".product-card");
 
-  function closeFilterMenu() {
-    filterMenu.style.display = "none";
-  }
+  function openFilter()  { filterMenu.style.display = "block";  }
+  function closeFilter() { filterMenu.style.display = "none";   }
 
-  function openFilterMenu() {
-    filterMenu.style.display = "block";
-  }
-
-  if (filterToggle) {
-    filterToggle.addEventListener("click", function (e) {
+  if (filterToggle && filterMenu && currentFilterSpan) {
+    filterToggle.addEventListener("click", e => {
       e.preventDefault();
-      if (filterMenu.style.display === "block") {
-        closeFilterMenu();
-      } else {
-        openFilterMenu();
-      }
+      filterMenu.style.display === "block" ? closeFilter() : openFilter();
     });
-  }
 
-  if (filterMenu) {
-    filterMenu.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", function (e) {
+    // choose a filter
+    filterMenu.querySelectorAll("a[data-filter]").forEach(link => {
+      link.addEventListener("click", e => {
         e.preventDefault();
-        const selected = this.getAttribute("data-filter");
-        currentFilterSpan.innerText = selected;
-        applyFilter(selected);
-        closeFilterMenu();
+        const sel = link.dataset.filter;
+        currentFilterSpan.innerText = sel;
+        applyFilter(sel);
+        closeFilter();
       });
     });
 
-    document.addEventListener("click", function (e) {
+    // click outside to close
+    document.addEventListener("click", e => {
       if (
         filterMenu.style.display === "block" &&
         !filterMenu.contains(e.target) &&
         e.target !== filterToggle
-      ) {
-        closeFilterMenu();
-      }
+      ) closeFilter();
+    });
+
+    // initial URL-based filter?
+    const urlFs = new URLSearchParams(window.location.search).get("filter");
+    if (urlFs) {
+      currentFilterSpan.innerText = urlFs;
+      applyFilter(urlFs);
+    }
+  }
+
+  function applyFilter(name) {
+    const lower = name.toLowerCase();
+    productCards.forEach(card => {
+      const cat = card.dataset.category?.toLowerCase() || "";
+      card.style.display =
+        lower === "all" || cat === lower ? "flex" : "none";
     });
   }
 
-  function applyFilter(filterName) {
-    productCards.forEach((card) => {
-      const cat = card.getAttribute("data-category");
-      if (filterName === "All" || cat === filterName) {
-        card.style.display = "flex";
-      } else {
-        card.style.display = "none";
-      }
+  //
+  // ─── FAVORITE (heart) BUTTON TOGGLE ────────────────────────────────────────
+  //
+  document.querySelectorAll(".favorite-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      btn.classList.toggle("active");
+      const icon = btn.querySelector("i.fa-heart");
+      icon.classList.toggle("far");
+      icon.classList.toggle("fas");
     });
-  }
-
-  const urlParams = new URLSearchParams(window.location.search);
-  const initialFilter = urlParams.get("filter");
-  if (initialFilter) {
-    currentFilterSpan.innerText = initialFilter;
-    applyFilter(initialFilter);
-  }
-
-  /*───────────────────────────────────────────────────────────────────────────
-    PRODUCT IMAGE CAROUSEL + QUANTITY CONTROLS (Search Page Only)
-  ────────────────────────────────────────────────────────────────────────────*/
-  document.querySelectorAll(".product-card").forEach((card) => {
-    const imgEl = card.querySelector(".product-img");
-    const prevBtn = card.querySelector(".prev-img");
-    const nextBtn = card.querySelector(".next-img");
-    const qtyNumber = card.querySelector(".qty-number");
-    const increaseBtn = card.querySelector(".qty-increase");
-    const decreaseBtn = card.querySelector(".qty-decrease");
-
-    // Parse the JSON array of images from data-images
-    const images = JSON.parse(imgEl.getAttribute("data-images"));
-    let idx = 0;
-
-    if (prevBtn) {
-      prevBtn.addEventListener("click", () => {
-        idx = (idx - 1 + images.length) % images.length;
-        imgEl.src = images[idx];
-      });
-    }
-    if (nextBtn) {
-      nextBtn.addEventListener("click", () => {
-        idx = (idx + 1) % images.length;
-        imgEl.src = images[idx];
-      });
-    }
-
-    // Quantity controls
-    let qty = 0;
-    if (increaseBtn) {
-      increaseBtn.addEventListener("click", () => {
-        qty++;
-        qtyNumber.innerText = qty;
-      });
-    }
-    if (decreaseBtn) {
-      decreaseBtn.addEventListener("click", () => {
-        if (qty > 0) qty--;
-        qtyNumber.innerText = qty;
-      });
-    }
   });
-});
 
+  //
+  // ─── PRODUCT‐GRID IMAGE CAROUSEL ───────────────────────────────────────────
+  //
+  const productImages = {
+    beachtent: [
+      "assets/beach tent1.jpg",
+      "assets/beach tent2.jpg",
+      "assets/beach tent3.jpg",
+      "assets/beach tent4.jpg",
+    ],
+    familytent: [
+      "assets/family tent1.jpg",
+      "assets/family tent2.jpg",
+      "assets/family tent3.jpg",
+      "assets/family tent4.jpg",
+    ],
+    headtorch: [
+      "assets/headtorch1.jpg",
+      "assets/headtorch2.jpg",
+      "assets/headtorch3.jpg",
+      "assets/headtorch4.jpg",
+    ],
+    backpack: [
+      "assets/backpack1.jpg",
+      "assets/backpack2.jpg",
+      "assets/backpack3.jpg",
+      "assets/backpack4.jpg",
+    ],
+  };
 
-// ─────────────────────────────────────────────────────────────────────────────
-//                          main.js (all pages use this file)
-// ─────────────────────────────────────────────────────────────────────────────
-document.addEventListener("DOMContentLoaded", () => {
-  // 1) Initialize / update the cart‐count badge in the header
+  document.querySelectorAll(".product-image-wrapper").forEach(wrapper => {
+    // get this product’s ID from either wrapper.dataset.id or the prev button
+    const prevBtn = wrapper.querySelector(".prev-img");
+    const id = wrapper.dataset.id || prevBtn.dataset.id;
+    const imgs = productImages[id] || [];
+    if (!imgs.length) return;
+
+    const imgEl   = wrapper.querySelector(".product-img");
+    const nextBtn = wrapper.querySelector(".next-img");
+    // start at first image
+    wrapper.dataset.currentIndex = 0;
+    imgEl.src = imgs[0];
+
+    prevBtn.addEventListener("click", () => {
+      let idx = +wrapper.dataset.currentIndex - 1;
+      idx = (idx + imgs.length) % imgs.length;
+      wrapper.dataset.currentIndex = idx;
+      imgEl.src = imgs[idx];
+    });
+    nextBtn.addEventListener("click", () => {
+      let idx = +wrapper.dataset.currentIndex + 1;
+      idx %= imgs.length;
+      wrapper.dataset.currentIndex = idx;
+      imgEl.src = imgs[idx];
+    });
+  });
+
+  //
+  // ─── CART LOGIC (all pages) ────────────────────────────────────────────────
+  //
   let cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
   updateCartBadge();
 
-  // 2) On product pages: attach “Add to Cart” buttons (they have class .add-to-cart-btn)
-  document.querySelectorAll(".add-to-cart-btn").forEach((btn) => {
-    btn.addEventListener("click", (e) => {
-      // Each product page must set window.PRODUCT_DATA = { id, name, price, image }
-      if (window.PRODUCT_DATA) {
-        addItemToCart({ ...window.PRODUCT_DATA, quantity: 1 });
-      }
-    });
-  });
-
-  // 3) On search.html: attach “＋” and “－” buttons to update cart directly from the grid
-  document.querySelectorAll(".qty-btn").forEach((qtyBtn) => {
-    qtyBtn.addEventListener("click", (e) => {
-      const parentCard = e.currentTarget.closest(".product-card");
-      if (!parentCard) return;
-
-      // We assume each .product-card element has data attributes set:
-      // data-id, data-name, data-price, data-image
-      const id = parentCard.getAttribute("data-id");
-      const name = parentCard.getAttribute("data-name");
-      const price = parseFloat(parentCard.getAttribute("data-price"));
-      const image = parentCard.getAttribute("data-image");
-
-      // Determine if this is “plus” or “minus”
-      const isPlus = e.currentTarget.classList.contains("plus-btn");
-      changeItemQuantity(id, name, price, image, isPlus ? 1 : -1);
-
-      // Also update the visible quantity number inside that card
-      const qtyNumberEl = parentCard.querySelector(".qty-number");
-      let currentQty = parseInt(qtyNumberEl.textContent || "0", 10);
-      currentQty = isPlus ? currentQty + 1 : Math.max(0, currentQty - 1);
-      qtyNumberEl.textContent = currentQty;
-    });
-  });
-
-  // 4) If we are on cart.html (it has an element with ID #cart-content), render the cart
-  if (document.getElementById("cart-content")) {
-    renderCartPage();
-  }
-
-  // ────────────────────────────────────────────────────────────────────────────
-  // Utility Functions
-  // ────────────────────────────────────────────────────────────────────────────
-
-  // Update the red badge in the header
+  // header badge updater
   function updateCartBadge() {
     cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
-    const totalCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-    const badge = document.querySelector(".cart-count");
-    if (badge) {
-      badge.textContent = totalCount;
-    }
+    const count = cartItems.reduce((sum, i) => sum + i.quantity, 0);
+    document.querySelectorAll(".cart-count").forEach(b => {
+      b.textContent = count;
+    });
   }
 
-  // Add a new item or bump quantity if it already exists
-  function addItemToCart(product) {
-    const existing = cartItems.find((ci) => ci.id === product.id);
-    if (existing) {
-      existing.quantity += product.quantity;
-    } else {
-      cartItems.push({ ...product });
-    }
-    // Remove any product with zero quantity
-    cartItems = cartItems.filter((ci) => ci.quantity > 0);
+  // add or change quantity
+  function saveCart() {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
     updateCartBadge();
-    if (document.getElementById("cart-content")) {
-      renderCartPage();
-    }
+    if (document.getElementById("cart-content")) renderCartPage();
   }
 
-  // Change quantity by delta (±1). If not found, create a new entry with quantity=1
-  function changeItemQuantity(id, name, price, image, delta) {
-    const existing = cartItems.find((ci) => ci.id === id);
+  function addOrChange(id, name, price, image, delta) {
+    const existing = cartItems.find(i => i.id === id);
     if (existing) {
       existing.quantity = Math.max(0, existing.quantity + delta);
       if (existing.quantity === 0) {
-        // Remove entirely if quantity is zero
-        cartItems = cartItems.filter((ci) => ci.id !== id);
+        cartItems = cartItems.filter(i => i.id !== id);
       }
     } else if (delta > 0) {
-      cartItems.push({ id, name, price, image, quantity: 1 });
+      cartItems.push({ id, name, price, image, quantity: delta });
     }
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
-    updateCartBadge();
-    if (document.getElementById("cart-content")) {
-      renderCartPage();
-    }
+    saveCart();
   }
 
-  // Render the cart page’s contents (list of items or empty state)
+  // hook “＋” / “－” on search.html
+  document.querySelectorAll(".qty-btn").forEach(btn => {
+    btn.addEventListener("click", e => {
+      const card = e.currentTarget.closest(".product-card");
+      const { id, name, price, image } = card.dataset;
+      const delta = e.currentTarget.getAttribute("data-action") === "increase" ? 1 : -1;
+      addOrChange(id, name, parseFloat(price), image, delta);
+      // update displayed number
+      const span = card.querySelector(".qty-number");
+      let n = parseInt(span.textContent, 10) || 0;
+      n = Math.max(0, n + delta);
+      span.textContent = n;
+    });
+  });
+
+  // hook Add-to-Cart on single product pages
+  document.querySelectorAll(".add-to-cart-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      if (!window.PRODUCT_DATA) return;
+      addOrChange(
+        window.PRODUCT_DATA.id,
+        window.PRODUCT_DATA.name,
+        window.PRODUCT_DATA.price,
+        window.PRODUCT_DATA.image,
+        1
+      );
+      // swap to qty controls if present
+      const controls = document.getElementById("qty-controls");
+      const addBtn   = document.getElementById("add-cart-btn");
+      if (controls && addBtn) {
+        addBtn.style.display = "none";
+        controls.style.display = "flex";
+        document.getElementById("qty-number").textContent = 1;
+      }
+    });
+  });
+
+  // CART PAGE RENDER
+  if (document.getElementById("cart-content")) renderCartPage();
+
   function renderCartPage() {
     cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
     const container = document.getElementById("cart-content");
-    const summaryEl = document.getElementById("cart-summary");
-    container.innerHTML = ""; // clear first
+    const summary   = document.getElementById("cart-summary");
+    container.innerHTML = "";
 
-    if (!cartItems || cartItems.length === 0) {
-      // Show empty‐cart box
+    if (!cartItems.length) {
       container.innerHTML = `
         <div class="cart-empty">
           <i class="fas fa-shopping-bag"></i>
           <p>No items in your cart</p>
         </div>`;
-      summaryEl.style.display = "none";
+      summary.style.display = "none";
       return;
     }
 
-    // Otherwise, build each .cart-item row
-    cartItems.forEach((item) => {
-      const itemEl = document.createElement("div");
-      itemEl.classList.add("cart-item");
-      itemEl.setAttribute("data-id", item.id);
-
-      itemEl.innerHTML = `
+    summary.style.display = "flex";
+    cartItems.forEach(item => {
+      const row = document.createElement("div");
+      row.className = "cart-item";
+      row.dataset.id = item.id;
+      row.innerHTML = `
         <div class="item-image">
-          <img src="${item.image}" alt="${item.name}" />
+          <img src="${item.image}" alt="${item.name}"/>
         </div>
         <div class="item-details">
           <span class="item-name">${item.name}</span>
           <span class="item-price">$${(item.price * item.quantity).toFixed(2)}</span>
           <div class="item-quantity">
-            <button class="qty-btn minus-btn" aria-label="Decrease quantity">–</button>
+            <button class="qty-btn" data-action="decrease">–</button>
             <span class="qty-number">${item.quantity}</span>
-            <button class="qty-btn plus-btn" aria-label="Increase quantity">＋</button>
+            <button class="qty-btn" data-action="increase">＋</button>
           </div>
-        </div>
-      `;
-
-      container.appendChild(itemEl);
+        </div>`;
+      container.appendChild(row);
     });
 
-    // Show the summary (total + checkout)
-    summaryEl.style.display = "flex";
-    updateCartTotal();
-
-    // Attach listeners to the new quantity buttons
-    container.querySelectorAll(".minus-btn").forEach((btn) => {
-      btn.addEventListener("click", (e) => {
-        const parentItem = e.currentTarget.closest(".cart-item");
-        const prodId = parentItem.getAttribute("data-id");
-        const existing = cartItems.find((ci) => ci.id === prodId);
-        if (!existing) return;
-        changeItemQuantity(prodId, existing.name, existing.price, existing.image, -1);
+    // attach plus/minus
+    container.querySelectorAll(".qty-btn").forEach(btn => {
+      btn.addEventListener("click", e => {
+        const row = e.currentTarget.closest(".cart-item");
+        const it  = cartItems.find(i => i.id === row.dataset.id);
+        const delta = btn.getAttribute("data-action") === "increase" ? 1 : -1;
+        addOrChange(it.id, it.name, it.price, it.image, delta);
       });
     });
-    container.querySelectorAll(".plus-btn").forEach((btn) => {
-      btn.addEventListener("click", (e) => {
-        const parentItem = e.currentTarget.closest(".cart-item");
-        const prodId = parentItem.getAttribute("data-id");
-        const existing = cartItems.find((ci) => ci.id === prodId);
-        if (!existing) return;
-        changeItemQuantity(prodId, existing.name, existing.price, existing.image, +1);
-      });
-    });
-  }
 
-  // Compute and display the total sum of all items
-  function updateCartTotal() {
-    cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
-    const totalAmount = cartItems.reduce(
-      (sum, item) => sum + item.price * item.quantity,
-      0
-    );
-    const totalEl = document.querySelector(".total-amount");
-    if (totalEl) {
-      totalEl.textContent = `$${totalAmount.toFixed(2)}`;
-    }
+    // update total
+    const total = cartItems.reduce((sum,i) => sum + i.price * i.quantity, 0);
+    document.querySelectorAll(".total-amount").forEach(el => {
+      el.textContent = `$${total.toFixed(2)}`;
+    });
   }
 });
-
-
-<!-- ────────────────────────────────────────────────────────────────────────── -->
-<!--                            MAIN JAVASCRIPT FILE                             -->
-<script>
-  /********************************************************************
-   PRODUCT PAGE JS
-   -------------------------------------------------------------
-   1) Image Carousel Logic
-   2) Full‐Screen Overlay Logic
-   3) Add to Cart → Switch to Qty Controls
-   4) Qty Buttons Update localStorage & Header badge
-  ********************************************************************/
-
-  document.addEventListener("DOMContentLoaded", () => {
-    // ────────────────────────────────────────────────────────────────────────────
-    // 1) Set up the image‐carousel data
-    // ────────────────────────────────────────────────────────────────────────────
-    const imageList = [
-      "assets/beachtent1.jpg",
-      "assets/beachtent2.jpg",
-      "assets/beachtent3.jpg",
-      "assets/beachtent4.jpg"
-    ];
-    let currentIndex = 0; // currently displayed index
-
-    const mainImage = document.getElementById("main-image");
-    const prevBtn = document.querySelector(".nav-prev");
-    const nextBtn = document.querySelector(".nav-next");
-    const thumbs = document.querySelectorAll(".thumb");
-
-    function updateMainImage(index) {
-      currentIndex = index;
-      mainImage.src = imageList[index];
-      // Update selected thumbnail highlight
-      thumbs.forEach((thumb) => thumb.classList.remove("selected"));
-      thumbs[index].classList.add("selected");
-    }
-
-    // Prev / Next arrow handlers
-    prevBtn.addEventListener("click", () => {
-      let newIndex = currentIndex - 1;
-      if (newIndex < 0) newIndex = imageList.length - 1;
-      updateMainImage(newIndex);
-    });
-    nextBtn.addEventListener("click", () => {
-      let newIndex = (currentIndex + 1) % imageList.length;
-      updateMainImage(newIndex);
-    });
-
-    // Thumbnail click handlers
-    thumbs.forEach((thumb) => {
-      thumb.addEventListener("click", () => {
-        const idx = parseInt(thumb.getAttribute("data-index"), 10);
-        updateMainImage(idx);
-      });
-    });
-
-    // ────────────────────────────────────────────────────────────────────────────
-    // 2) Full‐Screen Overlay logic
-    // ────────────────────────────────────────────────────────────────────────────
-    const fullscreenOverlay = document.getElementById("fullscreen-overlay");
-    const fullscreenImg = document.getElementById("fullscreen-img");
-    const closeFsBtn = document.getElementById("close-fullscreen");
-
-    // When user clicks main image, open overlay
-    mainImage.addEventListener("click", () => {
-      fullscreenImg.src = imageList[currentIndex];
-      fullscreenOverlay.style.display = "flex";
-    });
-    // Close button
-    closeFsBtn.addEventListener("click", () => {
-      fullscreenOverlay.style.display = "none";
-    });
-    // Also click outside to close
-    fullscreenOverlay.addEventListener("click", (e) => {
-      if (e.target === fullscreenOverlay) {
-        fullscreenOverlay.style.display = "none";
-      }
-    });
-
-    // ────────────────────────────────────────────────────────────────────────────
-    // 3) “Add to Cart” → Quantity Controls
-    // ────────────────────────────────────────────────────────────────────────────
-    // We will use the same localStorage logic as in main.js (cart from earlier instructions).
-    // Ensure you have already included the “main.js” file which contains the addItemToCart(), changeItemQuantity(), updateCartBadge(), etc.
-
-    // Product Data for localStorage
-    window.PRODUCT_DATA = {
-      id: "beachtent",
-      name: "Beach Tent",
-      price: 149.95,
-      image: "assets/beachtent1.jpg"
-    };
-
-    const addCartBtn = document.getElementById("add-cart-btn");
-    const qtyControls = document.getElementById("qty-controls");
-    const qtyNumberEl = document.getElementById("qty-number");
-    const incBtn = document.getElementById("increment-btn");
-    const decBtn = document.getElementById("decrement-btn");
-
-    // Check localStorage on load—if this item already in cart, show qty controls with current qty
-    let cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
-    const existingItem = cartItems.find((ci) => ci.id === "beachtent");
-    if (existingItem) {
-      addCartBtn.style.display = "none";
-      qtyControls.style.display = "flex";
-      qtyNumberEl.textContent = existingItem.quantity;
-    }
-
-    // Click “Add to Cart”
-    addCartBtn.addEventListener("click", () => {
-      // Add one
-      addItemToCart({ ...window.PRODUCT_DATA, quantity: 1 });
-      // Hide this button, show qty controls
-      addCartBtn.style.display = "none";
-      qtyControls.style.display = "flex";
-      qtyNumberEl.textContent = 1;
-    });
-
-    // Click “＋”
-    incBtn.addEventListener("click", () => {
-      changeItemQuantity(
-        "beachtent",
-        window.PRODUCT_DATA.name,
-        window.PRODUCT_DATA.price,
-        window.PRODUCT_DATA.image,
-        +1
-      );
-      let current = parseInt(qtyNumberEl.textContent, 10) || 0;
-      current++;
-      qtyNumberEl.textContent = current;
-    });
-
-    // Click “－”
-    decBtn.addEventListener("click", () => {
-      changeItemQuantity(
-        "beachtent",
-        window.PRODUCT_DATA.name,
-        window.PRODUCT_DATA.price,
-        window.PRODUCT_DATA.image,
-        -1
-      );
-      let current = parseInt(qtyNumberEl.textContent, 10) || 0;
-      if (current <= 1) {
-        // If quantity goes to zero, revert back to “Add to Cart” button
-        qtyNumberEl.textContent = 0;
-        qtyControls.style.display = "none";
-        addCartBtn.style.display = "inline-block";
-      } else {
-        current--;
-        qtyNumberEl.textContent = current;
-      }
-    });
-  });
-</script>
