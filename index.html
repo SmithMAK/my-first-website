@@ -11,8 +11,7 @@
     rel="stylesheet"
   />
 
-  <!-- ─── FONT AWESOME 6.x FREE (jsDelivr CDN) ────────────────────────────────── -->
-  <!-- This link has been tested and will reliably load all of the “fas”, “far” and “fab” icons: -->
+  <!-- ─── FONT AWESOME ────────────────────────────────────────────────── -->
   <link
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"
@@ -27,12 +26,9 @@
   ────────────────────────────────────────────────────────────────────────── -->
   <header class="site-header">
     <div class="header-inner container">
-      <!-- Logo on the left (clickable to go to index.html) -->
       <a href="index.html" class="logo-link">
         <img src="assets/logo.jpg" alt="Camping Swag Logo" class="logo-img" />
       </a>
-
-      <!-- Primary navigation menu -->
       <nav class="primary-nav">
         <ul>
           <li><a href="index.html" class="nav-link">Home</a></li>
@@ -50,11 +46,8 @@
           <li><a href="blog.html" class="nav-link">Blog</a></li>
         </ul>
       </nav>
-
-      <!-- Icons on the right: search and cart -->
       <div class="nav-icons">
         <a href="search.html" aria-label="Search" class="nav-icon-link">
-          <!-- “fa-solid” prefix ensures a solid search icon -->
           <i class="fa-solid fa-search"></i>
         </a>
         <a href="cart.html" aria-label="Cart" class="nav-icon-link">
@@ -70,7 +63,7 @@
   ────────────────────────────────────────────────────────────────────────── -->
   <section class="slideshow-container">
     <!-- Slide 1 -->
-    <div class="slide">
+    <div class="slide active">
       <div class="slide-img-wrapper">
         <img src="assets/1.1.jpg" alt="Tent at sunset" class="slide-img" />
         <img src="assets/1.2.jpeg" alt="View from inside tent" class="slide-img" />
@@ -82,7 +75,6 @@
         <a href="search.html" class="btn-shop">SHOP NOW</a>
       </div>
     </div>
-
     <!-- Slide 2 -->
     <div class="slide">
       <div class="slide-img-wrapper">
@@ -96,7 +88,6 @@
         <a href="search.html" class="btn-shop">SHOP NOW</a>
       </div>
     </div>
-
     <!-- Slide 3 -->
     <div class="slide">
       <div class="slide-img-wrapper">
@@ -111,11 +102,15 @@
       </div>
     </div>
 
+    <!-- left/right arrows -->
+    <button class="slideshow-nav prev"><i class="fa-solid fa-chevron-left"></i></button>
+    <button class="slideshow-nav next"><i class="fa-solid fa-chevron-right"></i></button>
+
     <!-- Pagination dots -->
     <div class="slideshow-dots">
-      <span class="dot" data-index="0"></span>
-      <span class="dot" data-index="1"></span>
-      <span class="dot" data-index="2"></span>
+      <span class="dot active" data-index="0"></span>
+      <span class="dot"        data-index="1"></span>
+      <span class="dot"        data-index="2"></span>
     </div>
   </section>
 
@@ -125,30 +120,24 @@
   <section class="categories-section container">
     <h2 class="section-title">Camping Essentials</h2>
     <div class="categories-grid">
-      <!-- Tents -->
       <a href="search.html#tents" class="category-card">
         <img src="assets/tents.jpg" alt="Tents" class="category-img" />
-        <div class="overlay">
-          <span class="overlay-text">Tents</span>
-        </div>
+        <div class="overlay"><span class="overlay-text">T E N T S</span></div>
       </a>
-      <!-- Swags -->
       <a href="search.html#swags" class="category-card">
         <img src="assets/swags.jpg" alt="Swags" class="category-img" />
-        <div class="overlay">
-          <span class="overlay-text">Swags</span>
-        </div>
+        <div class="overlay"><span class="overlay-text">S W A G S</span></div>
       </a>
-      <!-- Packs -->
       <a href="search.html#packs" class="category-card">
         <img src="assets/packs.jpg" alt="Packs" class="category-img" />
-        <div class="overlay">
-          <span class="overlay-text">Packs</span>
-        </div>
+        <div class="overlay"><span class="overlay-text">P A C K S</span></div>
       </a>
     </div>
   </section>
 
+  <!-- ──────────────────────────────────────────────────────────────────────────
+     FOOTER
+  ────────────────────────────────────────────────────────────────────────── -->
   <!-- ──────────────────────────────────────────────────────────────────────────
      FOOTER
   ────────────────────────────────────────────────────────────────────────── -->
@@ -228,9 +217,46 @@
     </div>
   </footer>
 
+
   <!-- ──────────────────────────────────────────────────────────────────────────
-     MAIN JAVASCRIPT FILE
+     SCRIPTS
   ────────────────────────────────────────────────────────────────────────── -->
+  <script src="cart.js"></script>
   <script src="main.js"></script>
+  <script>
+    // ──────────────────────────────────────────────────────────────────────────
+    //                      INLINE SLIDESHOW LOGIC
+    // ──────────────────────────────────────────────────────────────────────────
+    document.addEventListener('DOMContentLoaded', () => {
+      const slides = [...document.querySelectorAll('.slideshow-container .slide')];
+      const dots   = [...document.querySelectorAll('.slideshow-dots .dot')];
+      const prev   = document.querySelector('.slideshow-nav.prev');
+      const next   = document.querySelector('.slideshow-nav.next');
+      let idx = 0, max = slides.length;
+
+      function show(n) {
+        slides.forEach((s,i) => s.classList.toggle('active', i===n));
+        dots  .forEach((d,i) => d.classList.toggle('active', i===n));
+      }
+
+      function advance() {
+        idx = (idx + 1) % max;
+        show(idx);
+      }
+
+      // dot clicks
+      dots.forEach(d => d.addEventListener('click', () => {
+        idx = +d.dataset.index;
+        show(idx);
+      }));
+
+      // arrow clicks
+      prev.addEventListener('click', () => { idx = (idx-1+max)%max; show(idx); });
+      next.addEventListener('click', () => { idx = (idx+1)   %max; show(idx); });
+
+      // auto-advance every 5s
+      setInterval(advance, 5000);
+    });
+  </script>
 </body>
 </html>

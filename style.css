@@ -38,7 +38,7 @@
         height: 120px;
         width: auto;
       }
-      
+
   /* Utility container to center content and padding */
   .container {
     max-width: 1200px;
@@ -180,92 +180,100 @@
     align-items: center;
     justify-content: center;
   }
-  
-  /* ─────────────────────────────────────────────────────────────────────────────
-     SLIDESHOW STYLE
-  ───────────────────────────────────────────────────────────────────────────── */
-  .slideshow-container {
-    position: relative;
-    overflow: hidden;
-    background-color: var(--color-bg);
-  }
-  
-  /* Make each slide a flex container for two images */
-  .slide {
-    display: none;      /* hidden by default */
-    flex-direction: row;
-    position: relative;
-    width: 100%;
-  }
-  
-  .slide-img-wrapper {
-    display: flex;
-    width: 100%;
-  }
-  
-  .slide-img {
-    width: 50%;
-    height: 86vh;
-    object-fit: cover;
-  }
-  
-  .slide-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #ffffff;
-    text-align: center;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-    max-width: 80%;
-    z-index: 1000;
-  }
-  
-  .slide-text .small-label {
-    font-family: var(--font-body);
-    font-size: 0.9rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    margin-bottom: 0.5rem;
-    letter-spacing: 1px;
-  }
-  
-  .slide-text h1 {
-    font-family: var(--font-heading);
-    font-size: 2.5rem;
-    line-height: 1.2;
-    margin-bottom: 0.5rem;
-  }
-  
-  .slide-text .subtitle {
-    font-size: 1rem;
-    margin-bottom: 1rem;
-  }
-  
-  /* Pagination dots */
-  .slideshow-dots {
-    position: absolute;
-    bottom: 1rem;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 0.5rem;
-    z-index: 1002;
-  }
-  
-  .dot {
-    display: inline-block;
-    width: 14px;
-    height: 14px;
-    background-color: rgba(0, 0, 0, 0.25);
-    border-radius: 50%;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .dot.active {
-    background-color: rgba(255, 255, 255, 0.85);
-  }
+
+/* ─── SLIDESHOW SECTION ─────────────────────────────────────────────────────── */
+.slideshow-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;           /* full-screen height */
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  display: flex;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+.slide.active {
+  opacity: 1;
+}
+
+.slide-img-wrapper {
+  flex: 1;
+  display: flex;
+  height: 100%;
+}
+.slide-img {
+  width: 50%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.slide-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 80%;
+  text-align: center;
+  color: #F9F0E1;
+}
+.slide-text .small-label {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+}
+.slide-text h1 {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  margin: 0.2rem 0 0.5rem;
+}
+.slide-text .subtitle {
+  font-family: var(--font-body);
+  margin-bottom: 1rem;
+}
+
+/* arrows */
+.slideshow-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.8);
+  border: none;
+  padding: 0.5rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  border-radius: 50%;
+  z-index: 10;
+}
+.slideshow-nav.prev { left: 1rem; }
+.slideshow-nav.next { right: 1rem; }
+
+/* dots */
+.slideshow-dots {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem;
+  z-index: 10;
+}
+.dot {
+  width: 12px; height: 12px;
+  background: rgba(255,255,255,0.6);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.dot.active {
+  background: rgba(255,255,255,0.95);
+}
+
   
   /* ─────────────────────────────────────────────────────────────────────────────
      CATEGORIES SECTION
@@ -483,16 +491,20 @@
     cursor: pointer;
     border-radius: 50%;
     color: var(--color-text);
-    transition: background-color 0.2s ease;
+    transition: background-color 0.2s ease, color 0.2s ease;
   }
   
   .favorite-btn:hover {
     background-color: var(--color-accent);
     color: var(--color-text);
   }
-  
-  .favorite-btn .fa-heart {
-    pointer-events: none;
+  .favorite-btn.active {
+    background-color: var(--color-accent);
+    color: var(--color-text);
+  }
+  .favorite-btn.active i.fa-heart {
+    /* fill the heart when “active” */
+    color: var(--color-text);
   }
   
   /* Product Info (name, price, quantity) */
