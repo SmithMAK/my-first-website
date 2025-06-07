@@ -2,8 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Camping Swag | Home</title>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+  <title>Camping Swag | Cart</title>
 
   <!-- ─── GOOGLE FONTS ────────────────────────────────────────────────────────── -->
   <link
@@ -11,25 +14,30 @@
     rel="stylesheet"
   />
 
-  <!-- ─── FONT AWESOME 6.x FREE (jsDelivr CDN) ────────────────────────────────── -->
-  <!-- This link has been tested and will reliably load all of the “fas”, “far” and “fab” icons: -->
+  <!-- ─── FONT AWESOME 6.x FREE ────────────────────────────────────────────────── -->
   <link
     rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha384-XxX..."
+    crossorigin="anonymous"
   />
 
   <!-- ─── MAIN CSS ─────────────────────────────────────────────────────────────── -->
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- ──────────────────────────────────────────────────────────────────────────
-     STICKY NAVIGATION BAR
-  ────────────────────────────────────────────────────────────────────────── -->
+  <!-- ────────────────────────────────────────────────────────────────────────── -->
+  <!--                           STICKY NAVIGATION BAR                            -->
+  <!-- ────────────────────────────────────────────────────────────────────────── -->
   <header class="site-header">
     <div class="header-inner container">
-      <!-- Logo on the left (clickable to go to index.html) -->
+      <!-- Logo on the left -->
       <a href="index.html" class="logo-link">
-        <img src="assets/logo.jpg" alt="Camping Swag Logo" class="logo-img" />
+        <img
+          src="assets/logo.jpg"
+          alt="Camping Swag Logo"
+          class="logo-img"
+        />
       </a>
 
       <!-- Primary navigation menu -->
@@ -38,7 +46,7 @@
           <li><a href="index.html" class="nav-link">Home</a></li>
           <li class="has-submenu">
             <a href="search.html" class="nav-link">
-              Shop Now <i class="fa-solid fa-chevron-down"></i>
+              Shop Now <i class="fas fa-chevron-down"></i>
             </a>
             <ul class="submenu">
               <li><a href="search.html#tents" class="submenu-link">Tents</a></li>
@@ -54,253 +62,82 @@
       <!-- Icons on the right: search and cart -->
       <div class="nav-icons">
         <a href="search.html" aria-label="Search" class="nav-icon-link">
-          <!-- “fa-solid” prefix ensures a solid search icon -->
-          <i class="fa-solid fa-search"></i>
+          <i class="fas fa-search"></i>
         </a>
         <a href="cart.html" aria-label="Cart" class="nav-icon-link">
-          <i class="fa-solid fa-shopping-cart"></i>
+          <i class="fas fa-shopping-cart"></i>
           <span class="cart-count">0</span>
         </a>
       </div>
     </div>
   </header>
 
-  <style>
-    /* ─────────────────────────────────────────────────────────────────────────────
-       CART PAGE SPECIFIC STYLES
-    ────────────────────────────────────────────────────────────────────────────── */
-    .cart-page {
-      max-width: 1200px;
-      margin: 2rem auto 4rem;
-      padding: 0 1rem;
-    }
-
-    /* “Continue Shopping” button */
-    .btn-continue {
-      display: inline-block;
-      margin-bottom: 2rem;
-      padding: 0.75rem 1.5rem;
+  <!-- ────────────────────────────────────────────────────────────────────────── -->
+  <!--                                YOUR CART                                     -->
+  <!-- ────────────────────────────────────────────────────────────────────────── -->
+  <main class="container" style="margin: 2rem auto; max-width: 1000px;">
+    <button onclick="window.location.href='search.html'" style="
       background-color: var(--color-accent);
       color: var(--color-text);
-      font-family: var(--font-body);
-      font-weight: 600;
-      font-size: 1rem;
       border: none;
+      padding: 0.75rem 1.5rem;
+      font-family: var(--font-body);
+      font-weight: 500;
+      margin-bottom: 2rem;
       border-radius: 4px;
       cursor: pointer;
-      text-decoration: none;
-      transition: background-color 0.2s ease;
-    }
-    .btn-continue:hover {
-      background-color: var(--color-text);
-      color: #ffffff;
-    }
+    ">
+      ← Continue Shopping
+    </button>
 
-    .cart-title {
-      font-family: var(--font-heading);
-      font-size: 2.5rem;
-      margin-bottom: 1.5rem;
-      color: var(--color-text);
-      text-align: center;
-    }
+    <h2 style="font-family: var(--font-heading); font-size: 2rem; margin-bottom: 2rem; color: var(--color-text); text-align: center;">
+      YOUR CART
+    </h2>
 
-    /* Container that will hold either the “empty” state or the list of items */
-    #cart-content {
-      margin-bottom: 2rem;
-    }
-
-    /* Empty‐cart box */
-    .cart-empty {
+    <!-- Empty Cart Placeholder -->
+    <div id="empty-cart" style="
+      display: none;
       background-color: var(--color-accent);
       border-radius: 8px;
-      padding: 4rem 2rem;
+      padding: 3rem;
       text-align: center;
-    }
-    .cart-empty i {
-      font-size: 3rem;
-      margin-bottom: 1rem;
       color: var(--color-text);
-    }
-    .cart-empty p {
       font-family: var(--font-body);
-      font-size: 1.25rem;
-      color: var(--color-text);
-    }
+      font-size: 1.1rem;
+    ">
+      <i class="fas fa-shopping-bag" style="font-size: 3rem; margin-bottom: 1rem;"></i><br />
+      No items in your cart
+    </div>
 
-    /* When there are items in the cart, each item is displayed in .cart-item */
-    .cart-item {
-      display: flex;
-      align-items: center;
-      padding: 1rem 0;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    }
-    .cart-item:last-child {
-      border-bottom: none;
-    }
+    <!-- Cart Items Table -->
+    <div id="cart-items" style="display: none; margin-bottom: 2rem;">
+      <!-- We'll generate line items here via JS -->
+    </div>
 
-    .item-image {
-      flex: 0 0 150px;
-      margin-right: 1.5rem;
-    }
-    .item-image img {
-      width: 100%;
-      border-radius: 4px;
-      object-fit: cover;
-    }
-
-    .item-details {
-      flex: 1;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-
-    .item-name {
-      flex: 1 1 200px;
-      font-family: var(--font-body);
-      font-weight: 600;
-      font-size: 1rem;
-      color: var(--color-text);
-    }
-
-    .item-price {
-      flex: 0 0 120px;
-      font-family: var(--font-body);
-      font-weight: 700;
-      font-size: 1rem;
-      color: var(--color-text);
-      text-align: right;
-    }
-
-    .item-quantity {
-      flex: 0 0 160px;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 0.5rem;
-      margin-left: 1rem;
-    }
-
-    .item-quantity button {
-      background-color: var(--color-accent);
-      color: var(--color-text);
-      border: none;
-      padding: 0.4rem 0.8rem;
-      font-size: 1rem;
-      cursor: pointer;
-      border-radius: 4px;
-      transition: background-color 0.2s ease;
-    }
-    .item-quantity button:hover {
-      background-color: var(--color-text);
-      color: #ffffff;
-    }
-
-    .item-quantity .qty-number {
-      min-width: 24px;
-      text-align: center;
-      font-family: var(--font-body);
-      font-size: 1rem;
-    }
-
-    /* Cart summary / total section */
-    .cart-summary {
-      display: none; /* hidden when cart is empty */
-      justify-content: flex-end;
-      align-items: flex-end;
-      gap: 2rem;
-      flex-wrap: wrap;
-    }
-    .cart-summary .total-label {
-      font-family: var(--font-body);
-      font-size: 1.25rem;
-      font-weight: 500;
-      color: var(--color-text);
-    }
-    .cart-summary .total-amount {
-      font-family: var(--font-heading);
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--color-text);
-      margin-bottom: 0.25rem;
-    }
-    .cart-summary small {
-      display: block;
-      font-family: var(--font-body);
-      font-size: 0.75rem;
-      color: var(--color-text);
-      opacity: 0.8;
-      margin-bottom: 1rem;
-    }
-    .cart-summary .btn-checkout {
-      background-color: var(--color-text);
-      color: #ffffff;
-      font-family: var(--font-body);
-      font-weight: 600;
-      font-size: 1rem;
-      padding: 0.75rem 2rem;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: background-color 0.2s ease;
-    }
-    .cart-summary .btn-checkout:hover {
-      background-color: #4a0705; /* a slightly darker brown */
-    }
-
-    /* Responsive: items stack on small screens */
-    @media (max-width: 768px) {
-      .cart-item {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .item-details {
-        width: 100%;
-        margin-top: 1rem;
-      }
-      .item-price,
-      .item-quantity {
-        flex: 1 1 100%;
-        text-align: left;
-        margin-left: 0;
-        margin-top: 0.5rem;
-      }
-      .cart-summary {
-        justify-content: center;
-      }
-    }
-  </style>
-</head>
-<body>
-
-  <!-- ────────────────────────────────────────────────────────────────────────── -->
-  <!--                             CART PAGE CONTENT                              -->
-  <!-- ────────────────────────────────────────────────────────────────────────── -->
-  <main class="cart-page container">
-    <!-- “Continue Shopping” -->
-    <a href="search.html" class="btn-continue">CONTINUE SHOPPING</a>
-
-    <!-- Page Title -->
-    <h2 class="cart-title">YOUR CART</h2>
-
-    <!-- This div will be populated by JavaScript:
-         either show empty‐cart or list of items. -->
-    <div id="cart-content"></div>
-
-    <!-- Cart summary (total + checkout) -->
-    <div id="cart-summary" class="cart-summary">
-      <div>
-        <span class="total-label">Total</span><br />
-        <span class="total-amount">$0.00</span><br />
-        <small>Shipping Fee will be calculated at the time of purchase</small>
-      </div>
-      <button class="btn-checkout">Checkout</button>
+    <!-- Total & Checkout -->
+    <div id="cart-summary" style="display: none; text-align: right; margin-top: 2rem;">
+      <p style="font-family: var(--font-body); font-size: 1.1rem; margin-bottom: 0.5rem;">Shipping Fee will be calculated at the time of purchase</p>
+      <p style="font-family: var(--font-heading); font-size: 1.75rem; margin-bottom: 1rem; color: var(--color-text);">
+        Total &nbsp; <strong id="grand-total">$0.00</strong>
+      </p>
+      <button onclick="window.location.href='checkout.html'" style="
+        background-color: var(--color-text);
+        color: #FFFFFF;
+        border: none;
+        padding: 0.85rem 2rem;
+        font-family: var(--font-body);
+        font-weight: 700;
+        font-size: 1rem;
+        border-radius: 4px;
+        cursor: pointer;
+      ">
+        Checkout
+      </button>
     </div>
   </main>
 
   <!-- ────────────────────────────────────────────────────────────────────────── -->
   <!--                                  FOOTER                                     -->
-  <!-- (identical to your other pages’ footer)                                   -->
   <!-- ────────────────────────────────────────────────────────────────────────── -->
   <footer class="site-footer">
     <div class="footer-container container">
@@ -327,8 +164,7 @@
       <div class="footer-col about-col">
         <h3>About</h3>
         <p>
-          Proudly owned and run by Australians. Camping Swag Online is dedicated
-          to offering high‐quality products at reasonable prices.
+          Proudly owned and run by Australians. Camping Swag Online is dedicated to offering high‐quality products at reasonable prices.
         </p>
         <a href="about.html" class="learn-more">LEARN MORE</a>
       </div>
@@ -348,10 +184,10 @@
       <div class="footer-col customer-col">
         <h3>Customer Care</h3>
         <ul>
-          <li><a href="about.html">Contact</a></li>
-          <li><a href="about.html">FAQs</a></li>
-          <li><a href="about.html">Terms & Conditions</a></li>
-          <li><a href="about.html">Shipping & Returns</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="faqs.html">FAQs</a></li>
+          <li><a href="terms.html">Terms & Conditions</a></li>
+          <li><a href="shipping.html">Shipping & Returns</a></li>
         </ul>
         <!-- Social Media Icons -->
         <div class="footer-social">
@@ -382,5 +218,170 @@
   <!--                            MAIN JAVASCRIPT FILE                             -->
   <!-- ────────────────────────────────────────────────────────────────────────── -->
   <script src="main.js"></script>
+  <script src="cart.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const cartContainer = document.getElementById('cart-items');
+      const emptyCartDiv  = document.getElementById('empty-cart');
+      const summaryDiv    = document.getElementById('cart-summary');
+      const grandTotalEl  = document.getElementById('grand-total');
+
+      // Build the table of line items
+      function renderCart() {
+        const cart = Cart.getCart();
+        const keys = Object.keys(cart);
+
+        // If no products, show the “empty cart” placeholder
+        if (keys.length === 0) {
+          emptyCartDiv.style.display   = 'block';
+          cartContainer.style.display  = 'none';
+          summaryDiv.style.display     = 'none';
+          return;
+        }
+
+        emptyCartDiv.style.display  = 'none';
+        cartContainer.style.display = 'block';
+        summaryDiv.style.display    = 'block';
+
+        // Clear any previous rows:
+        cartContainer.innerHTML = '';
+
+        // Create a <table> to hold the line items:
+        const table = document.createElement('table');
+        table.style.width = '100%';
+        table.style.borderCollapse = 'collapse';
+        table.style.marginBottom = '2rem';
+
+        // Table Header Row (optional visually):
+        const thead = document.createElement('thead');
+        thead.innerHTML = `
+          <tr style="border-bottom: 1px solid rgba(0,0,0,0.1); font-family: var(--font-body); font-weight: 500; color: var(--color-text);">
+            <th style="text-align: left; padding: 0.5rem;">Product</th>
+            <th style="text-align: center; padding: 0.5rem;">Unit Price</th>
+            <th style="text-align: center; padding: 0.5rem;">Quantity</th>
+            <th style="text-align: right; padding: 0.5rem;">Subtotal</th>
+          </tr>
+        `;
+        table.appendChild(thead);
+
+        // Table Body Rows
+        const tbody = document.createElement('tbody');
+        let grandTotal = 0;
+
+        keys.forEach(pid => {
+          const quantity = cart[pid];
+          const product  = Cart.PRODUCTS[pid];
+          const unitPrice = product.price;
+          const lineTotal = (unitPrice * quantity);
+          grandTotal += lineTotal;
+
+          // Single row:
+          const tr = document.createElement('tr');
+          tr.style.borderBottom = '1px solid rgba(0,0,0,0.05)';
+
+          // Product Image + Name
+          const tdProduct = document.createElement('td');
+          tdProduct.style.padding = '0.75rem';
+          tdProduct.style.display = 'flex';
+          tdProduct.style.alignItems = 'center';
+          tdProduct.innerHTML = `
+            <img
+              src="${product.images[0]}"
+              alt="${product.name}"
+              style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px; margin-right: 1rem;"
+            />
+            <a href="${product.pageUrl}" style="font-family: var(--font-body); font-size: 1rem; color: var(--color-text); text-decoration: none;">
+              ${product.name}
+            </a>
+          `;
+          tr.appendChild(tdProduct);
+
+          // Unit Price
+          const tdPrice = document.createElement('td');
+          tdPrice.style.textAlign = 'center';
+          tdPrice.style.padding = '0.75rem';
+          tdPrice.innerHTML = `<span style="font-family: var(--font-body); color: var(--color-text);">$${unitPrice.toFixed(2)}</span>`;
+          tr.appendChild(tdPrice);
+
+          // Quantity Controls (– ■ +)
+          const tdQty = document.createElement('td');
+          tdQty.style.textAlign = 'center';
+          tdQty.style.padding = '0.75rem';
+          tdQty.innerHTML = `
+            <button class="qty-btn" data-action="decrease" data-id="${pid}" style="background-color: var(--color-accent); color: var(--color-text); border: none; padding: 0.4rem 0.8rem; font-size: 1rem; cursor: pointer; border-radius: 4px; margin-right: 0.5rem;">
+              &minus;
+            </button>
+            <span id="line-qty-${pid}" style="font-family: var(--font-body); font-size: 1rem; min-width: 24px; display: inline-block; text-align: center;">${quantity}</span>
+            <button class="qty-btn" data-action="increase" data-id="${pid}" style="background-color: var(--color-accent); color: var(--color-text); border: none; padding: 0.4rem 0.8rem; font-size: 1rem; cursor: pointer; border-radius: 4px; margin-left: 0.5rem;">
+              &#43;
+            </button>
+          `;
+          tr.appendChild(tdQty);
+
+          // Subtotal
+          const tdSubtotal = document.createElement('td');
+          tdSubtotal.style.textAlign = 'right';
+          tdSubtotal.style.padding = '0.75rem';
+          tdSubtotal.id = `line-subtotal-${pid}`;
+          tdSubtotal.innerHTML = `<span style="font-family: var(--font-body); color: var(--color-text);">$${lineTotal.toFixed(2)}</span>`;
+          tr.appendChild(tdSubtotal);
+
+          tbody.appendChild(tr);
+        });
+
+        table.appendChild(tbody);
+        cartContainer.appendChild(table);
+
+        // Finally, fill in grand total:
+        grandTotalEl.textContent = `$${grandTotal.toFixed(2)}`;
+
+        // Attach quantity‐button listeners
+        document.querySelectorAll('.qty-btn').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const productId = this.dataset.id;
+            const action    = this.dataset.action; // "increase" or "decrease"
+
+            if (action === 'increase') {
+              Cart.addToCart(productId);
+            } else {
+              Cart.removeFromCart(productId);
+            }
+
+            // Update this line’s row: new quantity and new subtotal
+            const cartNow = Cart.getCart();
+            const newQty  = cartNow[productId] || 0;
+            document.getElementById(`line-qty-${productId}`).textContent = newQty;
+
+            const product = Cart.PRODUCTS[productId];
+            const newSub  = (product.price * newQty);
+            document.getElementById(`line-subtotal-${productId}`).textContent = `$${newSub.toFixed(2)}`;
+
+            // If quantity is now 0, remove this row entirely and re‐render if empty
+            if (newQty === 0) {
+              // Remove from table
+              const row = this.closest('tr');
+              row.parentNode.removeChild(row);
+
+              // If no more items, show empty state
+              if (Object.keys(cartNow).length === 0) {
+                renderCart();
+                return;
+              }
+            }
+
+            // Recompute grand total
+            let total = 0;
+            Object.entries(cartNow).forEach(([pid, qty]) => {
+              total += Cart.PRODUCTS[pid].price * qty;
+            });
+            grandTotalEl.textContent = `$${total.toFixed(2)}`;
+          });
+        });
+      }
+
+      // Initially call renderCart() to decide empty vs. line items:
+      renderCart();
+    });
+  </script>
 </body>
 </html>
