@@ -1,1 +1,244 @@
-<link rel="stylesheet" href="css/fonts.css">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Camping Swag | Checkout</title>
+
+  <!-- GOOGLE FONTS -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Libre+Caslon+Text:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- FONT AWESOME -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"
+  />
+
+  <!-- MAIN CSS -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- ───────────────────────────────────────────────────────────────
+       HEADER
+  ─────────────────────────────────────────────────────────────── -->
+  <header class="site-header">
+    <div class="header-inner container">
+      <a href="index.html" class="logo-link">
+        <img src="assets/logo.jpg" alt="Camping Swag Logo" class="logo-img"/>
+      </a>
+      <nav class="primary-nav">
+        <ul>
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li class="has-submenu">
+            <a href="search.html" class="nav-link">
+              Shop Now <i class="fa-solid fa-chevron-down"></i>
+            </a>
+            <ul class="submenu">
+              <li><a href="search.html#tents" class="submenu-link">Tents</a></li>
+              <li><a href="search.html#swags" class="submenu-link">Swags</a></li>
+              <li><a href="search.html#packs" class="submenu-link">Packs</a></li>
+            </ul>
+          </li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="blog.html" class="nav-link">Blog</a></li>
+        </ul>
+      </nav>
+      <div class="nav-icons">
+        <a href="search.html" class="nav-icon-link" aria-label="Search">
+          <i class="fa-solid fa-search"></i>
+        </a>
+        <a href="cart.html" class="nav-icon-link" aria-label="Cart">
+          <i class="fa-solid fa-shopping-cart"></i>
+          <span class="cart-count">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ───────────────────────────────────────────────────────────────
+       CHECKOUT FORM
+  ─────────────────────────────────────────────────────────────── -->
+  <main class="container" style="padding: 2rem 0;">
+    <h1 style="text-align:center; margin-bottom:1.5rem; font-family:var(--font-heading);">
+      Checkout
+    </h1>
+
+    <!-- Express Payment Buttons -->
+    <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-bottom:1rem;">
+      <button class="btn-shop" style="background:#4B4AFF; color:white;">Shop Pay</button>
+      <button class="btn-shop" style="background:#000; color:white;">G Pay</button>
+      <button class="btn-shop" style="background:#FFD43B; color:#000;">PayPal</button>
+    </div>
+    <p style="text-align:center; color:rgba(0,0,0,0.6); margin-bottom:1rem;">— OR —</p>
+
+    <form class="checkout-form">
+      <!-- CONTACT -->
+      <fieldset style="border:none; margin-bottom:2rem;">
+        <legend style="font-weight:500; margin-bottom:.5rem;">Contact</legend>
+        <input type="email" placeholder="Email or phone number" required
+               style="width:100%; padding:.75rem; border:1px solid rgba(0,0,0,0.2); border-radius:4px;"/>
+        <label style="display:flex; align-items:center; margin-top:.5rem;">
+          <input type="checkbox" checked style="margin-right:.5rem;"/>
+          Email me with news and offers
+        </label>
+      </fieldset>
+
+      <!-- DELIVERY -->
+      <fieldset style="border:none; margin-bottom:2rem;">
+        <legend style="font-weight:500; margin-bottom:.5rem;">Delivery</legend>
+        <select style="width:100%; padding:.75rem; border:1px solid rgba(0,0,0,0.3); border-radius:4px; margin-bottom:1rem;">
+          <option>Country/region: Australia</option>
+          <!-- …other countries… -->
+        </select>
+        <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:1rem;">
+          <input type="text" placeholder="First name (optional)" style="flex:1; padding:.75rem; border:1px solid rgba(0,0,0,0.2); border-radius:4px;"/>
+          <input type="text" placeholder="Last name (optional)" value="Smith" style="flex:1; padding:.75rem; border:1px solid rgba(0,0,0,0.2); border-radius:4px;"/>
+        </div>
+        <input type="text" placeholder="Address" value="265 Pigdon Street"
+               style="width:100%; padding:.75rem; border:1px solid rgba(0,0,0,0.2); border-radius:4px; margin-bottom:1rem;"/>
+        <input type="text" placeholder="Apartment, suite, etc. (optional)"
+               style="width:100%; padding:.75rem; border:1px solid rgba(0,0,0,0.2); border-radius:4px; margin-bottom:1rem;"/>
+        <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+          <input type="text" placeholder="City" value="Melbourne"
+                 style="flex:2; padding:.75rem; border:1px solid rgba(0,0,0,0.2); border-radius:4px;"/>
+          <select style="flex:2; padding:.75rem; border:1px solid rgba(0,0,0,0.2); border-radius:4px;">
+            <option>Suburb: Princes Hill</option>
+            <!-- …other suburbs… -->
+          </select>
+          <input type="text" placeholder="Postal code" value="3054"
+                 style="flex:1; padding:.75rem; border:1px solid rgba(0,0,0,0.2); border-radius:4px;"/>
+        </div>
+
+        <!-- SHIPPING METHOD -->
+        <fieldset style="border:1px solid rgba(0,0,0,0.1); border-radius:4px; margin-top:1.5rem; padding:1rem;">
+          <legend style="font-weight:500;">Shipping method</legend>
+          <label style="display:flex; align-items:center; justify-content:space-between; margin-bottom:.5rem; padding:.5rem; border:1px solid #000; border-radius:4px;">
+            <span>
+              <input type="radio" name="ship" checked style="margin-right:.5rem;"/>
+              AusPost (3–5 business days)
+            </span>
+            $10.00
+          </label>
+          <label style="display:flex; align-items:center; justify-content:space-between; padding:.5rem; border:1px solid rgba(0,0,0,0.2); border-radius:4px;">
+            <span>
+              <input type="radio" name="ship" style="margin-right:.5rem;"/>
+              AusPost Express (2–3 business days)
+            </span>
+            $20.00
+          </label>
+        </fieldset>
+      </fieldset>
+
+      <!-- PAYMENT -->
+      <fieldset style="border:none; margin-bottom:2rem;">
+        <legend style="font-weight:500; margin-bottom:.5rem;">Payment</legend>
+        <p style="font-size:.9rem; color:rgba(0,0,0,0.6); margin-bottom:1rem;">
+          All transactions are secure and encrypted
+        </p>
+
+        <!-- Credit Card -->
+        <fieldset style="border:1px solid #77A4FF; border-radius:4px; padding:1rem; margin-bottom:1rem;">
+          <label style="display:flex; align-items:center; justify-content:space-between; font-weight:500;">
+            Credit or debit card
+            <span>
+              <i class="fa-brands fa-cc-visa"></i>
+              <i class="fa-brands fa-cc-mastercard"></i>
+              <i class="fa-brands fa-cc-amex"></i>
+            </span>
+          </label>
+          <input type="text" placeholder="Card number"
+                 style="width:100%; padding:.75rem; border:1px solid rgba(0,0,0,0.2); border-radius:4px; margin:1rem 0;"/>
+          <div style="display:flex; gap:1rem; margin-bottom:1rem;">
+            <input type="text" placeholder="Expiration date (MM/YY)"
+                   style="flex:2; padding:.75rem; border:1px solid rgba(0,0,0,0.2); border-radius:4px;"/>
+            <input type="text" placeholder="Security code"
+                   style="flex:1; padding:.75rem; border:1px solid rgba(0,0,0,0.2); border-radius:4px;"/>
+          </div>
+          <input type="text" placeholder="Name on card"
+                 style="width:100%; padding:.75rem; border:1px solid rgba(0,0,0,0.2); border-radius:4px; margin-bottom:1rem;"/>
+          <label style="display:flex; align-items:center;">
+            <input type="checkbox" checked style="margin-right:.5rem;"/>
+            Use shipping address as billing address
+          </label>
+        </fieldset>
+
+        <!-- Alternative Payment Methods -->
+        <label style="display:flex; align-items:center; margin-bottom:.5rem;">
+          <input type="radio" name="altpay" style="margin-right:.5rem;"/>
+          PayPal <i class="fa-brands fa-paypal" style="margin-left:.5rem;"></i>
+        </label>
+        <label style="display:flex; align-items:center; margin-bottom:.5rem;">
+          <input type="radio" name="altpay" style="margin-right:.5rem;"/>
+          Apple Pay <i class="fa-brands fa-apple" style="margin-left:.5rem;"></i>
+        </label>
+        <label style="display:flex; align-items:center;">
+          <input type="radio" name="altpay" style="margin-right:.5rem;"/>
+          Amazon Pay <i class="fa-brands fa-amazon-pay" style="margin-left:.5rem;"></i>
+        </label>
+
+        <label style="display:flex; align-items:center; margin-top:1rem;">
+          <input type="checkbox" style="margin-right:.5rem;"/>
+          Save my information for a faster checkout
+        </label>
+      </fieldset>
+
+      <!-- PAY NOW -->
+      <div style="text-align:center; margin-top:2rem;">
+        <a href="confirmation.html" class="btn-shop" style="padding:1rem 3rem;">
+          Pay Now
+        </a>
+      </div>
+    </form>
+  </main>
+
+  <!-- ───────────────────────────────────────────────────────────────
+       FOOTER
+  ─────────────────────────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <div class="footer-container container">
+      <div class="footer-col subscribe-col">
+        <h3>Subscribe to get 10% OFF</h3>
+        <form class="subscribe-form">
+          <input type="email" placeholder="Enter your Email" required />
+          <button type="submit">Subscribe</button>
+        </form>
+        <p class="disclaimer">By subscribing you agree to the Term of Use & Privacy Policy</p>
+        <p>&copy; 2025, CampingSwag</p>
+      </div>
+      <div class="footer-col about-col">
+        <h3>About</h3>
+        <p>…</p>
+        <a href="about.html" class="learn-more">LEARN MORE</a>
+      </div>
+      <div class="footer-col shop-col">
+        <h3>Shop</h3>
+        <ul>
+          <li><a href="search.html">Shop All</a></li>
+          <li><a href="search.html#bestseller">Best Seller</a></li>
+          <li><a href="search.html#newcoming">New Coming</a></li>
+          <li><a href="search.html#onsale">On Sale</a></li>
+        </ul>
+      </div>
+      <div class="footer-col customer-col">
+        <h3>Customer Care</h3>
+        <ul>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="faqs.html">FAQs</a></li>
+          <li><a href="terms.html">Terms & Conditions</a></li>
+          <li><a href="shipping.html">Shipping & Returns</a></li>
+        </ul>
+        <div class="footer-social">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-tiktok"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

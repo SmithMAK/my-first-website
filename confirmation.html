@@ -1,1 +1,219 @@
-<link rel="stylesheet" href="css/fonts.css">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Camping Swag | Confirmation</title>
+
+  <!-- ─── GOOGLE FONTS ────────────────────────────────────────────────────────── -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Libre+Caslon+Text:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- ─── FONT AWESOME FREE ────────────────────────────────────────────────── -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"
+  />
+
+  <!-- ─── MAIN CSS ─────────────────────────────────────────────────────────────── -->
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <!-- ───────────────────────────────────────────────────────────────
+       HEADER (same as other pages)
+  ─────────────────────────────────────────────────────────────── -->
+  <header class="site-header">
+    <div class="header-inner container">
+      <a href="index.html" class="logo-link">
+        <img src="assets/logo.jpg" alt="Camping Swag Logo" class="logo-img"/>
+      </a>
+      <nav class="primary-nav">
+        <ul>
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li class="has-submenu">
+            <a href="search.html" class="nav-link">
+              Shop Now <i class="fa-solid fa-chevron-down"></i>
+            </a>
+            <ul class="submenu">
+              <li><a href="search.html#tents" class="submenu-link">Tents</a></li>
+              <li><a href="search.html#swags" class="submenu-link">Swags</a></li>
+              <li><a href="search.html#packs" class="submenu-link">Packs</a></li>
+            </ul>
+          </li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="blog.html" class="nav-link">Blog</a></li>
+        </ul>
+      </nav>
+      <div class="nav-icons">
+        <a href="search.html" class="nav-icon-link" aria-label="Search">
+          <i class="fa-solid fa-search"></i>
+        </a>
+        <a href="cart.html" class="nav-icon-link" aria-label="Cart">
+          <i class="fa-solid fa-shopping-cart"></i>
+          <span class="cart-count">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ───────────────────────────────────────────────────────────────
+       CONFIRMATION CONTENT
+  ─────────────────────────────────────────────────────────────── -->
+  <main class="container" style="padding: 2rem 0;">
+    <!-- Success Message -->
+    <div style="text-align:center; margin-bottom:2rem;">
+      <i class="fa-solid fa-circle-check" style="font-size:2.5rem; color:var(--color-accent);"></i>
+      <p style="margin-top:0.5rem; font-size:0.9rem; color:rgba(0,0,0,0.6);">
+        Confirmation <strong>#DQFDHG5E0</strong>
+      </p>
+      <h2 style="font-family:var(--font-heading); margin-top:.5rem;">
+        Thank you, Maddie!
+      </h2>
+    </div>
+
+    <!-- “Your order is confirmed” box -->
+    <div style="border:1px solid rgba(0,0,0,0.2); border-radius:4px; overflow:hidden; margin-bottom:1rem;">
+      <div style="padding:1rem;">
+        <h3 style="font-weight:500; margin-bottom:.5rem;">Your order is confirmed</h3>
+        <p style="margin-bottom:1rem; color:rgba(0,0,0,0.7);">
+          You’ll get a confirmation email with your order number soon.
+        </p>
+        <a href="#" class="btn-shop" style="display:inline-block; margin-bottom:1rem;">
+          Track my order →
+        </a>
+      </div>
+      <div style="background-color:var(--color-accent); padding:0.75rem 1rem;">
+        <label style="display:flex; align-items:center; gap:.5rem; font-size:0.9rem;">
+          <input type="checkbox"/>
+          Email me with news and offers
+        </label>
+      </div>
+    </div>
+
+    <!-- Order details box -->
+    <div style="border:1px solid rgba(0,0,0,0.2); border-radius:4px; overflow:hidden; margin-bottom:2rem;">
+      <div style="padding:1rem; display:grid; grid-template-columns:1fr 1fr; gap:1rem; font-size:0.9rem;">
+        <!-- Left column -->
+        <div>
+          <p style="font-weight:500; margin-bottom:.25rem;">Contact information</p>
+          <p>Maddie Smith</p>
+          <hr style="margin:1rem 0; border:none; border-top:1px solid rgba(0,0,0,0.1);"/>
+          <p style="font-weight:500; margin-bottom:.25rem;">Shipping address</p>
+          <p>
+            Maddie Smith<br/>
+            265 Pigdon St<br/>
+            Princes Hill, VIC, 3054<br/>
+            Australia
+          </p>
+          <hr style="margin:1rem 0; border:none; border-top:1px solid rgba(0,0,0,0.1);"/>
+          <p style="font-weight:500; margin-bottom:.25rem;">Shipping method</p>
+          <p>AusPost</p>
+        </div>
+        <!-- Right column -->
+        <div>
+          <p style="font-weight:500; margin-bottom:.25rem;">Payment method</p>
+          <p>
+            <i class="fa-brands fa-cc-visa" style="margin-right:.5rem;"></i>
+            Visa •••• 1234
+          </p>
+          <hr style="margin:1rem 0; border:none; border-top:1px solid rgba(0,0,0,0.1);"/>
+          <p style="font-weight:500; margin-bottom:.25rem;">Billing address</p>
+          <p>
+            Maddie Smith<br/>
+            265 Pigdon St<br/>
+            Princes Hill, VIC, 3054<br/>
+            Australia
+          </p>
+        </div>
+      </div>
+      <div style="background-color:var(--color-accent); padding:0.75rem 1rem;">
+        <label style="display:flex; align-items:center; gap:.5rem; font-size:0.9rem;">
+          <input type="checkbox"/>
+          Save my information for a faster checkout
+        </label>
+      </div>
+    </div>
+
+    <!-- Help link + Continue Shopping -->
+    <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem;">
+      <p style="font-size:0.9rem;">
+        Need help? <a href="contact.html">Contact us</a>
+      </p>
+      <a href="search.html" class="btn-shop" style="padding:1rem 2rem;">
+        Continue Shopping
+      </a>
+    </div>
+
+    <!-- legal links -->
+    <nav style="text-align:center; margin-top:2rem; font-size:0.85rem; color:rgba(0,0,0,0.6);">
+      <a href="returnpolicy.html">Return policy</a>
+      <span style="margin:0 .5rem;">|</span>
+      <a href="privacy.html">Privacy policy</a>
+      <span style="margin:0 .5rem;">|</span>
+      <a href="terms.html">Terms of service</a>
+    </nav>
+  </main>
+
+  <!-- ───────────────────────────────────────────────────────────────
+       FOOTER (same as other pages)
+  ─────────────────────────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <div class="footer-container container">
+      <div class="footer-col subscribe-col">
+        <h3>Subscribe to get 10% OFF</h3>
+        <form class="subscribe-form">
+          <input type="email" placeholder="Enter your Email" required />
+          <button type="submit">Subscribe</button>
+        </form>
+        <p class="disclaimer">
+          By subscribing you agree to the Term of Use &amp; Privacy Policy
+        </p>
+        <p>&copy; 2025, CampingSwag</p>
+      </div>
+
+      <div class="footer-col about-col">
+        <h3>About</h3>
+        <p>
+          Proudly owned and run by Australians. Camping Swag Online is dedicated to offering
+          high‐quality products at reasonable prices.
+        </p>
+        <a href="about.html" class="learn-more">LEARN MORE</a>
+      </div>
+
+      <div class="footer-col shop-col">
+        <h3>Shop</h3>
+        <ul>
+          <li><a href="search.html">Shop All</a></li>
+          <li><a href="search.html#bestseller">Best Seller</a></li>
+          <li><a href="search.html#newcoming">New Coming</a></li>
+          <li><a href="search.html#onsale">On Sale</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col customer-col">
+        <h3>Customer Care</h3>
+        <ul>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="faqs.html">FAQs</a></li>
+          <li><a href="terms.html">Terms &amp; Conditions</a></li>
+          <li><a href="shipping.html">Shipping &amp; Returns</a></li>
+        </ul>
+        <div class="footer-social">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-tiktok"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ───────────────────────────────────────────────────────────────
+       SCRIPTS (if needed)
+  ─────────────────────────────────────────────────────────────── -->
+  <script src="main.js"></script>
+</body>
+</html>
