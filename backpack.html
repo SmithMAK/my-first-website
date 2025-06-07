@@ -24,23 +24,36 @@
 
   <!-- ─── MAIN CSS ─────────────────────────────────────────────────────────────── -->
   <link rel="stylesheet" href="style.css" />
+<style>
+    .product-detail-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+    @media (max-width: 768px) {
+      .product-detail-wrapper {
+        flex-direction: column;
+      }
+      /* make the add-to-cart / qty controls full-width on mobile */
+      #add-to-cart,
+      #quantity-container {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 <body>
-  <!-- ────────────────────────────────────────────────────────────────────────── -->
-  <!--                           STICKY NAVIGATION BAR                            -->
-  <!-- ────────────────────────────────────────────────────────────────────────── -->
+  <!-- ──────────────────────────────────────────────────────────────────────────
+     STICKY NAVIGATION BAR
+  ────────────────────────────────────────────────────────────────────────── -->
   <header class="site-header">
     <div class="header-inner container">
-      <!-- Logo on the left -->
+      <!-- Logo -->
       <a href="index.html" class="logo-link">
-        <img
-          src="assets/logo.jpg"
-          alt="Camping Swag Logo"
-          class="logo-img"
-        />
+        <img src="assets/logo.jpg" alt="Camping Swag Logo" class="logo-img" />
       </a>
 
-      <!-- Primary navigation menu -->
+      <!-- Primary navigation -->
       <nav class="primary-nav">
         <ul>
           <li><a href="index.html" class="nav-link">Home</a></li>
@@ -59,7 +72,7 @@
         </ul>
       </nav>
 
-      <!-- Icons on the right: search and cart -->
+      <!-- Search & cart icons -->
       <div class="nav-icons">
         <a href="search.html" aria-label="Search" class="nav-icon-link">
           <i class="fas fa-search"></i>
@@ -72,53 +85,70 @@
     </div>
   </header>
 
-  <!-- ────────────────────────────────────────────────────────────────────────── -->
-  <!--                                PRODUCT DETAIL                               -->
-  <!-- ────────────────────────────────────────────────────────────────────────── -->
+  <!-- ──────────────────────────────────────────────────────────────────────────
+     PRODUCT DETAIL
+  ────────────────────────────────────────────────────────────────────────── -->
   <main class="container" style="margin: 2rem auto; max-width: 1000px;">
-    <div style="display: flex; flex-wrap: wrap; gap: 2rem;">
-      <!-- LEFT: Square Grid of Thumbnails -->
+    <div class="product-detail-wrapper">
+      <!-- LEFT: Thumbnails grid -->
       <div style="flex: 1 1 350px; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-        <img src="assets/backpack1.jpg" alt="Backpack view 1" style="width:100%; border-radius: 8px; object-fit: cover; cursor: pointer;" class="thumb-img" data-product="backpack" data-index="0" />
-        <img src="assets/backpack2.jpg" alt="Backpack view 2" style="width:100%; border-radius: 8px; object-fit: cover; cursor: pointer;" class="thumb-img" data-product="backpack" data-index="1" />
-        <img src="assets/backpack3.jpg" alt="Backpack view 3" style="width:100%; border-radius: 8px; object-fit: cover; cursor: pointer;" class="thumb-img" data-product="backpack" data-index="2" />
-        <img src="assets/backpack4.jpg" alt="Backpack view 4" style="width:100%; border-radius: 8px; object-fit: cover; cursor: pointer;" class="thumb-img" data-product="backpack" data-index="3" />
+        <img src="assets/backpack1.jpg" alt="Backpack view 1" class="thumb-img"
+             style="width:100%; border-radius:8px; object-fit:cover; cursor:pointer;"
+             data-product="backpack" data-index="0" />
+        <img src="assets/backpack2.jpg" alt="Backpack view 2" class="thumb-img"
+             style="width:100%; border-radius:8px; object-fit:cover; cursor:pointer;"
+             data-product="backpack" data-index="1" />
+        <img src="assets/backpack3.jpg" alt="Backpack view 3" class="thumb-img"
+             style="width:100%; border-radius:8px; object-fit:cover; cursor:pointer;"
+             data-product="backpack" data-index="2" />
+        <img src="assets/backpack4.jpg" alt="Backpack view 4" class="thumb-img"
+             style="width:100%; border-radius:8px; object-fit:cover; cursor:pointer;"
+             data-product="backpack" data-index="3" />
       </div>
 
-      <!-- RIGHT: Product Info, Price, Add-to-Cart, Accordion, Reviews -->
+      <!-- RIGHT: Info, add-to-cart, accordion -->
       <div style="flex: 1 1 500px;">
-        <h1 style="font-family: var(--font-heading); font-size: 2rem; margin-bottom: 0.5rem; color: var(--color-text);">
+        <h1 style="font-family: var(--font-heading); font-size:2rem; margin-bottom:0.5rem; color:var(--color-text);">
           35 L Backpack
         </h1>
-        <p style="font-family: var(--font-body); font-size: 1.25rem; font-weight: 700; margin-bottom: 1.5rem; color: var(--color-text);">
+        <p style="font-family: var(--font-body); font-size:1.25rem; font-weight:700; margin-bottom:1.5rem; color:var(--color-text);">
           $49.95
         </p>
 
-        <!-- ADD TO CART / then quantity controls once added -->
-        <div id="add-cart-container" style="margin-bottom: 1.5rem;">
-          <button id="add-to-cart" data-id="backpack" class="btn-shop" style="font-size: 1rem; padding: 0.75rem 1.75rem;">
+        <!-- Add to Cart / Qty Controls -->
+        <div id="add-cart-container" style="margin-bottom:1.5rem;">
+          <button id="add-to-cart" data-id="backpack" class="btn-shop"
+                  style="font-size:1rem; padding:0.75rem 1.75rem;">
             Add to Cart
           </button>
         </div>
-        <div id="quantity-container" style="display: none; margin-bottom: 1.5rem; align-items: center; gap: 0.75rem; display: flex;">
-          <button class="qty-btn" data-action="decrease" data-id="backpack" style="background-color: var(--color-accent); color: var(--color-text); border: none; padding: 0.4rem 0.8rem; font-size: 1rem; cursor: pointer; border-radius: 4px;">
+        <div id="quantity-container" style="display:none; margin-bottom:1.5rem; align-items:center; gap:0.75rem; display:flex;">
+          <button class="qty-btn" data-action="decrease" data-id="backpack"
+                  style="background-color:var(--color-accent); color:var(--color-text); border:none; padding:0.4rem 0.8rem; font-size:1rem; cursor:pointer; border-radius:4px;">
             &minus;
           </button>
-          <span id="qty-number-backpack" style="font-family: var(--font-body); font-size: 1.1rem; min-width: 24px; text-align: center;">0</span>
-          <button class="qty-btn" data-action="increase" data-id="backpack" style="background-color: var(--color-accent); color: var(--color-text); border: none; padding: 0.4rem 0.8rem; font-size: 1rem; cursor: pointer; border-radius: 4px;">
+          <span id="qty-number-backpack"
+                style="font-family:var(--font-body); font-size:1.1rem; min-width:24px; text-align:center;">
+            0
+          </span>
+          <button class="qty-btn" data-action="increase" data-id="backpack"
+                  style="background-color:var(--color-accent); color:var(--color-text); border:none; padding:0.4rem 0.8rem; font-size:1rem; cursor:pointer; border-radius:4px;">
             &#43;
           </button>
         </div>
 
-        <!-- ACCORDION: Materials & Care, Sizing, Shipping & Returns -->
-        <div class="accordion" style="margin-bottom: 2rem;">
-          <div class="accordion-item" style="margin-bottom: 1rem;">
-            <button class="accordion-header" style="width: 100%; background: none; border: none; text-align: left; font-family: var(--font-body); font-weight: 500; font-size: 1.1rem; color: var(--color-text); cursor: pointer; padding: 0.5rem 0;">
+        <!-- Accordion -->
+        <div class="accordion" style="margin-bottom:2rem;">
+          <div class="accordion-item" style="margin-bottom:1rem;">
+            <button class="accordion-header" style="width:100%; background:none; border:none; text-align:left;
+                   font-family:var(--font-body); font-weight:500; font-size:1.1rem; color:var(--color-text);
+                   cursor:pointer; padding:0.5rem 0;">
               Materials &amp; Care
-              <i class="fas fa-chevron-down" style="float: right; transition: transform 0.2s ease;"></i>
+              <i class="fas fa-chevron-down" style="float:right; transition:transform 0.2s ease;"></i>
             </button>
-            <div class="accordion-content" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease; font-family: var(--font-body); font-size: 0.95rem; color: var(--color-text);">
-              <p style="margin-top: 0.5rem; line-height: 1.5;">
+            <div class="accordion-content" style="max-height:0; overflow:hidden;
+                   transition:max-height 0.3s ease; font-family:var(--font-body); font-size:0.95rem; color:var(--color-text);">
+              <p style="margin-top:0.5rem; line-height:1.5;">
                 ● Outer: Ripstop Nylon with water‐resistant coating<br>
                 ● Straps: Padded EVA foam with adjustable sternum strap<br>
                 ● Zippers: Water‐resistant YKK<br>
@@ -127,28 +157,34 @@
             </div>
           </div>
 
-          <div class="accordion-item" style="margin-bottom: 1rem;">
-            <button class="accordion-header" style="width: 100%; background: none; border: none; text-align: left; font-family: var(--font-body); font-weight: 500; font-size: 1.1rem; color: var(--color-text); cursor: pointer; padding: 0.5rem 0;">
+          <div class="accordion-item" style="margin-bottom:1rem;">
+            <button class="accordion-header" style="width:100%; background:none; border:none; text-align:left;
+                   font-family:var(--font-body); font-weight:500; font-size:1.1rem; color:var(--color-text);
+                   cursor:pointer; padding:0.5rem 0;">
               Sizing
-              <i class="fas fa-chevron-down" style="float: right; transition: transform 0.2s ease;"></i>
+              <i class="fas fa-chevron-down" style="float:right; transition:transform 0.2s ease;"></i>
             </button>
-            <div class="accordion-content" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease; font-family: var(--font-body); font-size: 0.95rem; color: var(--color-text);">
-              <p style="margin-top: 0.5rem; line-height: 1.5;">
+            <div class="accordion-content" style="max-height:0; overflow:hidden;
+                   transition:max-height 0.3s ease; font-family:var(--font-body); font-size:0.95rem; color:var(--color-text);">
+              <p style="margin-top:0.5rem; line-height:1.5;">
                 ● Volume: 35 liters<br>
-                ● Dimensions: 20″ H × 12″ W × 8″ D (51 × 30 × 20 cm)<br>
-                ● Weight: 2 lbs (0.9 kg)<br>
-                ● Fit recommended for torso length 16″– 20″.
+                ● Dimensions: 20″ H × 12″ W × 8″ D (51 × 30 × 20 cm)<br>
+                ● Weight: 2 lbs (0.9 kg)<br>
+                ● Fit recommended for torso length 16″–20″.
               </p>
             </div>
           </div>
 
           <div class="accordion-item">
-            <button class="accordion-header" style="width: 100%; background: none; border: none; text-align: left; font-family: var(--font-body); font-weight: 500; font-size: 1.1rem; color: var(--color-text); cursor: pointer; padding: 0.5rem 0;">
+            <button class="accordion-header" style="width:100%; background:none; border:none; text-align:left;
+                   font-family:var(--font-body); font-weight:500; font-size:1.1rem; color:var(--color-text);
+                   cursor:pointer; padding:0.5rem 0;">
               Shipping &amp; Returns
-              <i class="fas fa-chevron-down" style="float: right; transition: transform 0.2s ease;"></i>
+              <i class="fas fa-chevron-down" style="float:right; transition:transform 0.2s ease;"></i>
             </button>
-            <div class="accordion-content" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease; font-family: var(--font-body); font-size: 0.95rem; color: var(--color-text);">
-              <p style="margin-top: 0.5rem; line-height: 1.5;">
+            <div class="accordion-content" style="max-height:0; overflow:hidden;
+                   transition:max-height 0.3s ease; font-family:var(--font-body); font-size:0.95rem; color:var(--color-text);">
+              <p style="margin-top:0.5rem; line-height:1.5;">
                 ● Free shipping $75+ within AU (3–5 business days).<br>
                 ● $10 flat shipping under $75 (4–7 business days).<br>
                 ● Returns within 30 days. Product must be unworn and in original packaging. Customer pays return shipping.
@@ -156,61 +192,58 @@
             </div>
           </div>
         </div>
-
-        <!-- REVIEWS SECTION -->
-        <section class="reviews" style="margin-bottom: 2rem;">
-          <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 1rem; color: var(--color-text);">Customer Reviews</h2>
-
-          <!-- Review #1 -->
-          <div class="review-item" style="margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(0,0,0,0.1);">
-            <p style="font-family: var(--font-body); font-size: 0.9rem; color: var(--color-text); margin-bottom: 0.25rem;">
-              <strong>Jordan K.</strong> <span style="color: #FFD700;">★★★★★</span>
-            </p>
-            <p style="font-family: var(--font-body); font-size: 0.95rem; color: var(--color-text); line-height: 1.4;">
-              “Excellent storage capacity, comfortable straps, and perfect for a day hike. Lightweight!”  
-            </p>
-          </div>
-
-          <!-- Review #2 -->
-          <div class="review-item" style="margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(0,0,0,0.1);">
-            <p style="font-family: var(--font-body); font-size: 0.9rem; color: var(--color-text); margin-bottom: 0.25rem;">
-              <strong>Amelia P.</strong> <span style="color: #FFD700;">★★★★☆</span>
-            </p>
-            <p style="font-family: var(--font-body); font-size: 0.95rem; color: var(--color-text); line-height: 1.4;">
-              “Great pockets for water bottle &amp; camera. Lost one star because the hip belt could be a bit sturdier.”  
-            </p>
-          </div>
-
-          <!-- Review #3 -->
-          <div class="review-item">
-            <p style="font-family: var(--font-body); font-size: 0.9rem; color: var(--color-text); margin-bottom: 0.25rem;">
-              <strong>Ryan T.</strong> <span style="color: #FFD700;">★★★★★</span>
-            </p>
-            <p style="font-family: var(--font-body); font-size: 0.95rem; color: var(--color-text); line-height: 1.4;">
-              “A steal at this price. The zippers are solid and all my trekking gear fits perfectly.”  
-            </p>
-          </div>
-        </section>
       </div>
     </div>
+
+    <!-- REVIEWS (moved below) -->
+    <section class="reviews" style="margin-bottom:2rem;">
+      <h2 style="font-family:var(--font-heading); font-size:1.5rem; margin-bottom:1rem; color:var(--color-text);">
+        Customer Reviews
+      </h2>
+
+      <!-- Review #1 -->
+      <div class="review-item" style="margin-bottom:1.5rem; padding-bottom:1rem; border-bottom:1px solid rgba(0,0,0,0.1);">
+        <p style="font-family:var(--font-body); font-size:0.9rem; color:var(--color-text); margin-bottom:0.25rem;">
+          <strong>Jordan K.</strong> <span style="color:#FFD700;">★★★★★</span>
+        </p>
+        <p style="font-family:var(--font-body); font-size:0.95rem; color:var(--color-text); line-height:1.4;">
+          “Excellent storage capacity, comfortable straps, and perfect for a day hike. Lightweight!”
+        </p>
+      </div>
+
+      <!-- Review #2 -->
+      <div class="review-item" style="margin-bottom:1.5rem; padding-bottom:1rem; border-bottom:1px solid rgba(0,0,0,0.1);">
+        <p style="font-family:var(--font-body); font-size:0.9rem; color:var(--color-text); margin-bottom:0.25rem;">
+          <strong>Amelia P.</strong> <span style="color:#FFD700;">★★★★☆</span>
+        </p>
+        <p style="font-family:var(--font-body); font-size:0.95rem; color:var(--color-text); line-height:1.4;">
+          “Great pockets for water bottle &amp; camera. Lost one star because the hip belt could be a bit sturdier.”
+        </p>
+      </div>
+
+      <!-- Review #3 -->
+      <div class="review-item">
+        <p style="font-family:var(--font-body); font-size:0.9rem; color:var(--color-text); margin-bottom:0.25rem;">
+          <strong>Ryan T.</strong> <span style="color:#FFD700;">★★★★★</span>
+        </p>
+        <p style="font-family:var(--font-body); font-size:0.95rem; color:var(--color-text); line-height:1.4;">
+          “A steal at this price. The zippers are solid and all my trekking gear fits perfectly.”
+        </p>
+      </div>
+    </section>
   </main>
 
-  <!-- ────────────────────────────────────────────────────────────────────────── -->
-  <!--                                  FOOTER                                     -->
-  <!-- ────────────────────────────────────────────────────────────────────────── -->
+  <!-- ──────────────────────────────────────────────────────────────────────────
+     FOOTER
+  ────────────────────────────────────────────────────────────────────────── -->
   <footer class="site-footer">
     <div class="footer-container container">
-      <!-- Subscribe Column -->
+      <!-- Subscribe -->
       <div class="footer-col subscribe-col">
         <h3>Subscribe to get 10% OFF</h3>
         <p>Subscribe for store updates and discounts.</p>
         <form class="subscribe-form" action="#" method="POST">
-          <input
-            type="email"
-            name="email"
-            placeholder="Enter your Email"
-            required
-          />
+          <input type="email" name="email" placeholder="Enter your Email" required />
           <button type="submit">Subscribe</button>
         </form>
         <p class="disclaimer">
@@ -219,7 +252,7 @@
         <p class="copyright">&copy; 2025, CampingSwag</p>
       </div>
 
-      <!-- About Column -->
+      <!-- About -->
       <div class="footer-col about-col">
         <h3>About</h3>
         <p>
@@ -228,7 +261,7 @@
         <a href="about.html" class="learn-more">LEARN MORE</a>
       </div>
 
-      <!-- Shop Column -->
+      <!-- Shop -->
       <div class="footer-col shop-col">
         <h3>Shop</h3>
         <ul>
@@ -239,7 +272,7 @@
         </ul>
       </div>
 
-      <!-- Customer Care Column -->
+      <!-- Customer Care & social -->
       <div class="footer-col customer-col">
         <h3>Customer Care</h3>
         <ul>
@@ -248,30 +281,27 @@
           <li><a href="terms.html">Terms & Conditions</a></li>
           <li><a href="shipping.html">Shipping & Returns</a></li>
         </ul>
-        <!-- Social Media Icons -->
         <div class="footer-social">
-          <a href="https://www.facebook.com" target="_blank" aria-label="Facebook"
-            ><i class="fab fa-facebook-f"></i
-          ></a>
-          <a href="https://www.instagram.com" target="_blank" aria-label="Instagram"
-            ><i class="fab fa-instagram"></i
-          ></a>
-          <a href="https://www.twitter.com" target="_blank" aria-label="Twitter"
-            ><i class="fab fa-twitter"></i
-          ></a>
-          <a href="https://www.tiktok.com" target="_blank" aria-label="TikTok"
-            ><i class="fab fa-tiktok"></i
-          ></a>
-          <a
-            href="https://www.youtube.com"
-            target="_blank"
-            aria-label="YouTube"
-            ><i class="fab fa-youtube"></i
-          ></a>
+          <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://twitter.com" target="_blank" aria-label="Twitter">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="https://tiktok.com" target="_blank" aria-label="TikTok">
+            <i class="fab fa-tiktok"></i>
+          </a>
+          <a href="https://youtube.com" target="_blank" aria-label="YouTube">
+            <i class="fab fa-youtube"></i>
+          </a>
         </div>
       </div>
     </div>
   </footer>
+
 
   <!-- ────────────────────────────────────────────────────────────────────────── -->
   <!--                            MAIN JAVASCRIPT FILE                             -->
