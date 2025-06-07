@@ -13,10 +13,10 @@ const Cart = (function() {
         name: 'Beach Tent',
         price: 149.95,
         images: [
-          'assets/beachtent1.jpg',
-          'assets/beachtent2.jpg',
-          'assets/beachtent3.jpg',
-          'assets/beachtent4.jpg'
+          'assets/beach tent1.jpg',
+          'assets/beach tent2.jpg',
+          'assets/beach tent3.jpg',
+          'assets/beach tent4.jpg'
         ],
         pageUrl: 'beachtent.html'
       },
@@ -25,10 +25,10 @@ const Cart = (function() {
         name: 'Family Tent',
         price: 279.95,
         images: [
-          'assets/familytent1.jpg',
-          'assets/familytent2.jpg',
-          'assets/familytent3.jpg',
-          'assets/familytent4.jpg'
+          'assets/family tent1.jpg',
+          'assets/family tent2.jpg',
+          'assets/family tent3.jpg',
+          'assets/family tent4.jpg'
         ],
         pageUrl: 'familytent.html'
       },

@@ -11,25 +11,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function showSlide(idx) {
     slides.forEach((slide, i) => {
-      slide.style.display = i === idx ? "flex" : "none";
+      slide.classList.toggle("active", i === idx);
       dots[i].classList.toggle("active", i === idx);
     });
   }
 
-  if (slides.length > 0 && dots.length === slides.length) {
+if (slides.length && slides.length === dots.length) {
+  showSlide(slideIndex);
+  setInterval(() => {
+    slideIndex = (slideIndex + 1) % slides.length;
     showSlide(slideIndex);
-    setInterval(() => {
-      slideIndex = (slideIndex + 1) % slides.length;
-      showSlide(slideIndex);
-    }, 4000);
-    dots.forEach(dot => {
-      dot.addEventListener("click", () => {
-        slideIndex = Number(dot.dataset.index);
-        showSlide(slideIndex);
-      });
-    });
-  }
+  }, 4000);
 
+  dots.forEach(dot => {
+    dot.addEventListener("click", () => {
+      slideIndex = Number(dot.dataset.index);
+      showSlide(slideIndex);
+    });
+  });
+}
   //
   // ─── FILTER DROPDOWN (Search page only) ───────────────────────────────────
   //
