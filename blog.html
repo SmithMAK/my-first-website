@@ -14,7 +14,7 @@
     rel="stylesheet"
   />
 
-  <!-- ─── FONT AWESOME 6.x FREE ────────────────────────────────────────────────── -->
+  <!-- ─── FONT AWESOME ────────────────────────────────────────────────── -->
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -31,7 +31,6 @@
   <!-- ────────────────────────────────────────────────────────────────────────── -->
   <header class="site-header">
     <div class="header-inner container">
-      <!-- Logo on the left -->
       <a href="index.html" class="logo-link">
         <img
           src="assets/logo.jpg"
@@ -73,12 +72,12 @@
   </header>
 
   <!-- ────────────────────────────────────────────────────────────────────────── -->
-  <!--                                BLOG HERO                                  -->
+  <!--                                BLOG                                        -->
   <!-- ────────────────────────────────────────────────────────────────────────── -->
   <main>
-    <!-- Hero Section -->
+    <!-- Main image Section -->
     <section class="blog-hero" style="position: relative; text-align: center; margin-bottom: 4rem;">
-      <!-- Hero image -->
+      <!-- image -->
       <img
         src="assets/mainimage2.jpg"
         alt="Hiking in the mountains"
@@ -251,6 +250,23 @@
       </div>
     </section>
   </main>
+
+ <script type="text/javascript">
+    (function(d, t) {
+        var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+        v.onload = function() {
+          window.voiceflow.chat.load({
+            verify: { projectID: '6839403587cb94407421888f' },
+            url: 'https://general-runtime.voiceflow.com',
+            versionID: 'production',
+            voice: {
+              url: "https://runtime-api.voiceflow.com"
+            }
+          });
+        }
+        v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
+    })(document, 'script');
+  </script>
 
   <!-- ────────────────────────────────────────────────────────────────────────── -->
   <!--                                  FOOTER                                     -->

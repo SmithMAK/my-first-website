@@ -73,10 +73,10 @@
   </header>
 
   <!-- ────────────────────────────────────────────────────────────────────────── -->
-  <!--                                ABOUT HERO                                 -->
+  <!--                                ABOUT                                       -->
   <!-- ────────────────────────────────────────────────────────────────────────── -->
   <main>
-    <!-- Hero Title / Background -->
+    <!-- Title / Background -->
     <section
       style="
         background-color: var(--color-text);
@@ -92,7 +92,7 @@
       </p>
     </section>
 
-    <!-- Hero Image -->
+    <!-- Main Image -->
     <section style="margin-bottom: 4rem;">
       <img
         src="assets/mainimage1.jpg"
@@ -171,6 +171,23 @@
       </div>
     </section>
   </main>
+
+  <script type="text/javascript">
+    (function(d, t) {
+        var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+        v.onload = function() {
+          window.voiceflow.chat.load({
+            verify: { projectID: '6839403587cb94407421888f' },
+            url: 'https://general-runtime.voiceflow.com',
+            versionID: 'production',
+            voice: {
+              url: "https://runtime-api.voiceflow.com"
+            }
+          });
+        }
+        v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
+    })(document, 'script');
+  </script>
 
   <!-- ────────────────────────────────────────────────────────────────────────── -->
   <!--                                  FOOTER                                     -->
