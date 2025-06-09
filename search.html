@@ -80,7 +80,7 @@
       Browse Essential Camping Items
     </h2>
 
-    <!-- Optional “Filter by” dropdown (if you had one) -->
+    <!-- Filter -->
     <div style="text-align: right; margin-bottom: 1.5rem;">
       <label for="filter-select" style="font-family: var(--font-body); margin-right: 0.5rem;">Filter by:</label>
       <select id="filter-select" style="padding: 0.5rem 1rem; font-size: 1rem; border-radius: 4px; border: 1px solid rgba(0,0,0,0.1);">
@@ -263,6 +263,24 @@
     </div>
   </main>
 
+  <script type="text/javascript">
+    (function(d, t) {
+        var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+        v.onload = function() {
+          window.voiceflow.chat.load({
+            verify: { projectID: '6839403587cb94407421888f' },
+            url: 'https://general-runtime.voiceflow.com',
+            versionID: 'production',
+            voice: {
+              url: "https://runtime-api.voiceflow.com"
+            }
+          });
+        }
+        v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
+    })(document, 'script');
+  </script>
+  
+  
   <!-- ────────────────────────────────────────────────────────────────────────── -->
   <!--                                  FOOTER                                     -->
   <!-- ────────────────────────────────────────────────────────────────────────── -->

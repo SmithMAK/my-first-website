@@ -171,7 +171,7 @@
     top: -6px;
     right: -10px;
     background-color: var(--color-text);
-    color: #fff;
+    color: #F9F0E1;
     font-size: 0.65rem;
     border-radius: 50%;
     width: 16px;
@@ -378,7 +378,7 @@
   }
   
   #filter-toggle {
-    background-color: #ffffff;
+    background-color: #F9F0E1;
     color: var(--color-text);
     border: 1px solid rgba(0, 0, 0, 0.1);
     font-size: 1rem;
@@ -396,7 +396,7 @@
     position: absolute;
     top: 110%;
     left: 0;
-    background-color: #ffffff;
+    background-color: #F9F0E1;
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 4px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
